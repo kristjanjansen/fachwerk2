@@ -6,35 +6,40 @@ import {
   onMounted
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
-const StoreSymbol = Symbol();
+import { scene, camera, renderer } from "../utils/scene3.js";
 
-export function provideStore(store) {
-  provide(StoreSymbol, store);
-}
-
-export function useStore() {
-  const store = inject(StoreSymbol);
-  if (!store) {
-    // throw error, no store provided
-  }
-  return store;
-}
+import {
+  Scene,
+  PerspectiveCamera,
+  WebGLRenderer,
+  BoxGeometry,
+  MeshBasicMaterial,
+  Mesh
+} from "https://unpkg.com/three@0.113.2/build/three.module.js";
 
 export const FTest1 = {
   setup() {
-    const a = ref(null);
-    provideStore(a);
-    onMounted(() => setTimeout(() => (a.value = "ohoo"), 1000));
+    const node = ref(null);
+    onMounted(() => {
+      node.value.appendChild(renderer.domElement);
+      //renderer.render(scene, camera);
+      const animate = () => {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+      };
+      animate();
+    });
+    return { node };
   },
-  template: "<div><slot /></div>"
+  template: `<div ref="node"><slot /></div>`
 };
 
 export const FTest2 = {
   setup() {
-    const b = useStore();
-    watch(() => {
-      console.log(b.value);
-    });
+    var geometry = new BoxGeometry();
+    var material = new MeshBasicMaterial({ color: 0x00ff00 });
+    var cube = new Mesh(geometry, material);
+    scene.add(cube);
   },
   template: "<div>aaa</div>"
 };

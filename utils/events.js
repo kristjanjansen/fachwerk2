@@ -27,3 +27,7 @@ function Events() {
 }
 
 export const events = new Events();
+
+export const send = (key, payload = null) => events.emit(key, payload);
+
+export const receive = (key, callback) => events.on(key, callback);

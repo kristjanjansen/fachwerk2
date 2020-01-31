@@ -1,4 +1,4 @@
-import { set as storeSet, events } from "../utils/index.js";
+import { set as storeSet, send } from "../utils/index.js";
 
 export const FSlider = {
   props: { value: { default: 0 }, set: { default: "" } },
@@ -6,7 +6,7 @@ export const FSlider = {
     const onInput = e => {
       const value = parseFloat(e.target.value);
       emit("value", value);
-      events.emit("a", value);
+      send("a", value);
       if (set) {
         storeSet(set, value);
       }

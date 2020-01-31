@@ -4,8 +4,8 @@ import {
   reactive
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
-const store = ref({ a: 100 });
+const store = ref({});
 
 export const set = (key, value) => (store.value[key] = value);
 
-export const get = key => store.value[key];
+export const get = (key = null) => (key ? store.value[key] : store.value);

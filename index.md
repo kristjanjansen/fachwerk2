@@ -1,11 +1,14 @@
 # Hello Fachwerk2
 
-<f-slider v-on:value="v => set('a', v)" />
+<f-slider set="a" />
 
-{{ get('a') }}
+<f-slider set="b" />
+
+{{ get() }}
 
 <f-scene>
-<f-circle />
+  <f-circle :r="get('a')" />
+  <f-circle :r="get('b')" />
 </f-scene>
 
 Based on Vue 3.0

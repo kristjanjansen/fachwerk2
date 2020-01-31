@@ -1,11 +1,7 @@
-import {
-  createApp,
-  ref,
-  reactive
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { ref } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
-const store = ref({});
+const state = ref({});
 
-export const set = (key, value) => (store.value[key] = value);
+export const set = (key, value) => (state.value[key] = value);
 
-export const get = (key = null) => (key ? store.value[key] : store.value);
+export const get = (key = null) => (key ? state.value[key] : state.value);

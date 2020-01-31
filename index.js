@@ -23,7 +23,6 @@ const App = {
           render: compile(marked(res, { breaks: true }))
         };
       });
-    utils.receive("a", a => console.log(a));
     return () => (content.value ? h(content.value) : null);
   }
 };

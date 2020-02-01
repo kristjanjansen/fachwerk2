@@ -1,6 +1,7 @@
-export { FCircle } from "./FCircle.js";
-export { FScene } from "./FScene.js";
-export { FSlider } from "./FSlider.js";
-export { FScene3 } from "./FScene3.js";
-export { FBox3 } from "./FBox3.js";
-export { FTest1, FTest2 } from "./FTest.js";
+export * from "./FAnimate.js";
+export * from "./FCircle.js";
+export * from "./FScene.js";
+export * from "./FSlider.js";
+export * from "./FScene3.js";
+export * from "./FBox3.js";
+export * from "./FTest.js";

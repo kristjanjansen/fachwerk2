@@ -10,6 +10,8 @@ import * as components from "./components/index.js";
 
 import * as utils from "./utils/index.js";
 
+// https://unpkg.com/shifty@2.8.3/dist/shifty.js
+
 const App = {
   setup() {
     const content = ref();

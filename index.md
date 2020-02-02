@@ -1,1 +1,3 @@
-<f-scene />
+<f-scene>
+  <f-circle />
+</f-scene>

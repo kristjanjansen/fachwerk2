@@ -19,9 +19,10 @@ export const FBox3 = {
     scene.add(cube);
     watch(
       () => props.rotation,
-      () => {
-        console.log(props.rotation);
-        cube.rotation.x = deg2rad(props.rotation);
+      rotation => {
+        cube.rotation.x = deg2rad(rotation);
+        cube.rotation.y = deg2rad(rotation);
+        cube.rotation.z = deg2rad(rotation);
       }
     );
     return () => null;

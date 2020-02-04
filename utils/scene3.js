@@ -13,5 +13,6 @@ camera.position.z = 5;
 
 const renderer = new WebGLRenderer();
 renderer.setSize(300, 200);
+renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
 
 export { scene, camera, renderer };

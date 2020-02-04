@@ -1,5 +1,4 @@
 import {
-  inject,
   ref,
   onMounted,
   provide,
@@ -37,21 +36,4 @@ export const FScene = {
     </svg>
   </div>
   `
-};
-
-export const FCircle = {
-  props: { r: { default: 10 } },
-  setup() {
-    const svgUnit = inject("svgUnit");
-    return { svgUnit };
-  },
-  template: `
-    <circle 
-      cx="0"
-      cy="0"
-      :r="r"
-      fill="none"
-      stroke="black"
-      :stroke-width="svgUnit"
-    ></circle>`
 };

@@ -12,11 +12,14 @@ import {
   Object3D,
   Vector3,
   VertexColors
-} from "../../../build/three.module.js";
-import { Projector } from "../renderers/Projector.js";
-import { RenderableFace } from "../renderers/Projector.js";
-import { RenderableLine } from "../renderers/Projector.js";
-import { RenderableSprite } from "../renderers/Projector.js";
+} from "https://unpkg.com/three@0.113.2/build/three.module.js";
+
+import {
+  Projector,
+  RenderableFace,
+  RenderableLine,
+  RenderableSprite
+} from "./Projector.js";
 
 var SVGObject = function(node) {
   Object3D.call(this);

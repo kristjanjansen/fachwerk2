@@ -1,4 +1,4 @@
-import { set as storeSet } from "../fachwerk.js";
+import { set as storeSet } from "../../fachwerk.js";
 
 export const FSlider = {
   props: { value: { default: 0 }, set: { default: "" } },

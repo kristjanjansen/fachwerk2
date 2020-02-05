@@ -17,8 +17,6 @@ import {
   Mesh
 } from "https://unpkg.com/three@0.113.2/build/three.module.js";
 
-import { SVGRenderer } from "./FScene3/SVGRenderer.js";
-
 export const FScene3 = {
   setup() {
     const node = ref(null);

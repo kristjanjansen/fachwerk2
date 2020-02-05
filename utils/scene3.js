@@ -1,13 +1,15 @@
 import {
   Scene,
   PerspectiveCamera,
-  WebGLRenderer,
-  BoxGeometry,
-  MeshBasicMaterial,
-  Mesh
+  Color,
+  WebGLRenderer
 } from "https://unpkg.com/three@0.113.2/build/three.module.js";
 
+import { SVGRenderer } from "https://unpkg.com/three@0.113.2/examples/jsm/renderers/SVGRenderer.js";
+
 const scene = new Scene();
+scene.background = new Color("white");
+
 const camera = new PerspectiveCamera(75, 300 / 200, 0.1, 1000);
 camera.position.z = 5;
 

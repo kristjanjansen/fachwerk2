@@ -9,16 +9,23 @@ const anime = animeModule.default;
 import { set } from "../utils/index.js";
 
 export const FAnimate = {
-  setup() {
+  props: {
+    set: { default: "" }
+  },
+  setup(props) {
     const progress = ref(0);
     anime({
       targets: progress,
-      value: 100,
-      duration: 1000,
-      easing: "linear"
+      value: 360,
+      duration: 10000,
+      easing: "linear",
+      direction: "alternate",
+      loop: true
     });
-    watch(progress, progress => set("a", progress));
+    if (props.set) {
+      watch(progress, progress => set(props.set, progress));
+    }
     return { progress };
   },
-  template: `<div>{{ progress }}</div>`
+  template: `<div><slot :progress="progress" /></div>`
 };

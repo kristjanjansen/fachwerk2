@@ -6,7 +6,7 @@ import {
 import * as animeModule from "https://unpkg.com/animejs@3.1.0/lib/anime.es.js";
 const anime = animeModule.default;
 
-import { set } from "../utils/index.js";
+import { set } from "../fachwerk.js";
 
 export const FAnimate = {
   props: {
@@ -27,5 +27,5 @@ export const FAnimate = {
     }
     return { progress };
   },
-  template: `<div><slot :progress="progress" /></div>`
+  template: `<slot :progress="progress" />`
 };

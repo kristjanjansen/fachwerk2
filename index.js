@@ -6,11 +6,8 @@ import {
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
 import marked from "https://unpkg.com/marked@0.8.0/lib/marked.esm.js";
-import * as components from "./components/index.js";
 
-import * as utils from "./utils/index.js";
-
-// https://unpkg.com/shifty@2.8.3/dist/shifty.js
+import { components, utils } from "./src/fachwerk.js";
 
 const App = {
   setup() {

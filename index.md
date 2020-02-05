@@ -1,8 +1,8 @@
 <f-slider set="a" />
 
-<f-canvas>
-  <f-canvas-circle :r="get('a')" />
-</f-canvas>
+<f-scene-canvas>
+  <f-box-canvas :r="get('a')" />
+</f-scene-canvas>
 
 <f-scene3>
   <f-box3 :r="get('a')" />

@@ -6,7 +6,7 @@ import {
   onMounted
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
-export const FCanvasCircle = {
+export const FBoxCanvas = {
   props: {
     r: { default: 1 }
   },

@@ -5,7 +5,7 @@ import {
   onBeforeUpdate
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
-export const FCanvas = {
+export const FSceneCanvas = {
   setup() {
     const node = ref(null);
     const ctx = ref(null);

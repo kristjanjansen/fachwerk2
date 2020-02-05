@@ -25,6 +25,7 @@ export const FScene = {
   },
   template: `<div
     ref="svg"
+    style="border: 1px solid red;"
   >
     <svg
       style="display: block; width: 100%; height: auto;"

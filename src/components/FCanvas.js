@@ -1,7 +1,5 @@
 import {
-  inject,
   provide,
-  watch,
   ref,
   onMounted,
   onBeforeUpdate
@@ -24,5 +22,14 @@ export const FCanvas = {
     });
     return { node };
   },
-  template: `<canvas style="width: 200px; height: 200px; border: 1px solid red" ref="node"><slot /></canvas>`
+  template: `
+  <canvas
+    style="
+      width: 200px;
+      height: 200px;
+      border: 1px solid red;
+    "
+    ref="node">
+      <slot />
+  </canvas>`
 };

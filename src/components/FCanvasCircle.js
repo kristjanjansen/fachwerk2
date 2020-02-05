@@ -16,7 +16,13 @@ export const FCanvasCircle = {
       if (ctx.value) {
         ctx.value.lineWidth = 1;
         ctx.value.beginPath();
-        ctx.value.arc(100, 100, props.r, 0, 2 * Math.PI);
+        ctx.value.strokeRect(
+          100 - props.r / 2,
+          100 - props.r / 2,
+          props.r,
+          props.r
+        );
+        //ctx.value.arc(100, 100, props.r, 0, 2 * Math.PI);
         ctx.value.stroke();
       }
     });

@@ -4,12 +4,10 @@
   <f-canvas-circle :r="get('a')" />
 </f-canvas>
 
-<f-slider set="b" />
-
 <f-scene3>
-  <f-box3 :rotation="get('b')" />
+  <f-box3 :r="get('a')" />
 </f-scene3>
 
-<f-scene>
-  <f-box />
-</f-scene>
+<f-scene2>
+  <f-box2 :r="get('a')" />
+</f-scene2>

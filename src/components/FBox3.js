@@ -12,7 +12,7 @@ import {
 import { deg2rad } from "https://designstem.github.io/fachwerk/fachwerk.js";
 
 export const FBox3 = {
-  props: { rotation: { default: 0 } },
+  props: { r: { default: 0 } },
   setup(props) {
     const scene = inject("scene");
     var geometry = new BoxGeometry();
@@ -20,11 +20,11 @@ export const FBox3 = {
     var cube = new Mesh(geometry, material);
     scene.add(cube);
     watch(
-      () => props.rotation,
-      rotation => {
-        cube.rotation.x = deg2rad(rotation);
-        cube.rotation.y = deg2rad(rotation);
-        cube.rotation.z = deg2rad(rotation);
+      () => props.r,
+      r => {
+        cube.rotation.x = deg2rad(r);
+        cube.rotation.y = deg2rad(r);
+        cube.rotation.z = deg2rad(r);
       }
     );
     return () => null;

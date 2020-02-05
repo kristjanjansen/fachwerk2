@@ -5,7 +5,7 @@ import {
   computed
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
-export const FScene = {
+export const FScene2 = {
   setup() {
     const svg = ref(null);
     const width = ref(null);

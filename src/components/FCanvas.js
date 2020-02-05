@@ -3,7 +3,8 @@ import {
   provide,
   watch,
   ref,
-  onMounted
+  onMounted,
+  onBeforeUpdate
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
 export const FCanvas = {
@@ -11,20 +12,15 @@ export const FCanvas = {
     const node = ref(null);
     const ctx = ref(null);
     provide("ctx", ctx);
-    watch(() => console.log(ctx.value));
     onMounted(() => {
       const canvas = node.value;
       canvas.width = 400;
       canvas.height = 400;
       ctx.value = canvas.getContext("2d");
       ctx.value.scale(2, 2);
-      // const animate = () => {
-      //   ctx.value.save();
-      //   //ctx.value.clearRect(0, 0, 400, 400);
-      //   ctx.value.restore();
-      //   requestAnimationFrame(animate);
-      // };
-      // animate();
+    });
+    onBeforeUpdate(() => {
+      ctx.value.clearRect(0, 0, 400, 400);
     });
     return { node };
   },

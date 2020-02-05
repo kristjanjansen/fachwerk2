@@ -1,4 +1,7 @@
-import { watch } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import {
+  watch,
+  inject
+} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
 import {
   BoxGeometry,
@@ -8,13 +11,12 @@ import {
 
 import { deg2rad } from "https://designstem.github.io/fachwerk/fachwerk.js";
 
-import { scene, camera, renderer } from "../utils/scene3.js";
-
 export const FBox3 = {
   props: { rotation: { default: 0 } },
   setup(props) {
+    const scene = inject("scene");
     var geometry = new BoxGeometry();
-    var material = new MeshBasicMaterial({ color: 0x00ff00 });
+    var material = new MeshBasicMaterial({ color: "red" });
     var cube = new Mesh(geometry, material);
     scene.add(cube);
     watch(

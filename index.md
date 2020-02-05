@@ -1,4 +1,5 @@
-<f-slider set="r" />
-<f-scene3>
-  <f-box3 :rotation="get('r')" />
-</f-scene3>
+<f-slider set="a" />
+
+<f-canvas>
+  <f-canvas-circle :r="get('a')" />
+</f-canvas>

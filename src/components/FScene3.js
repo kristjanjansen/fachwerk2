@@ -20,6 +20,7 @@ import {
 export const FScene3 = {
   setup() {
     const node = ref(null);
+    provide("scene", scene);
     onMounted(() => {
       node.value.appendChild(renderer.domElement);
       const animate = () => {

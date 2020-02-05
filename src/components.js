@@ -6,3 +6,5 @@ export * from "./components/FScene2.js";
 export * from "./components/FScene3.js";
 export * from "./components/FSceneCanvas.js";
 export * from "./components/FSlider.js";
+
+export * from "./components/FScene.js";

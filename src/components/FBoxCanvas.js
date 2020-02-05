@@ -11,6 +11,7 @@ export const FBoxCanvas = {
     r: { default: 1 }
   },
   setup(props) {
+    console.log("a");
     const ctx = inject("ctx");
     watch(() => {
       if (ctx.value) {

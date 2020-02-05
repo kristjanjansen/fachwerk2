@@ -29,7 +29,9 @@ export const FSceneCanvas = {
       height: 200px;
       border: 1px solid red;
     "
-    ref="node">
-      <slot />
-  </canvas>`
+    ref="node"
+  >
+    <slot />
+  </canvas>
+  `
 };

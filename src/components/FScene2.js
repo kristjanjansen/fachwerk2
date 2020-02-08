@@ -1,12 +1,11 @@
 import {
-  inject,
   ref,
   onMounted,
   provide,
   computed
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
-export const FScene = {
+export const FScene2 = {
   setup() {
     const svg = ref(null);
     const width = ref(null);
@@ -26,6 +25,7 @@ export const FScene = {
   },
   template: `<div
     ref="svg"
+    style="border: 1px solid red;"
   >
     <svg
       style="display: block; width: 100%; height: auto;"
@@ -37,21 +37,4 @@ export const FScene = {
     </svg>
   </div>
   `
-};
-
-export const FCircle = {
-  props: { r: { default: 10 } },
-  setup() {
-    const svgUnit = inject("svgUnit");
-    return { svgUnit };
-  },
-  template: `
-    <circle 
-      cx="0"
-      cy="0"
-      :r="r"
-      fill="none"
-      stroke="black"
-      :stroke-width="svgUnit"
-    ></circle>`
 };

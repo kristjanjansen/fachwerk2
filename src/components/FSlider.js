@@ -1,4 +1,4 @@
-import { set as storeSet } from "../utils/index.js";
+import { set as storeSet } from "../../fachwerk.js";
 
 export const FSlider = {
   props: { value: { default: 0 }, set: { default: "" } },
@@ -16,5 +16,7 @@ export const FSlider = {
     type="range"
     :value="value"
     @input="onInput"
+    max="360"
+    step="0.01"
   />`
 };

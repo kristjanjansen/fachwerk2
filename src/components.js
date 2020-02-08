@@ -8,3 +8,4 @@ export * from "./components/FSceneCanvas.js";
 export * from "./components/FSlider.js";
 
 export * from "./components/FScene.js";
+export * from "./components/FMath.js";

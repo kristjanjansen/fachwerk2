@@ -1,5 +1,5 @@
 <f-slider set="a" />
 
-<f-scene>
-  <f-box :r="get('a')" />
-</f-scene>
+<f-math>{{ get('a') }}</f-math>
+
+<f-math>c = \pm\sqrt{ {{ get('a') }} ^2 + b^2}</f-math>

@@ -9,7 +9,7 @@ import {
   Mesh
 } from "https://unpkg.com/three@0.113.2/build/three.module.js";
 
-import { deg2rad } from "https://designstem.github.io/fachwerk/fachwerk.js";
+import { deg2rad } from "../utils.js";
 
 export const FBox3 = {
   props: { r: { default: 0 } },

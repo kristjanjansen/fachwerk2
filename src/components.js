@@ -1,4 +1,6 @@
 export * from "./components/FAnimate.js";
+export * from "./components/FLine2.js";
+export * from "./components/FLineCanvas.js";
 export * from "./components/FBox2.js";
 export * from "./components/FBox3.js";
 export * from "./components/FBoxCanvas.js";

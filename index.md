@@ -1,5 +1,3 @@
-<f-slider set="a" />
-
-<f-math>{{ get('a') }}</f-math>
-
-<f-math>c = \pm\sqrt{ {{ get('a') }} ^2 + b^2}</f-math>
+<f-scene-canvas>
+  <f-line-canvas />
+</f-scene-canvas>

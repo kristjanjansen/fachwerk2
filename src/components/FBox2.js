@@ -1,12 +1,14 @@
 // @ts-check
 import { inject } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
-import { transform2dProps, stylingProps } from "../libs/props";
+import { stylingProps, useStyling2d } from "../libs/styling.js";
+import { transform2dProps, useTransform2d } from "../libs/transforms.js";
 
 export const FBox2 = {
   props: { r: { default: 10 }, ...transform2dProps, ...stylingProps },
-  setup() {
-    const svgUnit = inject("svgUnit");
-    return { svgUnit };
+  setup(props) {
+    const transform = useTransform2d(props);
+    const styling = useStyling2d(props);
+    return { transform, styling };
   },
   template: `
     <rect 
@@ -14,8 +16,9 @@ export const FBox2 = {
       y="0"
       :width="r"
       :height="r"
-      fill="none"
-      stroke="black"
-      :stroke-width="svgUnit"
+      :transform="transform"
+      :fill="styling.fill"
+      :stroke="styling.stroke"
+      :stroke-width="styling.strokeWidth"
     />`
 };

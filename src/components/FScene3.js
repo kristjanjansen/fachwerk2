@@ -7,7 +7,7 @@ import {
   onBeforeUpdate
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
-import { scene, camera, renderer } from "../utils/scene3.js";
+import { scene, camera, renderer } from "../libs/scene3.js";
 
 export const FScene3 = {
   setup() {

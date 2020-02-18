@@ -1,5 +1,10 @@
 //@ts-check
-import { computed } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import {
+  computed,
+  watch,
+  inject
+} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { deg2rad } from "../utils.js";
 
 export const transform2dProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },
@@ -38,3 +43,14 @@ export const useTransform2d = props =>
     const scale = `scale(${scaleX} ${scaleY})`;
     return [translate, rotate, scale].join(" ");
   });
+
+// export const useTransform2dCanvas = props =>
+//   computed(() => {
+//     return ctx => {
+//       ctx.rotate(deg2rad(props.rotate));
+//     };
+//   });
+
+export const transform2dCanvas = (props, ctx) => {
+  ctx.rotate(deg2rad(props.rotation));
+};

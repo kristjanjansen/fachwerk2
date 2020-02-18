@@ -4,6 +4,7 @@ export * from "./components/FLineCanvas.js";
 export * from "./components/FBox2.js";
 export * from "./components/FBox3.js";
 export * from "./components/FBoxCanvas.js";
+export * from "./components/FCircleCanvas.js";
 export * from "./components/FScene2.js";
 export * from "./components/FScene3.js";
 export * from "./components/FSceneCanvas.js";

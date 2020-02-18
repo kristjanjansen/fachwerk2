@@ -2,10 +2,7 @@
 
 import {
   inject,
-  provide,
-  watch,
-  ref,
-  onMounted
+  watch
 } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
 
 import { stylingProps, styling2dCanvas } from "../libs/styling.js";
@@ -15,7 +12,7 @@ import {
   reset2dCanvas
 } from "../libs/transforms.js";
 
-export const FBoxCanvas = {
+export const FCircleCanvas = {
   props: {
     ...transform2dProps,
     ...stylingProps,
@@ -27,12 +24,13 @@ export const FBoxCanvas = {
       if (ctx.value) {
         transform2dCanvas(props, ctx.value);
         styling2dCanvas(props, ctx.value);
+        ctx.value.beginPath();
+        ctx.value.arc(100, 100, props.r, 0, 2 * Math.PI);
         if (props.fill) {
-          ctx.value.fillRect(50, 50, props.r, props.r);
+          ctx.value.fill();
         }
         if (props.stroke !== "none") {
-          ctx.value.strokeRect(50, 50, props.r, props.r);
-          //ctx.value.arc(100, 100, props.r, 0, 2 * Math.PI);
+          ctx.value.stroke();
         }
         reset2dCanvas(ctx.value);
       }

@@ -22,3 +22,9 @@ export const useStyling2d = props => {
     return { fill, stroke, strokeWidth };
   });
 };
+
+export const styling2dCanvas = (props, ctx) => {
+  ctx.fillStyle = props.fill;
+  ctx.strokeStyle = props.stroke;
+  ctx.lineWidth = props.strokeWidth;
+};

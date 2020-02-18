@@ -25,7 +25,7 @@ export const FCircleCanvas = {
         transform2dCanvas(props, ctx.value);
         styling2dCanvas(props, ctx.value);
         ctx.value.beginPath();
-        ctx.value.arc(100, 100, props.r, 0, 2 * Math.PI);
+        ctx.value.arc(0, 0, props.r, 0, 2 * Math.PI);
         if (props.fill) {
           ctx.value.fill();
         }

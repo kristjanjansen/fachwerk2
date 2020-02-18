@@ -30,16 +30,16 @@ const transform2d = props => {
   const scaleX = props.scale[0];
   const scaleY = props.scale[1];
 
-  const rotationZ = props.rotation;
+  const rotation = props.rotation;
 
-  return { x, y, scaleX, scaleY, rotationZ };
+  return { x, y, scaleX, scaleY, rotation };
 };
 
 export const useTransform2d = props =>
   computed(() => {
-    const { x, y, scaleX, scaleY, rotationZ } = transform2d(props);
+    const { x, y, scaleX, scaleY, rotation } = transform2d(props);
     const translate = `translate(${x} ${y})`;
-    const rotate = `rotate(${rotationZ})`;
+    const rotate = `rotate(${rotation})`;
     const scale = `scale(${scaleX} ${scaleY})`;
     return [translate, rotate, scale].join(" ");
   });
@@ -52,7 +52,10 @@ export const useTransform2d = props =>
 //   });
 
 export const transform2dCanvas = (props, ctx) => {
-  ctx.rotate(deg2rad(props.rotation));
+  const { x, y, scaleX, scaleY, rotation } = transform2d(props);
+  ctx.translate(x, y);
+  ctx.scale(2 * scaleX, 2 * scaleY);
+  ctx.rotate(deg2rad(rotation));
 };
 
 export const reset2dCanvas = ctx => {

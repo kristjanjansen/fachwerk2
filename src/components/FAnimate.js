@@ -18,7 +18,7 @@ export const FAnimate = {
       targets: progress,
       value: 360,
       duration: 10000,
-      easing: "linear",
+      //easing: "linear",
       direction: "alternate",
       loop: true
     });

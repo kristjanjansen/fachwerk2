@@ -54,3 +54,8 @@ export const useTransform2d = props =>
 export const transform2dCanvas = (props, ctx) => {
   ctx.rotate(deg2rad(props.rotation));
 };
+
+export const reset2dCanvas = ctx => {
+  ctx.resetTransform();
+  ctx.scale(2, 2);
+};

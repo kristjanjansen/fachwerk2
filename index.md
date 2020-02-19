@@ -1,10 +1,10 @@
-<f-scene-canvas>
-   <f-circle-canvas
+<f-scene2>
+   <f-circle2
     r="25"
     :stroke-width="1"
     stroke="black"
     fill="red"
-    x="100"
-    y="100" 
+    x="0"
+    y="0" 
   />
-</f-scene-canvas>
+</f-scene2>

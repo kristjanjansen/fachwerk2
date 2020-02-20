@@ -19,13 +19,15 @@ const directionalLight = new DirectionalLight("white");
 directionalLight.position.set(0, 0, 2);
 scene.add(directionalLight);
 
-const camera = new PerspectiveCamera(75, 300 / 300, 0.1, 1000);
+const camera = new PerspectiveCamera(75, 200 / 200, 0.1, 1000);
 camera.position.z = 10;
 
 //const renderer = new WebGLRenderer();
 const renderer = new SVGRenderer();
 
-renderer.setSize(300, 300);
+renderer.setSize(200, 200);
 renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
 
-export { scene, camera, renderer };
+const createScene = () => ({ scene, camera, renderer });
+
+export { createScene };

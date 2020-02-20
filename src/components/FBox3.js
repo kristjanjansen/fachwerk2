@@ -27,21 +27,27 @@ export const FBox3 = {
 
     const geometry2 = new BoxGeometry(props.r, props.r, props.r);
 
-    const material2 = new MeshLambertMaterial({
-      color: "red",
-      opacity: 1
-      // side: DoubleSide
-    });
-
     const { fill, stroke } = useMaterial3d(props);
 
-    const cube2 = new Mesh(geometry2, fill.value);
-    scene.add(cube2);
+    const boxFill = new Mesh(geometry2, fill.value);
+    //    scene.add(boxFill);
 
     const geometry = new BoxBufferGeometry(props.r, props.r, props.r);
     const edges = new EdgesGeometry(geometry);
-    const cube = new LineSegments(edges, stroke.value);
-    scene.add(cube);
+    const boxStroke = new LineSegments(edges, stroke.value);
+    scene.add(boxStroke);
+
+    watch(
+      () => props.rotation,
+      () => {
+        boxStroke.rotation.x = deg2rad(props.rotation);
+        boxStroke.rotation.y = deg2rad(props.rotation);
+        boxStroke.rotation.z = deg2rad(props.rotation);
+        // cube.rotation.x = deg2rad(r);
+        // cube.rotation.y = deg2rad(r);
+        // cube.rotation.z = deg2rad(r);
+      }
+    );
 
     // watch(
     //   () => props.r,

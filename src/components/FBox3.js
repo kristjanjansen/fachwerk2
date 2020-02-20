@@ -12,42 +12,46 @@ import {
   BoxBufferGeometry,
   EdgesGeometry,
   LineBasicMaterial,
-  LineSegments
+  LineSegments,
+  Group
 } from "https://unpkg.com/three@0.113.2/build/three.module.js";
 
 import { deg2rad } from "../utils.js";
 
 import { stylingProps, useMaterial3d } from "../libs/styling.js";
-import { transform2dProps, useTransform2d } from "../libs/transforms.js";
+import { transform2dProps, useTransform3d } from "../libs/transforms.js";
 
 export const FBox3 = {
   props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },
   setup(props) {
     const scene = inject("scene");
 
-    const geometry2 = new BoxGeometry(props.r, props.r, props.r);
-
+    var group = new Group();
     const { fill, stroke } = useMaterial3d(props);
 
-    const boxFill = new Mesh(geometry2, fill.value);
-    //    scene.add(boxFill);
+    const fillGeometry = new BoxGeometry(props.r, props.r, props.r);
+    const fillBox = new Mesh(fillGeometry, fill.value);
+    group.add(fillBox);
 
     const geometry = new BoxBufferGeometry(props.r, props.r, props.r);
     const edges = new EdgesGeometry(geometry);
-    const boxStroke = new LineSegments(edges, stroke.value);
-    scene.add(boxStroke);
+    const strokeBox = new LineSegments(edges, stroke.value);
+    group.add(strokeBox);
 
-    watch(
-      () => props.rotation,
-      () => {
-        boxStroke.rotation.x = deg2rad(props.rotation);
-        boxStroke.rotation.y = deg2rad(props.rotation);
-        boxStroke.rotation.z = deg2rad(props.rotation);
-        // cube.rotation.x = deg2rad(r);
-        // cube.rotation.y = deg2rad(r);
-        // cube.rotation.z = deg2rad(r);
-      }
-    );
+    scene.add(group);
+
+    useTransform3d(props, group);
+    // watch(
+    //   () => props.rotation,
+    //   () => {
+    //     group.rotation.x = deg2rad(props.rotation);
+    //     group.rotation.y = deg2rad(props.rotation);
+    //     group.rotation.z = deg2rad(props.rotation);
+    //     // cube.rotation.x = deg2rad(r);
+    //     // cube.rotation.y = deg2rad(r);
+    //     // cube.rotation.z = deg2rad(r);
+    //   }
+    // );
 
     // watch(
     //   () => props.r,

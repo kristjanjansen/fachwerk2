@@ -6,8 +6,9 @@ import {
 
 import {
   BoxGeometry,
-  MeshLambertMaterial,
+  MeshPhongMaterial,
   MeshBasicMaterial,
+  MeshNormalMaterial,
   DoubleSide,
   Mesh,
   BoxBufferGeometry,
@@ -43,7 +44,7 @@ export const styling2dCanvas = (props, ctx) => {
 
 export const useMaterial3d = props => {
   const fill = computed(() => {
-    return new MeshBasicMaterial({
+    return new MeshPhongMaterial({
       color: props.fill,
       opacity: props.opacity,
       side: DoubleSide

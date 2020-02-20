@@ -44,12 +44,16 @@ export const useTransform2d = props =>
     return [translate, rotate, scale].join(" ");
   });
 
-// export const useTransform2dCanvas = props =>
-//   computed(() => {
-//     return ctx => {
-//       ctx.rotate(deg2rad(props.rotate));
-//     };
-//   });
+export const useTransform3d = (props, object) => {
+  watch(
+    () => props.rotation,
+    () => {
+      object.rotation.x = deg2rad(props.rotation);
+      object.rotation.y = deg2rad(props.rotation);
+      object.rotation.z = deg2rad(props.rotation);
+    }
+  );
+};
 
 export const transform2dCanvas = (props, ctx) => {
   const { x, y, scaleX, scaleY, rotation } = transform2d(props);

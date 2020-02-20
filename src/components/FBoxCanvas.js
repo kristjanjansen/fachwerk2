@@ -14,6 +14,7 @@ import {
   transform2dCanvas,
   reset2dCanvas
 } from "../libs/transforms.js";
+import { deg2rad } from "../utils.js";
 
 export const FBoxCanvas = {
   props: {
@@ -31,8 +32,10 @@ export const FBoxCanvas = {
           ctx.value.fillRect(50, 50, props.r, props.r);
         }
         if (props.stroke !== "none") {
+          //ctx.value.beginPath();
           ctx.value.strokeRect(50, 50, props.r, props.r);
           //ctx.value.arc(100, 100, props.r, 0, 2 * Math.PI);
+          //ctx.value.stroke();
         }
         reset2dCanvas(ctx.value);
       }

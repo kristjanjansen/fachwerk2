@@ -12,13 +12,13 @@ export const FSceneCanvas = {
     provide("ctx", ctx);
     onMounted(() => {
       const canvas = node.value;
-      canvas.width = 400;
-      canvas.height = 400;
+      canvas.width = 400; // 400
+      canvas.height = 400; // 400
       ctx.value = canvas.getContext("2d");
       ctx.value.scale(2, 2);
     });
     onBeforeUpdate(() => {
-      ctx.value.clearRect(0, 0, 400, 400);
+      ctx.value.clearRect(0, 0, 400, 400); // 400
     });
     return { node };
   },

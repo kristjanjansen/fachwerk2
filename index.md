@@ -1,10 +1,11 @@
-<f-scene2>
-   <f-circle2
-    r="25"
+<f-scene3>
+   <f-box3
+    r="2"
     :stroke-width="1"
     stroke="black"
     fill="red"
     x="0"
-    y="0" 
+    y="0"
+    :rotation="[10,10,10]"
   />
-</f-scene2>
+</f-scene3>

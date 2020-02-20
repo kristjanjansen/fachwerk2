@@ -22,7 +22,7 @@ scene.add(directionalLight);
 const camera = new PerspectiveCamera(75, 300 / 200, 0.1, 1000);
 camera.position.z = 5;
 
-const renderer = new WebGLRenderer();
+const renderer = new SVGRenderer();
 renderer.setSize(300, 200);
 renderer.setPixelRatio(window.devicePixelRatio ? window.devicePixelRatio : 1);
 

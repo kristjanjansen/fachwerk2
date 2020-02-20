@@ -17,12 +17,15 @@ import {
 
 import { deg2rad } from "../utils.js";
 
+import { stylingProps, useMaterial3d } from "../libs/styling.js";
+import { transform2dProps, useTransform2d } from "../libs/transforms.js";
+
 export const FBox3 = {
-  props: { r: { default: 0 } },
+  props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },
   setup(props) {
     const scene = inject("scene");
 
-    var geometry2 = new BoxGeometry(1, 1, 1);
+    const geometry2 = new BoxGeometry(props.r, props.r, props.r);
 
     const material2 = new MeshLambertMaterial({
       color: "red",
@@ -30,34 +33,27 @@ export const FBox3 = {
       // side: DoubleSide
     });
 
-    //const material2 = new MeshBasicMaterial({ color: "red", opacity: 1 });
+    const { fill, stroke } = useMaterial3d(props);
 
-    const cube2 = new Mesh(geometry2, material2);
+    const cube2 = new Mesh(geometry2, fill.value);
     scene.add(cube2);
 
-    // const geometry = new BoxBufferGeometry(1.1, 1, 1);
-    // const edges = new EdgesGeometry(geometry);
-    // const material = new LineBasicMaterial({
-    //   color: "black",
-    //   linewidth: 3,
-    //   linecap: "round",
-    //   linejoin: "round",
-    //   opacity: 1
-    // });
-    // const cube = new LineSegments(edges, material);
-    // scene.add(cube);
+    const geometry = new BoxBufferGeometry(props.r, props.r, props.r);
+    const edges = new EdgesGeometry(geometry);
+    const cube = new LineSegments(edges, stroke.value);
+    scene.add(cube);
 
-    watch(
-      () => props.r,
-      r => {
-        cube2.rotation.x = deg2rad(r);
-        cube2.rotation.y = deg2rad(r);
-        cube2.rotation.z = deg2rad(r);
-        // cube.rotation.x = deg2rad(r);
-        // cube.rotation.y = deg2rad(r);
-        // cube.rotation.z = deg2rad(r);
-      }
-    );
+    // watch(
+    //   () => props.r,
+    //   r => {
+    //     cube2.rotation.x = deg2rad(r);
+    //     cube2.rotation.y = deg2rad(r);
+    //     cube2.rotation.z = deg2rad(r);
+    //     // cube.rotation.x = deg2rad(r);
+    //     // cube.rotation.y = deg2rad(r);
+    //     // cube.rotation.z = deg2rad(r);
+    //   }
+    // );
     return () => null;
   }
 };

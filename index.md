@@ -1,3 +1,3 @@
-<f-scene type="canvas">
+<f-scene bitmap3>
   <f-box />
 </f-scene>

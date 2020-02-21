@@ -1,4 +1,4 @@
-import { h, provide } from "../deps/vue.js";
+import { computed, h, provide } from "../deps/vue.js";
 
 import { FSceneSvg } from "./FSceneSvg.js";
 import { FSceneCanvas } from "./FSceneCanvas.js";
@@ -10,22 +10,55 @@ const FSceneThreeSvg = (props, context) =>
 const FSceneThreeWebgl = (props, context) =>
   h(FSceneThree, { ...props, renderer: "webgl", ...context }, context.slots);
 
+const getSceneType = props => {
+  return computed(() => {
+    let type = "svg";
+    if (props["vector"] === "" || props["vector"]) {
+      type = "svg";
+    }
+    if (props["bitmap"] === "" || props["bitmap"]) {
+      type = "canvas";
+    }
+    if (props["vector3"] === "" || props["vector3"]) {
+      type = "threeSvg";
+    }
+    if (props["bitmap3"] === "" || props["bitmap3"]) {
+      type = "threeWebgl";
+    }
+    console.log(type);
+    return type;
+  });
+};
+
 export const FScene = {
   props: {
-    type: {
-      default: "svg",
-      type: String
+    vector: {
+      default: false,
+      type: [String, Boolean]
+    },
+    vector3: {
+      default: false,
+      type: [String, Boolean]
+    },
+    bitmap: {
+      default: false,
+      type: [String, Boolean]
+    },
+    bitmap3: {
+      default: false,
+      type: [String, Boolean]
     }
   },
   setup(props, context) {
-    const sceneTypes = {
+    console.log(props);
+    const type = getSceneType(props);
+    const types = {
       svg: FSceneSvg,
       canvas: FSceneCanvas,
-      svg3: FSceneThreeSvg,
-      webgl: FSceneThreeWebgl
+      threeSvg: FSceneThreeSvg,
+      threeWebgl: FSceneThreeWebgl
     };
-    provide("sceneType", props.type);
-    return () =>
-      h(sceneTypes[props.type], { ...props, ...context }, context.slots);
+    provide("sceneType", type);
+    return () => h(types[type.value], { ...props, ...context }, context.slots);
   }
 };

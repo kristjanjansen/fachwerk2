@@ -11,7 +11,7 @@ import {
 import { stylingProps, useMaterial3d } from "../libs/styling.js";
 import { transform2dProps, useTransform3d } from "../libs/transforms.js";
 
-export const FBox3 = {
+export const FBoxThree = {
   props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },
   setup(props) {
     const scene = inject("scene");

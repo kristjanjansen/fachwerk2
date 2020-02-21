@@ -1,7 +1,7 @@
 import { stylingProps, useStyling2d } from "../libs/styling.js";
 import { transform2dProps, useTransform2d } from "../libs/transforms.js";
 
-export const FBox2 = {
+export const FBoxSvg = {
   props: { r: { default: 10 }, ...transform2dProps, ...stylingProps },
   setup(props) {
     const transform = useTransform2d(props);

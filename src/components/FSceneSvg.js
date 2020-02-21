@@ -1,6 +1,6 @@
 import { ref, onMounted, provide, computed } from "../deps/vue.js";
 
-export const FScene2 = {
+export const FSceneSvg = {
   setup() {
     const svg = ref(null);
     const width = ref(null);

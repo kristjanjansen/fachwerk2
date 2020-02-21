@@ -10,8 +10,14 @@ import {
   SVGRenderer
 } from "../deps/three.js";
 
-export const FScene3 = {
-  setup() {
+export const FSceneThree = {
+  props: {
+    renderer: {
+      default: "svg",
+      type: String
+    }
+  },
+  setup(props) {
     const node = ref(null);
 
     const scene = new Scene();
@@ -27,8 +33,8 @@ export const FScene3 = {
     const camera = new PerspectiveCamera(75, 200 / 200, 0.1, 1000);
     camera.position.z = 10;
 
-    const renderer = new WebGLRenderer();
-    //const renderer = new SVGRenderer();
+    const renderer =
+      props.renderer == "webgl" ? new WebGLRenderer() : new SVGRenderer();
     renderer.setSize(200, 200);
     renderer.setPixelRatio(
       window.devicePixelRatio ? window.devicePixelRatio : 1

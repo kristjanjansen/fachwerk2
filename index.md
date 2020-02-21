@@ -1,3 +1,3 @@
-<f-scene svg3d>
-  <f-box />
+<f-scene svg3>
+  <f-circle />
 </f-scene>

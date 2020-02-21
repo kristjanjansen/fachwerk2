@@ -6,11 +6,18 @@ import {
   Color,
   AmbientLight,
   DirectionalLight,
-  WebGLRenderer,
-  SVGRenderer
+  WebGLRenderer
 } from "../deps/three.js";
 
-export const FSceneCanvas3 = {
+import { SVGRenderer } from "../deps/svgrenderer.js";
+
+export const FSceneThree = {
+  props: {
+    renderer: {
+      default: "svg",
+      type: String
+    }
+  },
   setup(props) {
     const node = ref(null);
 
@@ -27,9 +34,8 @@ export const FSceneCanvas3 = {
     const camera = new PerspectiveCamera(75, 200 / 200, 0.1, 1000);
     camera.position.z = 10;
 
-    console.log(props);
-
-    const renderer = new WebGLRenderer();
+    const renderer =
+      props.renderer == "webgl" ? new WebGLRenderer() : new SVGRenderer();
     renderer.setSize(200, 200);
     renderer.setPixelRatio(
       window.devicePixelRatio ? window.devicePixelRatio : 1

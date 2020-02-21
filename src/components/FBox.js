@@ -1,9 +1,18 @@
-import { h } from "../deps/vue.js";
+import { h, inject } from "../deps/vue.js";
 
-import { FSceneCanvas } from "./FSceneCanvas.js";
-import { FSceneSvg } from "./FSceneSvg.js";
-import { FSceneThree } from "./FSceneThree.js";
+import { FBoxSvg } from "./FBoxSvg.js";
+import { FBoxCanvas } from "./FBoxCanvas.js";
+import { FBoxThree } from "./FBoxThree.js";
 
-export const FScene = (props, context) => {
-  return h(FScene3, { props, ...context }, context.slots);
+export const FBox = {
+  setup(props, context) {
+    const types = {
+      svg: FBoxSvg,
+      canvas: FBoxCanvas,
+      svg3: FBoxThree,
+      webgl: FBoxThree
+    };
+    const type = inject("sceneType");
+    return () => h(types[type], { props, ...context }, context.slots);
+  }
 };

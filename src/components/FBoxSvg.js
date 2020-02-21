@@ -10,8 +10,8 @@ export const FBoxSvg = {
   },
   template: `
     <rect 
-      x="0"
-      y="0"
+      :x="r / -2"
+      :y="r / -2"
       :width="r"
       :height="r"
       :fill="styling.fill"

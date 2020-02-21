@@ -4,10 +4,10 @@ import { FSceneSvg } from "./FSceneSvg.js";
 import { FSceneCanvas } from "./FSceneCanvas.js";
 import { FSceneThree } from "./FSceneThree.js";
 
-const FSceneThreeSvg = (props, context) =>
+export const FSceneThreeSvg = (props, context) =>
   h(FSceneThree, { ...props, renderer: "svg", ...context }, context.slots);
 
-const FSceneThreeWebgl = (props, context) =>
+export const FSceneThreeWebgl = (props, context) =>
   h(FSceneThree, { ...props, renderer: "webgl", ...context }, context.slots);
 
 const getSceneType = props => {

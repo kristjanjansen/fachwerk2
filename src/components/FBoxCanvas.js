@@ -20,10 +20,10 @@ export const FBoxCanvas = {
         transform2dCanvas(props, ctx.value);
         styling2dCanvas(props, ctx.value);
         if (props.fill !== "none") {
-          ctx.value.fillRect(0, 0, props.r, props.r);
+          ctx.value.fillRect(props.r / -2, props.r / -2, props.r, props.r);
         }
         if (props.stroke !== "none") {
-          ctx.value.strokeRect(0, 0, props.r, props.r);
+          ctx.value.strokeRect(props.r / -2, props.r / -2, props.r, props.r);
         }
         reset2dCanvas(ctx.value);
       }

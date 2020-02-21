@@ -1,5 +1,5 @@
 import { computed, watch } from "../deps/vue.js";
-import { deg2rad } from "../utils.js";
+import { deg2rad, scale } from "../../fachwerk.js";
 
 export const transform2dProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },
@@ -41,11 +41,21 @@ export const useTransform2d = props =>
 
 export const useTransform3d = (props, object) => {
   watch(
+    () => props.position,
+    () => {
+      object.position.x = scale(props.x, 0, 200, -100, 100);
+      object.position.y = scale(props.y, 0, 200, 100, -100);
+      //object.rotation.x = deg2rad(props.rotation);
+      //object.rotation.y = deg2rad(props.rotation);
+      //object.rotation.z = deg2rad(props.rotation);
+    }
+  );
+  watch(
     () => props.rotation,
     () => {
       //object.rotation.x = deg2rad(props.rotation);
       //object.rotation.y = deg2rad(props.rotation);
-      object.rotation.z = deg2rad(props.rotation);
+      object.rotation.z = deg2rad(360 - props.rotation);
     }
   );
 };

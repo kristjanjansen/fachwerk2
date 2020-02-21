@@ -1,11 +1,10 @@
 import { inject } from "../deps/vue.js";
 import {
+  Group,
   BoxGeometry,
   Mesh,
-  BoxBufferGeometry,
   EdgesGeometry,
-  LineSegments,
-  Group
+  LineSegments
 } from "../deps/three.js";
 
 import { stylingProps, useThreeFill, useThreeStroke } from "../libs/styling.js";
@@ -18,19 +17,19 @@ export const FBoxThree = {
 
     var group = new Group();
 
+    const geometry = new BoxGeometry(props.r, props.r, props.r);
+
     if (props.fill !== "none") {
       const fill = useThreeFill(props);
-      const fillGeometry = new BoxGeometry(props.r, props.r, props.r);
-      const fillBox = new Mesh(fillGeometry, fill.value);
-      group.add(fillBox);
+      const fillObject = new Mesh(geometry, fill.value);
+      group.add(fillObject);
     }
 
     if (props.stroke !== "none") {
-      const stroke = useThreeStroke(props);
-      const geometry = new BoxBufferGeometry(props.r, props.r, props.r);
       const edges = new EdgesGeometry(geometry);
-      const strokeBox = new LineSegments(edges, stroke.value);
-      group.add(strokeBox);
+      const stroke = useThreeStroke(props);
+      const strokeObject = new LineSegments(edges, stroke.value);
+      group.add(strokeObject);
     }
 
     scene.add(group);

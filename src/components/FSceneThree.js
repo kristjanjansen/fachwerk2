@@ -29,10 +29,11 @@ export const FSceneThree = {
 
     const directionalLight = new DirectionalLight("white", 1);
     directionalLight.position.set(0, 0, 10);
-    scene.add(directionalLight);
 
-    const camera = new PerspectiveCamera(75, 200 / 200, 0.1, 1000);
-    camera.position.z = 10;
+    scene.add(directionalLight);
+    scene.position.set(0, 0, 0);
+    const camera = new PerspectiveCamera(100, 200 / 200, 0.1, 1000);
+    camera.position.z = 80;
 
     const renderer =
       props.renderer == "webgl" ? new WebGLRenderer() : new SVGRenderer();
@@ -54,5 +55,15 @@ export const FSceneThree = {
 
     return { node };
   },
-  template: `<div ref="node"><slot /></div>`
+  template: `
+    <div class="f-scene-three" ref="node">
+      <slot />
+    </div>
+  `,
+  css: /*css*/ `
+    .f-scene-three > * {
+      border: 1px solid red;
+      display: block;
+    }
+  `
 };

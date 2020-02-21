@@ -43,8 +43,8 @@ export const useTransform3d = (props, object) => {
   watch(
     () => props.rotation,
     () => {
-      object.rotation.x = deg2rad(props.rotation);
-      object.rotation.y = deg2rad(props.rotation);
+      //object.rotation.x = deg2rad(props.rotation);
+      //object.rotation.y = deg2rad(props.rotation);
       object.rotation.z = deg2rad(props.rotation);
     }
   );

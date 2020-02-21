@@ -1,6 +1,7 @@
 import { inject } from "../deps/vue.js";
 import {
   Group,
+  PlaneGeometry,
   BoxGeometry,
   Mesh,
   EdgesGeometry,
@@ -17,7 +18,7 @@ export const FBoxThree = {
 
     var group = new Group();
 
-    const geometry = new BoxGeometry(props.r, props.r, props.r);
+    const geometry = new PlaneGeometry(props.r, props.r, props.r);
 
     if (props.fill !== "none") {
       const fill = useThreeFill(props);

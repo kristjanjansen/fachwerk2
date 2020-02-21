@@ -1,3 +1,3 @@
-<f-scene type="webgl">
+<f-scene type="canvas">
   <f-box />
 </f-scene>

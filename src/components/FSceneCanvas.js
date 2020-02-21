@@ -9,25 +9,18 @@ export const FSceneCanvas = {
     provide("ctx", ctx);
     onMounted(() => {
       const canvas = node.value;
-      canvas.width = 400; // 400
-      canvas.height = 400; // 400
+      canvas.width = 200;
+      canvas.height = 200;
       ctx.value = canvas.getContext("2d");
-      reset2dCanvas(ctx.value);
+      //reset2dCanvas(ctx.value);
     });
     onBeforeUpdate(() => {
-      ctx.value.clearRect(0, 0, 400, 400); // 400
+      ctx.value.clearRect(0, 0, 200, 200); // 400
     });
     return { node };
   },
   template: `
-  <canvas
-    style="
-      width: 200px;
-      height: 200px;
-      border: 1px solid red;
-    "
-    ref="node"
-  >
+  <canvas style="border: 1px solid red;" ref="node">
     <slot />
   </canvas>
   `

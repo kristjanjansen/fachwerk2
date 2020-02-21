@@ -9,8 +9,8 @@ export const FBox = {
     const types = {
       svg: FBoxSvg,
       canvas: FBoxCanvas,
-      threeSvg: FBoxThree,
-      threeWebgl: FBoxThree
+      svg3: FBoxThree,
+      webgl: FBoxThree
     };
     const type = inject("sceneType");
     return () => h(types[type.value], { ...props, ...context }, context.slots);

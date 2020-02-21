@@ -45,29 +45,34 @@ export const useTransform3d = (props, object) => {
     () => {
       object.position.x = scale(props.x, 0, 200, -100, 100);
       object.position.y = scale(props.y, 0, 200, 100, -100);
-      //object.rotation.x = deg2rad(props.rotation);
-      //object.rotation.y = deg2rad(props.rotation);
-      //object.rotation.z = deg2rad(props.rotation);
+      object.rotation.z = deg2rad(props.rotation);
     }
   );
   watch(
     () => props.rotation,
     () => {
-      //object.rotation.x = deg2rad(props.rotation);
-      //object.rotation.y = deg2rad(props.rotation);
+      object.rotation.x = deg2rad(props.rotation);
+      object.rotation.y = deg2rad(props.rotation);
       object.rotation.z = deg2rad(360 - props.rotation);
     }
   );
+  // watch(
+  //   () => props.scale,
+  //   () => {
+  //     object.scale.x = props.scale[0];
+  //     object.scale.y = props.scale[1];
+  //     object.scale.z = props.scale[2];
+  //   }
+  // );
 };
 
 export const transform2dCanvas = (props, ctx) => {
   const { x, y, scaleX, scaleY, rotation } = transform2d(props);
   ctx.translate(x, y);
-  ctx.scale(2 * scaleX, 2 * scaleY);
+  ctx.scale(scaleX, scaleY);
   ctx.rotate(deg2rad(rotation));
 };
 
 export const reset2dCanvas = ctx => {
   ctx.resetTransform();
-  ctx.scale(1, 1);
 };

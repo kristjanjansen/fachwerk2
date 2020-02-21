@@ -8,7 +8,7 @@ import {
   Group
 } from "../deps/three.js";
 
-import { stylingProps, useMaterial3d } from "../libs/styling.js";
+import { stylingProps, useThreeFill, useThreeStroke } from "../libs/styling.js";
 import { transform2dProps, useTransform3d } from "../libs/transforms.js";
 
 export const FBoxThree = {
@@ -17,15 +17,16 @@ export const FBoxThree = {
     const scene = inject("scene");
 
     var group = new Group();
-    const { fill, stroke } = useMaterial3d(props);
 
     if (props.fill !== "none") {
+      const fill = useThreeFill(props);
       const fillGeometry = new BoxGeometry(props.r, props.r, props.r);
       const fillBox = new Mesh(fillGeometry, fill.value);
       group.add(fillBox);
     }
 
     if (props.stroke !== "none") {
+      const stroke = useThreeStroke(props);
       const geometry = new BoxBufferGeometry(props.r, props.r, props.r);
       const edges = new EdgesGeometry(geometry);
       const strokeBox = new LineSegments(edges, stroke.value);

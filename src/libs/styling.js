@@ -31,23 +31,46 @@ export const styling2dCanvas = (props, ctx) => {
   ctx.lineWidth = props.strokeWidth;
 };
 
-export const useMaterial3d = props => {
-  const fill = computed(() => {
-    return new MeshPhongMaterial({
-      color: props.fill,
-      opacity: props.opacity,
-      side: DoubleSide
-    });
-  });
-  const stroke = computed(() => {
-    return new LineBasicMaterial({
-      color: props.stroke,
-      linewidth: props.strokeWidth,
-      linecap: "round",
-      linejoin: "round",
-      opacity: props.opacity,
-      side: DoubleSide
-    });
-  });
-  return { fill, stroke };
-};
+export const useThreeFill = props =>
+  computed(
+    () =>
+      new MeshPhongMaterial({
+        color: props.fill,
+        opacity: props.opacity,
+        side: DoubleSide
+      })
+  );
+
+export const useThreeStroke = props =>
+  computed(
+    () =>
+      new LineBasicMaterial({
+        color: props.stroke,
+        linewidth: props.strokeWidth,
+        linecap: "round",
+        linejoin: "round",
+        opacity: props.opacity,
+        side: DoubleSide
+      })
+  );
+
+// export const useMaterial3d = props => {
+//   const fill = computed(() => {
+//     return new MeshPhongMaterial({
+//       color: props.fill,
+//       opacity: props.opacity,
+//       side: DoubleSide
+//     });
+//   });
+// const stroke = computed(() => {
+//   return new LineBasicMaterial({
+//     color: props.stroke,
+//     linewidth: props.strokeWidth,
+//     linecap: "round",
+//     linejoin: "round",
+//     opacity: props.opacity,
+//     side: DoubleSide
+//   });
+// });
+//   return { fill, stroke };
+// };

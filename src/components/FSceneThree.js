@@ -27,8 +27,8 @@ export const FSceneThree = {
     // const ambientLight = new AmbientLight("white", 0.1);
     // scene.add(ambientLight);
 
-    const directionalLight = new DirectionalLight("white");
-    directionalLight.position.set(0, 0, 2);
+    const directionalLight = new DirectionalLight("white", 1);
+    directionalLight.position.set(0, 0, 10);
     scene.add(directionalLight);
 
     const camera = new PerspectiveCamera(75, 200 / 200, 0.1, 1000);

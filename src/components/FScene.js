@@ -16,16 +16,27 @@ const getSceneType = props => {
     if (props["vector"] === "" || props["vector"]) {
       type = "svg";
     }
+    if (props["svg"] === "" || props["svg"]) {
+      type = "svg";
+    }
     if (props["bitmap"] === "" || props["bitmap"]) {
+      type = "canvas";
+    }
+    if (props["canvas"] === "" || props["canvas"]) {
       type = "canvas";
     }
     if (props["vector3"] === "" || props["vector3"]) {
       type = "threeSvg";
     }
+    if (props["svg3d"] === "" || props["svg3d"]) {
+      type = "threeSvg";
+    }
     if (props["bitmap3"] === "" || props["bitmap3"]) {
       type = "threeWebgl";
     }
-    console.log(type);
+    if (props["webgl"] === "" || props["webgl"]) {
+      type = "threeWebgl";
+    }
     return type;
   });
 };
@@ -36,7 +47,15 @@ export const FScene = {
       default: false,
       type: [String, Boolean]
     },
+    svg: {
+      default: false,
+      type: [String, Boolean]
+    },
     vector3: {
+      default: false,
+      type: [String, Boolean]
+    },
+    svg3d: {
       default: false,
       type: [String, Boolean]
     },
@@ -44,13 +63,20 @@ export const FScene = {
       default: false,
       type: [String, Boolean]
     },
+    canvas: {
+      default: false,
+      type: [String, Boolean]
+    },
     bitmap3: {
+      default: false,
+      type: [String, Boolean]
+    },
+    wegbl: {
       default: false,
       type: [String, Boolean]
     }
   },
   setup(props, context) {
-    console.log(props);
     const type = getSceneType(props);
     const types = {
       svg: FSceneSvg,

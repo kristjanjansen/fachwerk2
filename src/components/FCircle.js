@@ -2,14 +2,15 @@ import { h, inject } from "../deps/vue.js";
 
 import { FCircleSvg } from "./FCircleSvg.js";
 import { FCircleCanvas } from "./FCircleCanvas.js";
+import { FCircleThree } from "./FCircleThree.js";
 
 export const FCircle = {
   setup(props, context) {
     const types = {
       svg: FCircleSvg,
       canvas: FCircleCanvas,
-      threeSvg: null,
-      threeWebgl: null
+      threeSvg: FCircleThree,
+      threeWebgl: FCircleThree
     };
     const type = inject("sceneType");
     return () =>

@@ -5,20 +5,20 @@ bitmap:
 <f-slider set="b" />
 
 <f-scene bitmap3>
-  <f-box fill="red" stroke="none" :r="50 / 15" :scale="[get('b',0) / 100,get('b',0) / 100,get('b',0) / 100]" :rotation="get('a')" />
-  <!-- <f-circle :position="[get('a'),get('a')]" r="50" /> -->
+  <f-box fill="red"  :r="50 / 15" :scale="[get('b',0) / 100,get('b',0) / 100,get('b',0) / 100]" :rotation="get('a')" />
+  <f-circle fill="yellow" :rotation="get('a')" :r="50 / 15" />
 </f-scene>
 
 <f-scene vector3>
-  <f-box fill="red" stroke="none" :r="50 / 15" :scale="[get('b',0) / 100,get('b',0) / 100,get('b',0) / 100]" :rotation="get('a')" />
-  <!-- <f-circle :position="[get('a'),get('a')]" r="50" /> -->
+  <f-box fill="red"  :r="50 / 15" :scale="[get('b',0) / 100,get('b',0) / 100,get('b',0) / 100]" :rotation="get('a')" />
+  <f-circle fill="yellow" :rotation="get('a')" :r="50 / 15" />
 </f-scene>
 
 bitmap:
 
 <f-scene bitmap>
   <f-box fill="red" stroke="none"  r="50" :scale="[get('b',0) / 100,get('b',0) / 100]" :rotation="get('a')" />
-  <f-circle :position="[get('a'),get('a')]" r="50" />
+  <f-circle :position="[get('a'),get('a')]" :rotation="get('a')" r="50" />
 </f-scene>
 
 vector:

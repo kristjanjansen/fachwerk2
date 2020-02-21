@@ -5,8 +5,8 @@ export const transform2dProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },
   rotation: { default: 0, type: [String, Number] },
   scale: { default: [1, 1], type: [String, Number, Array, Object] },
-  x: { default: null, type: [String, Number] },
-  y: { default: null, type: [String, Number] }
+  x: { default: 0, type: [String, Number] },
+  y: { default: 0, type: [String, Number] }
 };
 
 export const transform3dProps = {
@@ -19,13 +19,13 @@ export const transform3dProps = {
 };
 
 const transform2d = props => {
-  const x = props.x || props.position[0];
-  const y = props.y || props.position[1];
+  const x = props.x || props.position[0] || 0;
+  const y = props.y || props.position[1] || 0;
 
-  const scaleX = props.scale[0];
-  const scaleY = props.scale[1];
+  const scaleX = props.scale[0] || 1;
+  const scaleY = props.scale[1] || 1;
 
-  const rotation = props.rotation;
+  const rotation = props.rotation || 0;
 
   return { x, y, scaleX, scaleY, rotation };
 };
@@ -59,5 +59,5 @@ export const transform2dCanvas = (props, ctx) => {
 
 export const reset2dCanvas = ctx => {
   ctx.resetTransform();
-  ctx.scale(2, 2);
+  ctx.scale(1, 1);
 };

@@ -14,8 +14,8 @@ Animates a value
     const progress = ref(0);
     anime({
       targets: progress,
-      value: 360,
-      duration: 10000,
+      value: 100,
+      duration: 2000,
       easing: "linear",
       direction: "alternate",
       loop: true

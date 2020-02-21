@@ -9,9 +9,9 @@ import {
 
 export const FBoxCanvas = {
   props: {
-    ...transform2dProps,
+    r: { default: 1 },
     ...stylingProps,
-    r: { default: 1 }
+    ...transform2dProps
   },
   setup(props) {
     const ctx = inject("ctx");
@@ -19,14 +19,11 @@ export const FBoxCanvas = {
       if (ctx.value) {
         transform2dCanvas(props, ctx.value);
         styling2dCanvas(props, ctx.value);
-        if (props.fill) {
-          ctx.value.fillRect(50, 50, props.r, props.r);
+        if (props.fill !== "none") {
+          ctx.value.fillRect(0, 0, props.r, props.r);
         }
         if (props.stroke !== "none") {
-          //ctx.value.beginPath();
-          ctx.value.strokeRect(50, 50, props.r, props.r);
-          //ctx.value.arc(100, 100, props.r, 0, 2 * Math.PI);
-          //ctx.value.stroke();
+          ctx.value.strokeRect(0, 0, props.r, props.r);
         }
         reset2dCanvas(ctx.value);
       }

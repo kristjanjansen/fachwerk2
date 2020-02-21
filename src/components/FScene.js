@@ -37,6 +37,7 @@ const getSceneType = props => {
     if (props["webgl"] === "" || props["webgl"]) {
       type = "threeWebgl";
     }
+    console.log(type);
     return type;
   });
 };

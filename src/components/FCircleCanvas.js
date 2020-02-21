@@ -21,7 +21,7 @@ export const FCircleCanvas = {
         styling2dCanvas(props, ctx.value);
         ctx.value.beginPath();
         ctx.value.arc(0, 0, props.r, 0, 2 * Math.PI);
-        if (props.fill) {
+        if (props.fill !== "none") {
           ctx.value.fill();
         }
         if (props.stroke !== "none") {

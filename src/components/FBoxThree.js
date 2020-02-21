@@ -19,14 +19,18 @@ export const FBoxThree = {
     var group = new Group();
     const { fill, stroke } = useMaterial3d(props);
 
-    const fillGeometry = new BoxGeometry(props.r, props.r, props.r);
-    const fillBox = new Mesh(fillGeometry, fill.value);
-    group.add(fillBox);
+    if (props.fill !== "none") {
+      const fillGeometry = new BoxGeometry(props.r, props.r, props.r);
+      const fillBox = new Mesh(fillGeometry, fill.value);
+      group.add(fillBox);
+    }
 
-    const geometry = new BoxBufferGeometry(props.r, props.r, props.r);
-    const edges = new EdgesGeometry(geometry);
-    const strokeBox = new LineSegments(edges, stroke.value);
-    group.add(strokeBox);
+    if (props.stroke !== "none") {
+      const geometry = new BoxBufferGeometry(props.r, props.r, props.r);
+      const edges = new EdgesGeometry(geometry);
+      const strokeBox = new LineSegments(edges, stroke.value);
+      group.add(strokeBox);
+    }
 
     scene.add(group);
 

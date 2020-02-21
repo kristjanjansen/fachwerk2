@@ -1,3 +1,3 @@
-<f-scene type="2d">
-  <f-box-three />
+<f-scene type="canvas">
+  <f-box-canvas />
 </f-scene>

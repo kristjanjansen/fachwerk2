@@ -1,22 +1,12 @@
-import {
-  watch,
-  inject
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
-
+import { inject } from "../deps/vue.js";
 import {
   BoxGeometry,
-  MeshLambertMaterial,
-  MeshBasicMaterial,
-  DoubleSide,
   Mesh,
   BoxBufferGeometry,
   EdgesGeometry,
-  LineBasicMaterial,
   LineSegments,
   Group
-} from "https://unpkg.com/three@0.113.2/build/three.module.js";
-
-import { deg2rad } from "../utils.js";
+} from "../deps/three.js";
 
 import { stylingProps, useMaterial3d } from "../libs/styling.js";
 import { transform2dProps, useTransform3d } from "../libs/transforms.js";
@@ -41,29 +31,7 @@ export const FBox3 = {
     scene.add(group);
 
     useTransform3d(props, group);
-    // watch(
-    //   () => props.rotation,
-    //   () => {
-    //     group.rotation.x = deg2rad(props.rotation);
-    //     group.rotation.y = deg2rad(props.rotation);
-    //     group.rotation.z = deg2rad(props.rotation);
-    //     // cube.rotation.x = deg2rad(r);
-    //     // cube.rotation.y = deg2rad(r);
-    //     // cube.rotation.z = deg2rad(r);
-    //   }
-    // );
 
-    // watch(
-    //   () => props.r,
-    //   r => {
-    //     cube2.rotation.x = deg2rad(r);
-    //     cube2.rotation.y = deg2rad(r);
-    //     cube2.rotation.z = deg2rad(r);
-    //     // cube.rotation.x = deg2rad(r);
-    //     // cube.rotation.y = deg2rad(r);
-    //     // cube.rotation.z = deg2rad(r);
-    //   }
-    // );
     return () => null;
   }
 };

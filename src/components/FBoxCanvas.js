@@ -1,12 +1,4 @@
-//@ts-check
-
-import {
-  inject,
-  provide,
-  watch,
-  ref,
-  onMounted
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { inject, watch } from "../deps/vue.js";
 
 import { stylingProps, styling2dCanvas } from "../libs/styling.js";
 import {
@@ -14,7 +6,6 @@ import {
   transform2dCanvas,
   reset2dCanvas
 } from "../libs/transforms.js";
-import { deg2rad } from "../utils.js";
 
 export const FBoxCanvas = {
   props: {

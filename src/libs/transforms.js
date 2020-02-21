@@ -1,9 +1,4 @@
-//@ts-check
-import {
-  computed,
-  watch,
-  inject
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { computed, watch } from "../deps/vue.js";
 import { deg2rad } from "../utils.js";
 
 export const transform2dProps = {

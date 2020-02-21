@@ -1,9 +1,4 @@
-//@ts-check
-
-import {
-  inject,
-  watch
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { inject, watch } from "../deps/vue.js";
 
 import { stylingProps, styling2dCanvas } from "../libs/styling.js";
 import {

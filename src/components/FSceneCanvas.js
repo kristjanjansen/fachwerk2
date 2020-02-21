@@ -1,9 +1,4 @@
-import {
-  provide,
-  ref,
-  onMounted,
-  onBeforeUpdate
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { provide, ref, onMounted, onBeforeUpdate } from "../deps/vue.js";
 
 export const FSceneCanvas = {
   setup() {

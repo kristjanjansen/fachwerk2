@@ -1,6 +1,3 @@
-// @ts-check
-import { inject } from "../vendor/vue.js";
-
 import { stylingProps, useStyling2d } from "../libs/styling.js";
 import { transform2dProps, useTransform2d } from "../libs/transforms.js";
 

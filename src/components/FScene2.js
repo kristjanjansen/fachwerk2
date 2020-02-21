@@ -1,9 +1,4 @@
-import {
-  ref,
-  onMounted,
-  provide,
-  computed
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { ref, onMounted, provide, computed } from "../deps/vue.js";
 
 export const FScene2 = {
   setup() {

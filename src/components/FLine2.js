@@ -1,9 +1,4 @@
-import {
-  line
-  // curveCardinal,
-  // curveCardinalClosed,
-  // arc
-} from "https://unpkg.com/d3-shape@1.3.7/src/index.js?module";
+import { line } from "../deps/d3-shape.js";
 
 export const FLine2 = {
   setup() {

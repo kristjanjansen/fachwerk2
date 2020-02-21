@@ -1,4 +1,4 @@
-import { h } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { h } from "../deps/vue.js";
 
 import { FSceneCanvas } from "./FSceneCanvas.js";
 import { FScene2 } from "./FScene2.js";

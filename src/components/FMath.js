@@ -1,10 +1,10 @@
-import {
-  ref,
-  watch
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
-import katex from "https://unpkg.com/katex@0.11.1/dist/katex.mjs";
+import { ref, watch } from "../deps/vue.js";
+import * as katex from "../deps/katex.js";
 
 export const FMath = {
+  help: `
+Displays KaTeX-based math equations.
+  `,
   setup(_, { slots }) {
     const math = ref("");
     watch(

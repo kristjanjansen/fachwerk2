@@ -1,4 +1,4 @@
-import { ref } from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { ref } from "../deps/vue.js";
 
 const state = ref({});
 

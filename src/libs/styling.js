@@ -1,21 +1,10 @@
-//@ts-check
-import {
-  computed,
-  inject
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { computed, inject } from "../deps/vue.js";
 
 import {
-  BoxGeometry,
   MeshPhongMaterial,
-  MeshBasicMaterial,
-  MeshNormalMaterial,
   DoubleSide,
-  Mesh,
-  BoxBufferGeometry,
-  EdgesGeometry,
-  LineBasicMaterial,
-  LineSegments
-} from "https://unpkg.com/three@0.113.2/build/three.module.js";
+  LineBasicMaterial
+} from "../deps/three.js";
 
 export const stylingProps = {
   stroke: { default: "black", type: [String] },

@@ -1,22 +1,5 @@
-import { line } from "https://unpkg.com/d3-shape@1.3.7/src/index.js?module";
-
-// export const FLine2 = {
-//   setup() {
-//     const path = line()([
-//       [0, 0],
-//       [100, 50]
-//     ]);
-//     return { path };
-//   },
-//   template: `
-//     <path :d="path" stroke="black" />
-//   `
-// };
-
-import {
-  inject,
-  watch
-} from "https://unpkg.com/vue@3.0.0-alpha.4/dist/vue.esm.js";
+import { inject, watch } from "../deps/vue.js";
+import { line } from "../deps/d3-shape.js";
 
 export const FLineCanvas = {
   setup(props) {

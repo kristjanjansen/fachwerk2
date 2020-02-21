@@ -1,5 +1,6 @@
 import { provide, ref, onMounted, onBeforeUpdate } from "../deps/vue.js";
 
+import { deg2rad } from "../../fachwerk.js";
 import {
   Scene,
   PerspectiveCamera,
@@ -29,9 +30,8 @@ export const FSceneThree = {
 
     const directionalLight = new DirectionalLight("white", 1);
     directionalLight.position.set(0, 0, 10);
-
     scene.add(directionalLight);
-    scene.position.set(0, 0, 0);
+
     const camera = new PerspectiveCamera(100, 200 / 200, 0.1, 1000);
     camera.position.z = 80;
 

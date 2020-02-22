@@ -20,5 +20,8 @@ export const fachwerk = () => {
 
   componentCss(components);
 
+  app.config.errorHandler = () => null;
+  app.config.warnHandler = () => null;
+
   app.mount("#app");
 };

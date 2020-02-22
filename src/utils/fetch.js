@@ -1,15 +1,13 @@
-import { ref, onMounted } from "../deps/vue.js";
+import { ref } from "../deps/vue.js";
 
 export const useFetch = src => {
   const data = ref("");
   if (src) {
-    onMounted(() => {
-      fetch("./index.md")
-        .then(res => res.text())
-        .then(res => {
-          data.value = res;
-        });
-    });
+    fetch("./index.md")
+      .then(res => res.text())
+      .then(res => {
+        data.value = res;
+      });
   }
   return { data };
 };

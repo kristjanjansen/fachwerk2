@@ -1,4 +1,4 @@
-import { createApp } from "../deps/vue.js";
+import { createApp, ref } from "../deps/vue.js";
 import { useFetch, components, componentCss } from "../../fachwerk.js";
 
 export const fachwerk = () => {
@@ -8,7 +8,7 @@ export const fachwerk = () => {
       return { data };
     },
     template: `
-      <f-content :markdown="data" />
+      <f-content :content="data" />
     `
   };
 

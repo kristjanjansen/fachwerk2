@@ -25,5 +25,5 @@ Animates a value
     }
     return { progress };
   },
-  template: `<slot :progress="progress" />`
+  template: `<slot :value="progress" />`
 };

@@ -9,6 +9,7 @@ export const FMarkdown = {
     }
   },
   setup(props) {
+    console.log(props.markdown);
     const compiledMarkdown = computed(() => ({
       setup() {
         return { ...utils };

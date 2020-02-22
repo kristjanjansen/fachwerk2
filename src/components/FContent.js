@@ -12,6 +12,6 @@ export const FContent = {
     return { markdown };
   },
   template: `
-  <f-markdown markdown="markdown" />
+  <f-markdown :markdown="markdown" />
   `
 };

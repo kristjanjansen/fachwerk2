@@ -1,3 +1,5 @@
+import { ref, onMounted } from "../deps/vue.js";
+
 export const useFetch = src => {
   const data = ref("");
   if (src) {

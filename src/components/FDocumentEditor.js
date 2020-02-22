@@ -17,9 +17,12 @@ export const FDocumentEditor = {
     return { currentContent, log };
   },
   template: `
-  <div style="display: grid; grid-template-columns: 1fr 1fr;">
-    <f-editor :content="currentContent" @input:content="a => currentContent = a" />
-    <div>{{currentContent}}</div>
+  <div style="border: 1px solid red; display: grid; grid-template-columns: 1fr 1fr;">
+    <f-editor
+      :content="currentContent"
+      @input:content="content => currentContent = content"
+    />
+    <f-content :content="currentContent" />
   </div>
   `
 };

@@ -8,7 +8,7 @@ export const fachwerk = () => {
       return { data };
     },
     template: `
-      <f-content :content="data" />
+      <f-document-editor :content="data" />
     `
   };
 

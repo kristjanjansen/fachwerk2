@@ -1,4 +1,4 @@
-import { ref, watch } from "../deps/vue.js";
+import { ref } from "../deps/vue.js";
 import { set } from "../../fachwerk.js";
 
 export const FFetch = {

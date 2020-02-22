@@ -16,17 +16,20 @@ export const FMarkdown = {
     }
   },
   setup(props) {
-    onErrorCaptured(e => console.log(e));
-    const error = ref("");
-    const compiledMarkdown = computed(() => ({
-      setup() {
-        return { ...utils };
-      },
-      render: compile(marked(props.markdown, { breaks: true }), {
-        onError: () => null
-      })
-    }));
+    try {
+      onErrorCaptured((a, b, c) => console.log("COMPILE", a, b, c));
+      const compiledMarkdown = computed(() => ({
+        setup() {
+          return { ...utils };
+        },
+        render: compile(marked(props.markdown, { breaks: true }), {
+          onError: () => null
+        })
+      }));
 
-    return () => (compiledMarkdown.value ? h(compiledMarkdown.value) : null);
+      return () => (compiledMarkdown.value ? h(compiledMarkdown.value) : null);
+    } catch (e) {
+      console.log("C", e);
+    }
   }
 };

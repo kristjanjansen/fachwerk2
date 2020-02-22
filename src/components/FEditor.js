@@ -1,22 +1,25 @@
 import { ref, watch } from "../deps/vue.js";
 
 export const FEditor = {
-  props: { value: { default: "", type: String } },
+  props: { content: { default: "", type: String } },
   setup(props, { emit }) {
-    const currentValue = ref("aaaa");
-    // watch(
-    //   () => props.value,
-    //   value => (currentValue.value = value)
-    // );
-    // onInput = () => {
-    //   emit("input", currentValue.value);
-    // };
-    return { currentValue };
+    const currentContent = ref("");
+    watch(
+      () => props.content,
+      content => {
+        currentContent.value = content;
+      }
+    );
+    watch(currentContent, currentContent => {
+      emit("input:content", currentContent);
+    });
+
+    return { currentContent };
   },
   template: `
   <div>
     <textarea
-      v-model="currentValue"
+      v-model="currentContent"
       style="
         border: none;
         color: var(--lightergray);
@@ -30,7 +33,7 @@ export const FEditor = {
         padding: var(--base2);
       "
     />
-    <div>{{currentValue}}</div>
+    <div>{{currentContent}}</div>
   </div>
   `
 };

@@ -1,16 +1,19 @@
 import { ref } from "../deps/vue.js";
+import { useLocalstore } from "../utils/localstore.js";
 
-export const state = ref({ slides: false, count: 1, index: 0 });
+const count = ref(1);
+const slideMode = ref(false);
+const index = ref(0);
 
-export const isSlideVisible = index => {
-  if (state.value.slides) {
-    return index == state.value.index;
+export const state = { count, slideMode, index };
+export const isSlideVisible = i => {
+  if (slideMode.value === true) {
+    return i === index.value;
   }
   return true;
 };
 
-export const setSlideCount = count => (state.value.count = count);
-export const onPrevSlide = () => state.value.index--;
-export const onNextSlide = () => state.value.index++;
-export const onToggleSlideMode = () =>
-  (state.value.slides = !state.value.slides);
+export const setSlideCount = newCount => (count.value = newCount);
+export const onPrevSlide = () => index.value--;
+export const onNextSlide = () => index.value++;
+export const onToggleSlideMode = () => (slideMode.value = !slideMode.value);

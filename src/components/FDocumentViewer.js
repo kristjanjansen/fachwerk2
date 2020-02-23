@@ -30,8 +30,7 @@ export const FDocumentViewer = {
     };
   },
   template: `
-  <div style="border: 1px solid green;">
-    {{ state }} 
+  <div style="border: 1px solid green;">{{ state }}
     <button @click="onPrevSlide">←</button>
     <button @click="onNextSlide">→</button>
     <button @click="onToggleSlideMode">Mode</button>

@@ -1,4 +1,4 @@
-import { createApp, ref, onErrorCaptured } from "../deps/vue.js";
+import { createApp } from "../deps/vue.js";
 import {
   useFetch,
   components,
@@ -14,7 +14,7 @@ export const fachwerk = () => {
       return { data };
     },
     template: `
-      <f-document-editor :content="data" />
+      <f-document :content="data" />
     `
   };
 
@@ -26,8 +26,8 @@ export const fachwerk = () => {
 
   componentCss(components);
 
-  app.config.errorHandler = onError;
-  app.config.warnHandler = onWarning;
+  // app.config.errorHandler = onError;
+  // app.config.warnHandler = onWarning;
 
   app.mount("#app");
 };

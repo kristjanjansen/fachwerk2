@@ -1,8 +1,9 @@
-import { ref, watch } from "../deps/vue.js";
+import { ref, watch, onMounted } from "../deps/vue.js";
 
 export const FDocumentEditor = {
   props: { content: { default: "", type: String } },
   setup(props, { emit }) {
+    const editor = ref(null);
     const currentContent = ref("");
     watch(
       () => props.content,
@@ -13,11 +14,23 @@ export const FDocumentEditor = {
     watch(currentContent, currentContent => {
       emit("input:content", currentContent);
     });
-
-    return { currentContent };
+    onMounted(() => {
+      editor.value.onkeydown = function(e) {
+        if (e.keyCode === 9) {
+          const val = this.value;
+          const start = this.selectionStart;
+          const end = this.selectionEnd;
+          this.value = val.substring(0, start) + "  " + val.substring(end);
+          this.selectionStart = this.selectionEnd = start + 2;
+          return false;
+        }
+      };
+    });
+    return { currentContent, editor };
   },
   template: `
   <textarea
+    ref="editor"
     v-model="currentContent"
     style="
       border: none;

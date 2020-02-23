@@ -59,3 +59,7 @@ export const parsePage = page => {
 export const parseDocument = document => {
   return document.split(/\r?\n---\r?\n/).map(parsePage);
 };
+
+import { ref } from "../deps/vue.js";
+
+export const state = ref({ slides: false, index: 0 });

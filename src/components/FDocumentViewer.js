@@ -16,8 +16,8 @@ export const FDocumentViewer = {
   template: `
   <div style="border: 1px solid green;">
     <div v-for="page in parsedDocument" style="margin: 3px; border: 1px solid red;">
-      <div v-for="cell in page.content" style="margin: 3px; border: 1px solid blue;">
-        <f-markdown :markdown="cell" />
+      <div v-for="content in page.content" style="margin: 3px; border: 1px solid blue;">
+        <f-document-compiler :content="content" />
       </div>
     </div>
   </div>

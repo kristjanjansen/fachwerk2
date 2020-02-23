@@ -2,23 +2,23 @@ import { computed, h, compile, onErrorCaptured } from "../deps/vue.js";
 import marked from "../deps/marked.js";
 import { utils, onCompilerError } from "../../fachwerk.js";
 
-export const FMarkdown = {
+export const FDocumentCompiler = {
   props: {
-    markdown: {
+    content: {
       default: ""
     }
   },
   setup(props) {
     onErrorCaptured(onCompilerError);
-    const compiledMarkdown = computed(() => ({
+    const compiledContent = computed(() => ({
       setup() {
         return { ...utils };
       },
-      render: compile(marked(props.markdown, { breaks: true }), {
+      render: compile(marked(props.content, { breaks: true }), {
         onError: onCompilerError
       })
     }));
 
-    return () => (compiledMarkdown.value ? h(compiledMarkdown.value) : null);
+    return () => (compiledContent.value ? h(compiledContent.value) : null);
   }
 };

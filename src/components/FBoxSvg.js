@@ -1,9 +1,11 @@
 import { stylingProps, useStyling2d } from "../libs/styling.js";
 import { transform2dProps, useTransform2d } from "../libs/transforms.js";
+import { onError } from "../../fachwerk.js";
 
 export const FBoxSvg = {
   props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },
   setup(props) {
+    onErrorCaptured(onError);
     const styling = useStyling2d(props);
     const transform = useTransform2d(props);
     return { styling, transform };

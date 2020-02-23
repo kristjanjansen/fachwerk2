@@ -10,11 +10,11 @@ import {
 export const fachwerk = () => {
   const App = {
     setup() {
-      const { data } = useFetch("index.md");
-      return { data };
+      const { document } = useFetch("index.md");
+      return { document };
     },
     template: `
-      <f-document :content="data" />
+      <f-document :document="document" />
     `
   };
 

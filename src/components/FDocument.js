@@ -17,7 +17,7 @@ export const FDocument = {
   },
   template: `
   <div style="display: grid; grid-template-columns: 1fr 1fr;">
-    <f-editor
+    <f-document-editor
       :content="currentDocument"
       @input:content="document => currentDocument = document"
     />

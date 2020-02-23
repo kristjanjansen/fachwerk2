@@ -1,13 +1,13 @@
 import { ref } from "../deps/vue.js";
 
 export const useFetch = src => {
-  const data = ref("");
+  const document = ref("");
   if (src) {
     fetch("./index.md")
       .then(res => res.text())
       .then(res => {
-        data.value = res;
+        document.value = res;
       });
   }
-  return { data };
+  return { document };
 };

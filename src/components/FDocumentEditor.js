@@ -1,6 +1,6 @@
 import { ref, watch } from "../deps/vue.js";
 
-export const FEditor = {
+export const FDocumentEditor = {
   props: { content: { default: "", type: String } },
   setup(props, { emit }) {
     const currentContent = ref("");

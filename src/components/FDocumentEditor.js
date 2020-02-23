@@ -1,28 +1,37 @@
 import { ref, watch } from "../deps/vue.js";
-import { log } from "../../fachwerk.js";
 
 export const FDocumentEditor = {
-  props: {
-    content: {
-      default: "",
-      type: String
-    }
-  },
-  setup(props) {
-    const currentContent = ref("zzz");
-    // watch(
-    //   () => props.content,
-    //   content => (currentContent.value = content)
-    // );
-    return { currentContent, log };
+  props: { content: { default: "", type: String } },
+  setup(props, { emit }) {
+    const currentContent = ref("");
+    watch(
+      () => props.content,
+      content => {
+        currentContent.value = content;
+      }
+    );
+    watch(currentContent, currentContent => {
+      emit("input:content", currentContent);
+    });
+
+    return { currentContent };
   },
   template: `
-  <div style="border: 1px solid red; display: grid; grid-template-columns: 1fr 1fr;">
-    <f-editor
-      :content="currentContent"
-      @input:content="content => currentContent = content"
-    />
-    <f-content :content="currentContent" />
-  </div>
+  <textarea
+    v-model="currentContent"
+    style="
+      border: none;
+      color: var(--lightergray);
+      background: var(--paleblue);
+      font-family: var(--font-mono);
+      font-size: var(--font-mono-size);
+      line-height: var(--font-mono-lineheight);
+      outline: none;
+      resize: none;
+      width: 100%;
+      height: 80vh;
+      padding: var(--base2);
+    "
+  />
   `
 };

@@ -1,4 +1,4 @@
-import { createApp, ref, onErrorCaptured } from "../deps/vue.js";
+import { createApp } from "../deps/vue.js";
 import {
   useFetch,
   components,
@@ -10,11 +10,11 @@ import {
 export const fachwerk = () => {
   const App = {
     setup() {
-      const { data } = useFetch("index.md");
-      return { data };
+      const { document } = useFetch("index.md");
+      return { document };
     },
     template: `
-      <f-document-editor :content="data" />
+      <f-document :document="document" />
     `
   };
 

@@ -13,6 +13,12 @@ export const FBox = {
       webgl: FBoxThree
     };
     const type = inject("sceneType");
-    return () => h(types[type.value], { ...props, ...context }, context.slots);
+    let r = () => null;
+    try {
+      r = () => h(types[type.value], { ...props, ...context }, context.slots);
+    } catch (e) {
+      console.log("AAAAA", e);
+    }
+    return r;
   }
 };

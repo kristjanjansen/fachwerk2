@@ -16,8 +16,8 @@ export const FContent = {
   },
   template: `
   <div style="border: 1px solid green;">
-    <div v-for="page in parsedDocument" style="margin: 1px; border: 1px solid red;">
-      <div v-for="cell in page.content" style="margin: 1px; border: 1px solid blue;">
+    <div v-for="page in parsedDocument" style="margin: 3px; border: 1px solid red;">
+      <div v-for="cell in page.content" style="margin: 3px; border: 1px solid blue;">
         <f-markdown :markdown="cell" />
       </div>
     </div>

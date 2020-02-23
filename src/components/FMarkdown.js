@@ -1,6 +1,6 @@
-import { computed, h, compile } from "../deps/vue.js";
+import { computed, h, compile, onErrorCaptured } from "../deps/vue.js";
 import marked from "../deps/marked.js";
-import { utils } from "../../fachwerk.js";
+import { utils, onCompilerError } from "../../fachwerk.js";
 
 export const FMarkdown = {
   props: {
@@ -9,11 +9,14 @@ export const FMarkdown = {
     }
   },
   setup(props) {
+    onErrorCaptured(onCompilerError);
     const compiledMarkdown = computed(() => ({
       setup() {
         return { ...utils };
       },
-      render: compile(marked(props.markdown, { breaks: true }))
+      render: compile(marked(props.markdown, { breaks: true }), {
+        onError: onCompilerError
+      })
     }));
 
     return () => (compiledMarkdown.value ? h(compiledMarkdown.value) : null);

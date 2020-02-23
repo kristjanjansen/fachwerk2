@@ -15,6 +15,15 @@ export const isSlideVisible = i => {
 };
 
 export const setSlideCount = newCount => (count.value = newCount);
-export const onPrevSlide = () => index.value--;
-export const onNextSlide = () => index.value++;
+export const onPrevSlide = () => {
+  if (slideMode.value === true && index.value > 0) {
+    index.value--;
+  }
+};
+export const onNextSlide = () => {
+  // console.log(index.value, count.value);
+  if (slideMode.value === true && index.value < count.value - 1) {
+    index.value++;
+  }
+};
 export const onToggleSlideMode = () => (slideMode.value = !slideMode.value);

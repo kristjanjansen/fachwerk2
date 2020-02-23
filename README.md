@@ -33,3 +33,5 @@
     y="0" 
   />
 </f-scene2>
+
+https://logaretm.github.io/vue-use-web/functions/intersection-observer.html#state

@@ -21,7 +21,7 @@ export const FDocument = {
       :content="currentDocument"
       @input:content="document => currentDocument = document"
     />
-    <f-content :content="currentDocument" />
+    <f-document-viewer :document="currentDocument" />
   </div>
   `
 };

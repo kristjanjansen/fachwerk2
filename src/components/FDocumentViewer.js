@@ -2,16 +2,15 @@ import { computed, watch } from "../deps/vue.js";
 import { parseDocument } from "../libs/document.js";
 import { get, set } from "../../fachwerk.js";
 
-export const FContent = {
+export const FDocumentViewer = {
   props: {
-    content: {
+    document: {
       default: "",
       type: String
     }
   },
   setup(props) {
-    const markdown = computed(() => props.content);
-    const parsedDocument = computed(() => parseDocument(props.content));
+    const parsedDocument = computed(() => parseDocument(props.document));
     return { parsedDocument };
   },
   template: `

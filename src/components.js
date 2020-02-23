@@ -16,6 +16,6 @@ export * from "./components/FSceneThree.js";
 export * from "./components/FSlider.js";
 export * from "./components/FMarkdown.js";
 export * from "./components/FFetch.js";
-export * from "./components/FContent.js";
+export * from "./components/FDocumentViewer.js";
 export * from "./components/FDocument.js";
 export * from "./components/FEditor.js";

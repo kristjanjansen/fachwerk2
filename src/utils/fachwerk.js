@@ -26,8 +26,8 @@ export const fachwerk = () => {
 
   componentCss(components);
 
-  // app.config.errorHandler = onError;
-  // app.config.warnHandler = onWarning;
+  app.config.errorHandler = onError;
+  app.config.warnHandler = onWarning;
 
   app.mount("#app");
 };

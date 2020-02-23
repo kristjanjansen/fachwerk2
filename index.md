@@ -1,3 +1,7 @@
+<f-scene>
+  <f-box r=>
+</f-scene>
+
 Hello
 booo
 

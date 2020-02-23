@@ -2,14 +2,14 @@ import { computed, h, compile, onErrorCaptured } from "../deps/vue.js";
 import marked from "../deps/marked.js";
 import { utils, onCompilerError } from "../../fachwerk.js";
 
-const compiled = content => {
+const compileContent = content => {
   let c = () => null;
   try {
     c = compile(marked(content, { breaks: true }), {
       onError: onCompilerError
     });
-  } catch (e) {
-    console.log("E", e);
+  } catch (error) {
+    onCompilerError(error);
   }
   return c;
 };
@@ -26,7 +26,7 @@ export const FDocumentCompiler = {
       setup() {
         return { ...utils };
       },
-      render: compiled(props.content)
+      render: compileContent(props.content)
     }));
 
     return () => (compiledContent.value ? h(compiledContent.value) : null);

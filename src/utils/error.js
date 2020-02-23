@@ -1,5 +1,17 @@
-export const onError = () => {};
+const log = error => {
+  const parsedError = String(error)
+    .split("\n")[0]
+    .split(":")[1]
+    .trim();
+  console.log(
+    `%cDocument error:%c ${parsedError}`,
+    "color: orange",
+    "color: inherit"
+  );
+};
 
-export const onWarning = () => {};
+export const onError = error => log(error);
 
-export const onCompilerError = () => {};
+export const onWarning = error => log(error);
+
+export const onCompilerError = error => log(error);

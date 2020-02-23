@@ -2,8 +2,9 @@ import { ref } from "../deps/vue.js";
 import { useLocalstore } from "../utils/localstore.js";
 
 const count = ref(1);
-const slideMode = ref(false);
-const index = ref(0);
+
+const slideMode = useLocalstore(false, "slides");
+const index = useLocalstore(0, "index");
 
 export const state = { count, slideMode, index };
 export const isSlideVisible = i => {

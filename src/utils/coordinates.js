@@ -181,93 +181,81 @@ export const test_string_1_to_coordinates = () => {
 };
 
 export const string_1_1_to_coordinates = () => {
-  const expected = [[1, 1, 0]];
-  const actual = parseCoords("1 1");
-  return [expected, actual];
+  return [parseCoords("1 1"), [[1, 1, 0]]];
 };
 
 export const string_1_1_a_spaced_to_coordinates = () => {
-  const expected = [[1, 1, 0]];
-  const actual = parseCoords("1  1        a");
-  return [expected, actual];
+  return [parseCoords("1  1        a"), [[1, 1, 0]]];
 };
 
 export const string_1_1_a_1_spaced_to_coordinates = () => {
-  const expected = [[1, 1, 0]];
-  const actual = parseCoords("1  1        a 1");
-  return [expected, actual];
+  return [parseCoords("1  1        a 1"), [[1, 1, 0]]];
 };
 
 export const string_1_and_1_to_coordinates = () => {
-  const expected = [
-    [1, 0, 0],
-    [1, 0, 0]
+  return [
+    parseCoords("1,1"),
+    [
+      [1, 0, 0],
+      [1, 0, 0]
+    ]
   ];
-  const actual = parseCoords("1,1");
-  return [expected, actual];
 };
 
 export const string_1_and_1_in_array_to_coordinates = () => {
-  const expected = [[1, 1, 0]];
-  const actual = parseCoords(["1", "1"]);
-  return [expected, actual];
+  return [parseCoords(["1", "1"]), [[1, 1, 0]]];
 };
 
 export const string_1_1_and_1_1_in_array_to_coordinates = () => {
-  const expected = [
-    [1, 1, 0],
-    [1, 1, 0]
+  return [
+    parseCoords(["1 1", "1 1"]),
+    [
+      [1, 1, 0],
+      [1, 1, 0]
+    ]
   ];
-  const actual = parseCoords(["1 1", "1 1"]);
-  return [expected, actual];
 };
 
 export const string_1_and_1_spaced_to_coordinates = () => {
-  const expected = [
-    [1, 0, 0],
-    [1, 0, 0]
+  return [
+    parseCoords("1 ,   1"),
+    [
+      [1, 0, 0],
+      [1, 0, 0]
+    ]
   ];
-  const actual = parseCoords("1 ,   1");
-  return [expected, actual];
 };
 
 export const string_1_1_and_1_1_to_coordinates = () => {
-  const expected = [
-    [1, 1, 0],
-    [1, 1, 0]
+  return [
+    parseCoords("1 1, 1 1"),
+    [
+      [1, 1, 0],
+      [1, 1, 0]
+    ]
   ];
-  const actual = parseCoords("1 1, 1 1");
-  return [expected, actual];
 };
 
 export const string_1_1_1_to_coordinates = () => {
-  const expected = [[1, 1, 1]];
-  const actual = parseCoords("1 1 1");
-  return [expected, actual];
+  return [parseCoords("1 1 1"), [[1, 1, 1]]];
 };
 
 export const string_1_1_1_1_to_coordinates = () => {
-  const expected = [[1, 1, 1]];
-  const actual = parseCoords("1 1 1 1");
-  return [expected, actual];
+  return [parseCoords("1 1 1 1"), [[1, 1, 1]]];
 };
 
 export const string_1_1_1_and_1_1_1_to_coordinates = () => {
-  const expected = [
-    [1, 1, 1],
-    [1, 1, 1]
+  return [
+    parseCoords("1 1 1, 1 1 1"),
+    [
+      [1, 1, 1],
+      [1, 1, 1]
+    ]
   ];
-  const actual = parseCoords("1 1 1, 1 1 1");
-  return [expected, actual];
 };
 
 export const string_1_1_1_1_and_1_1_1_1_to_coordinates = () => {
-  const expected = [
-    [1, 1, 1],
-    [1, 1, 1]
-  ];
-  const actual = parseCoords("1 1 1 1, 1 1 1 1");
-  return [expected, actual];
+  return [parseCoords("1 1 1 1, 1 1 1 1")[([1, 1, 1], [1, 1, 1])]];
 };
 
 // Test numbers

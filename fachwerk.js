@@ -1,7 +1,7 @@
-export * from "./src/components.js";
-export * from "./src/utils.js";
+export * from "./src/components/index.js";
+export * from "./src/utils/index.js";
 
-import * as components from "./src/components.js";
-import * as utils from "./src/utils.js";
+import * as components from "./src/components/index.js";
+import * as utils from "./src/utils/index.js";
 
 export { components, utils };

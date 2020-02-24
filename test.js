@@ -1,7 +1,8 @@
-import * as utils from "./src/utils/index.js";
+import { test } from "./src/utils/test.js";
+import * as array from "./src/utils/array.js";
 
-const tests = Object.entries({ ...utils }).filter(([key, value]) =>
+const tests = Object.entries({ ...array }).filter(([key, value]) =>
   key.endsWith("_test")
 );
 
-console.log(tests);
+test(tests);

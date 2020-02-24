@@ -1,7 +1,7 @@
 import { convert } from "../deps/chromatism.js";
 import { getCssVariable } from "../../fachwerk.js";
 
-export const color_help = () => `
+export const docs_color = () => `
 
 \`color('name')\`
 

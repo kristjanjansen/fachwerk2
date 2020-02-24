@@ -8,6 +8,6 @@ const tests = Object.entries({
   ...array,
   ...coordinates,
   ...types
-}).filter(([key, value]) => key.endsWith("_test"));
+}).filter(([key, value]) => key.startsWith("test_"));
 
 test(tests);

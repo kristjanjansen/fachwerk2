@@ -23,8 +23,8 @@ export const toNumber = (value, def = null) => {
   return float;
 };
 
-export const isObject_object_test = () => [isObject({ x: 1 }), true];
+export const test_isObject_object = () => [isObject({ x: 1 }), true];
 
-export const isObject_array_test = () => [isObject([1]), false];
+export const test_isObject_array = () => [isObject([1]), false];
 
-export const isObject_date_test = () => [isObject(new Date()), false];
+export const test_isObject_date = () => [isObject(new Date()), false];

@@ -1,4 +1,4 @@
-export const scale_help = () => `
+export const docs_scale = () => `
 
 \`scale(value, start1, stop1, start2 = -2, stop2 = 2)\`
 

@@ -48,7 +48,7 @@ export const coordsTextToArray = (text, normalizer) => {
         .trim()
         .replace(/\s+/g, " ")
         .split(" ")
-        .map(value => makeNumber(value))
+        .map(value => toNumber(value))
     )
     .map(normalizer);
 };
@@ -158,103 +158,215 @@ export const parseCoords = (c, normalizer = normalizeDefault) => {
   return null;
 };
 
+// Strings
+
+export const test_string_empty_to_coordinates = () => {
+  return [parseCoords(" "), [[0, 0, 0]]];
+};
+
+export const test_string_empty_to_scale_coordinates = () => {
+  return [parseCoords(" ", normalizeScale), [[1, 1, 1]]];
+};
+
+export const test_string_0_to_coordinates = () => {
+  return [parseCoords("0"), [[0, 0, 0]]];
+};
+
+export const test_string_0_to_scale_coordinates = () => {
+  return [parseCoords("0", normalizeScale), [[0, 0, 0]]];
+};
+
+export const test_string_1_to_coordinates = () => {
+  return [parseCoords("1"), [[1, 0, 0]]];
+};
+
+export const string_1_1_to_coordinates = () => {
+  const expected = [[1, 1, 0]];
+  const actual = parseCoords("1 1");
+  return [expected, actual];
+};
+
+export const string_1_1_a_spaced_to_coordinates = () => {
+  const expected = [[1, 1, 0]];
+  const actual = parseCoords("1  1        a");
+  return [expected, actual];
+};
+
+export const string_1_1_a_1_spaced_to_coordinates = () => {
+  const expected = [[1, 1, 0]];
+  const actual = parseCoords("1  1        a 1");
+  return [expected, actual];
+};
+
+export const string_1_and_1_to_coordinates = () => {
+  const expected = [
+    [1, 0, 0],
+    [1, 0, 0]
+  ];
+  const actual = parseCoords("1,1");
+  return [expected, actual];
+};
+
+export const string_1_and_1_in_array_to_coordinates = () => {
+  const expected = [[1, 1, 0]];
+  const actual = parseCoords(["1", "1"]);
+  return [expected, actual];
+};
+
+export const string_1_1_and_1_1_in_array_to_coordinates = () => {
+  const expected = [
+    [1, 1, 0],
+    [1, 1, 0]
+  ];
+  const actual = parseCoords(["1 1", "1 1"]);
+  return [expected, actual];
+};
+
+export const string_1_and_1_spaced_to_coordinates = () => {
+  const expected = [
+    [1, 0, 0],
+    [1, 0, 0]
+  ];
+  const actual = parseCoords("1 ,   1");
+  return [expected, actual];
+};
+
+export const string_1_1_and_1_1_to_coordinates = () => {
+  const expected = [
+    [1, 1, 0],
+    [1, 1, 0]
+  ];
+  const actual = parseCoords("1 1, 1 1");
+  return [expected, actual];
+};
+
+export const string_1_1_1_to_coordinates = () => {
+  const expected = [[1, 1, 1]];
+  const actual = parseCoords("1 1 1");
+  return [expected, actual];
+};
+
+export const string_1_1_1_1_to_coordinates = () => {
+  const expected = [[1, 1, 1]];
+  const actual = parseCoords("1 1 1 1");
+  return [expected, actual];
+};
+
+export const string_1_1_1_and_1_1_1_to_coordinates = () => {
+  const expected = [
+    [1, 1, 1],
+    [1, 1, 1]
+  ];
+  const actual = parseCoords("1 1 1, 1 1 1");
+  return [expected, actual];
+};
+
+export const string_1_1_1_1_and_1_1_1_1_to_coordinates = () => {
+  const expected = [
+    [1, 1, 1],
+    [1, 1, 1]
+  ];
+  const actual = parseCoords("1 1 1 1, 1 1 1 1");
+  return [expected, actual];
+};
+
 // Test numbers
 
-export const number_0_to_coordinates_test = () => {
+export const test_number_0_to_coordinates = () => {
   return [parseCoords(0), [[0, 0, 0]]];
 };
 
-export const number_1_to_coordinates_test = () => {
+export const test_number_1_to_coordinates = () => {
   return [parseCoords(1), [[1, 0, 0]]];
 };
 
-export const number_2_to_coordinates_test = () => {
+export const test_number_2_to_coordinates = () => {
   return [parseCoords(2), [[2, 0, 0]]];
 };
 
-export const number_1_to_scale_coordinates_test = () => {
+export const test_number_1_to_scale_coordinates = () => {
   return [parseCoords(1, normalizeScale), [[1, 1, 1]]];
 };
 
-export const number_2_to_scale_coordinates_test = () => {
+export const test_number_2_to_scale_coordinates = () => {
   return [parseCoords(2, normalizeScale), [[2, 2, 2]]];
 };
 
-export const number_01_to_coordinates_test = () => {
+export const test_number_01_to_coordinates = () => {
   return [parseCoords(0.1), [[0.1, 0, 0]]];
 };
 
-export const number_1_in_array_to_coordinates_test = () => {
+export const test_number_1_in_array_to_coordinates = () => {
   return [parseCoords([1]), [[1, 0, 0]]];
 };
 
-export const number_1_in_array_array_to_coordinates_test = () => {
+export const test_number_1_in_array_array_to_coordinates = () => {
   return [parseCoords([[1]]), [[1, 0, 0]]];
 };
 
-export const number_1_1_in_array_to_coordinates_test = () => {
+export const test_number_1_1_in_array_to_coordinates = () => {
   return [parseCoords([1, 1]), [[1, 1, 0]]];
 };
 
-export const number_1_1_in_array_array_to_coordinates_test = () => {
+export const test_number_1_1_in_array_array_to_coordinates = () => {
   return [parseCoords([[1, 1]]), [[1, 1, 0]]];
 };
 
-export const array_number_1_1_1_in_array_to_coordinates_test = () => {
+export const test_array_number_1_1_1_in_array_to_coordinates = () => {
   return [parseCoords([1, 1, 1]), [[1, 1, 1]]];
 };
 
-export const number_1_1_1_in_array_array_to_coordinates_test = () => {
+export const test_number_1_1_1_in_array_array_to_coordinates = () => {
   return [parseCoords([[1, 1, 1]]), [[1, 1, 1]]];
 };
 
-export const number_1_1_1_1_in_array_array_to_coordinates_test = () => {
+export const test_number_1_1_1_1_in_array_array_to_coordinates = () => {
   return [parseCoords([[1, 1, 1, 1]]), [[1, 1, 1]]];
 };
 
-export const array_number_1_1_1_to_coordinates_test = () => {
+export const test_array_number_1_1_1_to_coordinates = () => {
   return [parseCoords([1, 1, 1]), [[1, 1, 1]]];
 };
 
-export const array_number_1_1_1_1_to_coordinates_test = () => {
+export const test_array_number_1_1_1_1_to_coordinates = () => {
   return [parseCoords([1, 1, 1, 1]), [[1, 1, 1]]];
 };
 
 // Test objects
 
-export const object_0_to_coordinates_test = () => {
+export const test_object_0_to_coordinates = () => {
   return [parseCoords({ x: 0 }), [[0, 0, 0]]];
 };
 
-export const object_string_1_to_coordinates_test = () => {
+export const test_object_string_1_to_coordinates = () => {
   return [parseCoords({ x: "1" }), [[1, 0, 0]]];
 };
 
-export const object_number_1_to_coordinates_test = () => {
+export const test_object_number_1_to_coordinates = () => {
   return [parseCoords({ x: "1" }), [[1, 0, 0]]];
 };
 
-export const object_number_1_1_to_coordinates_test = () => {
+export const test_object_number_1_1_to_coordinates = () => {
   return [parseCoords({ x: 1, y: 1 }), [[1, 1, 0]]];
 };
 
-export const object_number_1_1_1_to_coordinates_test = () => {
+export const test_object_number_1_1_1_to_coordinates = () => {
   return [parseCoords({ x: 1, y: 1, z: 1 }), [[1, 1, 1]]];
 };
 
-export const object_number_1_1_1_gibberish_to_coordinates_test = () => {
+export const test_object_number_1_1_1_gibberish_to_coordinates = () => {
   return [parseCoords({ x: 1, y: 1, z: 1, a: 1 }), [[1, 1, 1]]];
 };
 
-export const object_number_01_to_coordinates_test = () => {
+export const test_object_number_01_to_coordinates = () => {
   return [parseCoords({ x: "0.1" }), [[0.1, 0, 0]]];
 };
 
-export const object_number_1_in_array_to_coordinates_test = () => {
+export const test_object_number_1_in_array_to_coordinates = () => {
   return [parseCoords([{ x: 1 }]), [[1, 0, 0]]];
 };
 
-export const object_number_1_1_in_array_to_coordinates_test = () => {
+export const test_object_number_1_1_in_array_to_coordinates = () => {
   return [
     parseCoords([{ x: 1 }, { x: 1 }]),
     [
@@ -264,7 +376,7 @@ export const object_number_1_1_in_array_to_coordinates_test = () => {
   ];
 };
 
-export const object_number_1_1_1_in_array_to_coordinates_test = () => {
+export const test_object_number_1_1_1_in_array_to_coordinates = () => {
   return [
     parseCoords([{ x: 1 }, { x: 1 }, { x: 1 }]),
     [
@@ -275,7 +387,7 @@ export const object_number_1_1_1_in_array_to_coordinates_test = () => {
   ];
 };
 
-export const object_number_1_1_1_1_in_array_to_coordinates_test = () => {
+export const test_object_number_1_1_1_1_in_array_to_coordinates = () => {
   return [
     parseCoords([{ x: 1 }, { x: 1 }, { x: 1 }, { x: 1 }]),
     [
@@ -288,7 +400,7 @@ export const object_number_1_1_1_1_in_array_to_coordinates_test = () => {
 };
 
 // SKIP
-// export const object_everything_in_array_to_coordinates_test = () => {
+// export const test_object_everything_in_array_to_coordinates = () => {
 //   return [
 //     parseCoords([
 //       { x: 1, y: "1", z: false },
@@ -301,17 +413,17 @@ export const object_number_1_1_1_1_in_array_to_coordinates_test = () => {
 //   ];
 // };
 
-export const array_number_1_1_1_in_array_array_to_coordinates_test = () => {
+export const test_array_number_1_1_1_in_array_array_to_coordinates = () => {
   return [parseCoords([[1, 1, 1]]), [[1, 1, 1]]];
 };
 
 // Mixed coordinate values
 
-export const array_array_number_string_1_1_to_coordinates_test = () => {
+export const test_array_array_number_string_1_1_to_coordinates = () => {
   return [parseCoords([[1, "1"]]), [[1, 1, 0]]];
 };
 
-export const array_1_sting_1_to_coordinates_test = () => {
+export const test_array_1_sting_1_to_coordinates = () => {
   return [
     parseCoords([[1], "1"]),
     [
@@ -321,7 +433,7 @@ export const array_1_sting_1_to_coordinates_test = () => {
   ];
 };
 
-export const array_1_number_1_to_coordinates_test = () => {
+export const test_array_1_number_1_to_coordinates = () => {
   return [
     parseCoords([[1], 1]),
     [
@@ -331,7 +443,7 @@ export const array_1_number_1_to_coordinates_test = () => {
   ];
 };
 
-export const array_1_object_1_to_coordinates_test = () => {
+export const test_array_1_object_1_to_coordinates = () => {
   return [
     parseCoords([[1], { x: 1 }]),
     [

@@ -1,16 +1,20 @@
 import {
-  isNumber,
+  toNumber,
+  isObject,
   isString,
   isArray,
-  isObject,
-  padArrayRight
-} from "../../fachwerk.js";
+  isNumber,
+  isBoolean,
+  isNull
+} from "./types.js";
+
+import { padArrayRight } from "./array.js";
 
 export const normalizeDefault = arr => {
   if (arr == null) {
     return [0, 0, 0];
   }
-  return padArrayRight(arr, 3, 0).map(value => makeNumber(value));
+  return padArrayRight(arr, 3, 0).map(value => toNumber(value));
 };
 
 export const normalizeScale = arr => {
@@ -54,27 +58,32 @@ export const coordsNumberToArray = (number, normalizer) => {
 };
 
 export const coordsArrayToArray = (arr, normalizer) => {
-  const containsArrays = arr.length && arr.filter(a => Array.isArray(a)).length;
+  const containsArrays = arr.length && arr.filter(a => isArray(a)).length;
   const coords = arr.map(a => {
-    if (Array.isArray(a)) {
+    if (isArray(a)) {
       return normalizer(a);
     }
-    if (typeof a == "string") {
+    if (isString(a)) {
       if (a.split(/\s+/g).length > 1) {
         return coordsTextToArray(a, normalizer)[0];
       }
       return containsArrays ? normalizer([a]) : makeNumber(a);
     }
-    if (typeof a == "number") {
+    if (isNumber(a)) {
       return containsArrays ? normalizer([a]) : a;
     }
     if (isObject(a)) {
       return coordsObjectToArray(a, normalizer)[0];
     }
-    // TODO How to fail?
+    if (isBoolean(a)) {
+      return containsArrays ? normalizer([0]) : 0;
+    }
+    if (isNull(a)) {
+      return containsArrays ? normalizer([0]) : 0;
+    }
     return a;
   });
-  if (Array.isArray(coords[0])) {
+  if (isArray(coords[0])) {
     return coords;
   }
   return [normalizer(coords)];
@@ -93,58 +102,241 @@ export const coordsObjectToArray = (obj, normalizer = normalizeDefault) => {
     obj.hasOwnProperty("y") &&
     !obj.hasOwnProperty("z")
   ) {
-    return [normalizer([obj.x, obj.y, null])];
+    return [normalizer([obj.x, obj.y, 0])];
   }
   if (
     obj.hasOwnProperty("x") &&
     !obj.hasOwnProperty("y") &&
     obj.hasOwnProperty("z")
   ) {
-    return [normalizer([obj.x, null, obj.z])];
+    return [normalizer([obj.x, 0, obj.z])];
   }
   if (
     !obj.hasOwnProperty("x") &&
     obj.hasOwnProperty("y") &&
     obj.hasOwnProperty("z")
   ) {
-    return [normalizer([obj.x, null, obj.z])];
+    return [normalizer([obj.x, 0, obj.z])];
   }
   if (
     obj.hasOwnProperty("x") &&
     !obj.hasOwnProperty("y") &&
     !obj.hasOwnProperty("z")
   ) {
-    return [normalizer([obj.x, null, null])];
+    return [normalizer([obj.x, 0, 0])];
   }
   if (
     !obj.hasOwnProperty("x") &&
     obj.hasOwnProperty("y") &&
     !obj.hasOwnProperty("z")
   ) {
-    return [normalizer([null, obj.y, null])];
+    return [normalizer([0, obj.y, 0])];
   }
   if (
     !obj.hasOwnProperty("x") &&
     !obj.hasOwnProperty("y") &&
     obj.hasOwnProperty("z")
   ) {
-    return [normalizer([null, null, obj.z])];
+    return [normalizer([0, 0, obj.z])];
   }
   return [normalizer([])];
 };
 
-export const parseCoords = coords => {
-  if (isString(coords)) {
-    return coordsTextToArray(coords);
+export const parseCoords = (c, normalizer = normalizeDefault) => {
+  if (isString(c)) {
+    return coordsTextToArray(c, normalizer);
   }
-  if (isNumber(coords)) {
-    return coordsNumberToArray(coords);
+  if (isNumber(c)) {
+    return coordsNumberToArray(c, normalizer);
   }
-  if (isArray(coords)) {
-    return coordsArrayToArray(coords);
+  if (isArray(c)) {
+    return coordsArrayToArray(c, normalizer);
   }
-  if (isObject(ccoords)) {
-    return coordsObjectToArray(coords);
+  if (isObject(c)) {
+    return coordsObjectToArray(c, normalizer);
   }
   return null;
+};
+
+// Test numbers
+
+export const number_0_to_coordinates_test = () => {
+  return [parseCoords(0), [[0, 0, 0]]];
+};
+
+export const number_1_to_coordinates_test = () => {
+  return [parseCoords(1), [[1, 0, 0]]];
+};
+
+export const number_2_to_coordinates_test = () => {
+  return [parseCoords(2), [[2, 0, 0]]];
+};
+
+export const number_1_to_scale_coordinates_test = () => {
+  return [parseCoords(1, normalizeScale), [[1, 1, 1]]];
+};
+
+export const number_2_to_scale_coordinates_test = () => {
+  return [parseCoords(2, normalizeScale), [[2, 2, 2]]];
+};
+
+export const number_01_to_coordinates_test = () => {
+  return [parseCoords(0.1), [[0.1, 0, 0]]];
+};
+
+export const number_1_in_array_to_coordinates_test = () => {
+  return [parseCoords([1]), [[1, 0, 0]]];
+};
+
+export const number_1_in_array_array_to_coordinates_test = () => {
+  return [parseCoords([[1]]), [[1, 0, 0]]];
+};
+
+export const number_1_1_in_array_to_coordinates_test = () => {
+  return [parseCoords([1, 1]), [[1, 1, 0]]];
+};
+
+export const number_1_1_in_array_array_to_coordinates_test = () => {
+  return [parseCoords([[1, 1]]), [[1, 1, 0]]];
+};
+
+export const array_number_1_1_1_in_array_to_coordinates_test = () => {
+  return [parseCoords([1, 1, 1]), [[1, 1, 1]]];
+};
+
+export const number_1_1_1_in_array_array_to_coordinates_test = () => {
+  return [parseCoords([[1, 1, 1]]), [[1, 1, 1]]];
+};
+
+export const number_1_1_1_1_in_array_array_to_coordinates_test = () => {
+  return [parseCoords([[1, 1, 1, 1]]), [[1, 1, 1]]];
+};
+
+export const array_number_1_1_1_to_coordinates_test = () => {
+  return [parseCoords([1, 1, 1]), [[1, 1, 1]]];
+};
+
+export const array_number_1_1_1_1_to_coordinates_test = () => {
+  return [parseCoords([1, 1, 1, 1]), [[1, 1, 1]]];
+};
+
+// Test objects
+
+export const object_0_to_coordinates_test = () => {
+  return [parseCoords({ x: 0 }), [[0, 0, 0]]];
+};
+
+export const object_string_1_to_coordinates_test = () => {
+  return [parseCoords({ x: "1" }), [[1, 0, 0]]];
+};
+
+export const object_number_1_to_coordinates_test = () => {
+  return [parseCoords({ x: "1" }), [[1, 0, 0]]];
+};
+
+export const object_number_1_1_to_coordinates_test = () => {
+  return [parseCoords({ x: 1, y: 1 }), [[1, 1, 0]]];
+};
+
+export const object_number_1_1_1_to_coordinates_test = () => {
+  return [parseCoords({ x: 1, y: 1, z: 1 }), [[1, 1, 1]]];
+};
+
+export const object_number_1_1_1_gibberish_to_coordinates_test = () => {
+  return [parseCoords({ x: 1, y: 1, z: 1, a: 1 }), [[1, 1, 1]]];
+};
+
+export const object_number_01_to_coordinates_test = () => {
+  return [parseCoords({ x: "0.1" }), [[0.1, 0, 0]]];
+};
+
+export const object_number_1_in_array_to_coordinates_test = () => {
+  return [parseCoords([{ x: 1 }]), [[1, 0, 0]]];
+};
+
+export const object_number_1_1_in_array_to_coordinates_test = () => {
+  return [
+    parseCoords([{ x: 1 }, { x: 1 }]),
+    [
+      [1, 0, 0],
+      [1, 0, 0]
+    ]
+  ];
+};
+
+export const object_number_1_1_1_in_array_to_coordinates_test = () => {
+  return [
+    parseCoords([{ x: 1 }, { x: 1 }, { x: 1 }]),
+    [
+      [1, 0, 0],
+      [1, 0, 0],
+      [1, 0, 0]
+    ]
+  ];
+};
+
+export const object_number_1_1_1_1_in_array_to_coordinates_test = () => {
+  return [
+    parseCoords([{ x: 1 }, { x: 1 }, { x: 1 }, { x: 1 }]),
+    [
+      [1, 0, 0],
+      [1, 0, 0],
+      [1, 0, 0],
+      [1, 0, 0]
+    ]
+  ];
+};
+
+// SKIP
+// export const object_everything_in_array_to_coordinates_test = () => {
+//   return [
+//     parseCoords([
+//       { x: 1, y: "1", z: false },
+//       { x: 1, y: 1, z: null, a: 1 }
+//     ]),
+//     [
+//       [1, 1, 0],
+//       [1, 1, 0]
+//     ]
+//   ];
+// };
+
+export const array_number_1_1_1_in_array_array_to_coordinates_test = () => {
+  return [parseCoords([[1, 1, 1]]), [[1, 1, 1]]];
+};
+
+// Mixed coordinate values
+
+export const array_array_number_string_1_1_to_coordinates_test = () => {
+  return [parseCoords([[1, "1"]]), [[1, 1, 0]]];
+};
+
+export const array_1_sting_1_to_coordinates_test = () => {
+  return [
+    parseCoords([[1], "1"]),
+    [
+      [1, 0, 0],
+      [1, 0, 0]
+    ]
+  ];
+};
+
+export const array_1_number_1_to_coordinates_test = () => {
+  return [
+    parseCoords([[1], 1]),
+    [
+      [1, 0, 0],
+      [1, 0, 0]
+    ]
+  ];
+};
+
+export const array_1_object_1_to_coordinates_test = () => {
+  return [
+    parseCoords([[1], { x: 1 }]),
+    [
+      [1, 0, 0],
+      [1, 0, 0]
+    ]
+  ];
 };

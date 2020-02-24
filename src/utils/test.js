@@ -1,8 +1,20 @@
 import { shorten } from "./string.js";
 
+// https://github.com/denoland/deno/blob/master/std/testing/asserts.ts
+
+const isKeyedCollection = x => [Symbol.iterator, "size"].every(k => k in x);
+
 export const equal = (c, d) => {
   const seen = new Map();
   return (function compare(a, b) {
+    if (
+      a &&
+      b &&
+      ((a instanceof RegExp && b instanceof RegExp) ||
+        (a instanceof Date && b instanceof Date))
+    ) {
+      return String(a) === String(b);
+    }
     if (Object.is(a, b)) {
       return true;
     }
@@ -13,7 +25,24 @@ export const equal = (c, d) => {
       if (Object.keys(a || {}).length !== Object.keys(b || {}).length) {
         return false;
       }
-      const merged = Object.assign(a, b);
+      if (isKeyedCollection(a) && isKeyedCollection(b)) {
+        if (a.size !== b.size) {
+          return false;
+        }
+        let unmatchedEntries = a.size;
+        for (const [aKey, aValue] of a.entries()) {
+          for (const [bKey, bValue] of b.entries()) {
+            if (
+              (aKey === aValue && bKey === bValue && compare(aKey, bKey)) ||
+              (compare(aKey, bKey) && compare(aValue, bValue))
+            ) {
+              unmatchedEntries--;
+            }
+          }
+        }
+        return unmatchedEntries === 0;
+      }
+      const merged = Object.assign(Object.assign({}, a), b);
       for (const key in merged) {
         if (!compare(a && a[key], b && b[key])) {
           return false;
@@ -42,8 +71,8 @@ export const test = tests => {
   let failed = 0;
 
   tests.forEach(([name, test]) => {
-    const [expected, actual] = test();
-    if (equal(expected, actual)) {
+    const [actual, expected] = test();
+    if (equal(actual, expected)) {
       passed++;
       console.log(`  ${shorten(name).padEnd(53)}\t${green}OK${reset}`);
     } else {

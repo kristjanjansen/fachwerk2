@@ -9,7 +9,7 @@ import {
 } from "../deps/three.js";
 
 import { stylingProps, useThreeFill, useThreeStroke } from "../libs/styling.js";
-import { transform2dProps, useTransform3d } from "../libs/transforms.js";
+import { transform2dProps, useTransform3d } from "../libs/transform.js";
 
 export const FBoxThree = {
   props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },

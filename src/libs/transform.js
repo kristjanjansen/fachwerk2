@@ -58,7 +58,7 @@ export const useTransform3d = (props, object) => {
     () => {
       object.position.x = scale(props.x, 0, 200, -100, 100);
       object.position.y = scale(props.y, 0, 200, 100, -100);
-      object.rotation.z = deg2rad(props.rotation);
+      object.position.z = deg2rad(props.rotation);
     }
   );
   watch(

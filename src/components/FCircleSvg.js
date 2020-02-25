@@ -1,5 +1,5 @@
 import { stylingProps, useStyling2d } from "../libs/styling.js";
-import { transform2dProps, useSvgTransform } from "../libs/transforms.js";
+import { transform2dProps, useSvgTransform } from "../libs/transform.js";
 
 export const FCircleSvg = {
   props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },

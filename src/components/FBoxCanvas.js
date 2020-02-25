@@ -5,7 +5,7 @@ import {
   transform2dProps,
   transform2dCanvas,
   reset2dCanvas
-} from "../libs/transforms.js";
+} from "../libs/transform.js";
 
 export const FBoxCanvas = {
   props: {

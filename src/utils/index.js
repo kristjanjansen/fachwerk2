@@ -1,5 +1,4 @@
 export * from "./array.js";
-export * from "./color.js";
 export * from "./css.js";
 export * from "./error.js";
 export * from "./events.js";

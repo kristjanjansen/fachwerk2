@@ -15,7 +15,15 @@ export const isString = input => typeof input === "string";
 
 export const isFunction = input => typeof input === "function";
 
-export const toNumber = (value, def = null) => {
+export const test_isObject_object = () => [isObject({ x: 1 }), true];
+
+export const test_isObject_array = () => [isObject([1]), false];
+
+export const test_isObject_date = () => [isObject(new Date()), false];
+
+// toNumber
+
+export const toNumber = (value, def = 0) => {
   const float = parseFloat(value);
   if (isNaN(float)) {
     return def;
@@ -23,8 +31,30 @@ export const toNumber = (value, def = null) => {
   return float;
 };
 
-export const test_isObject_object = () => [isObject({ x: 1 }), true];
+export const test_toNumber_numeric_string = () => {
+  return [toNumber("0"), 0];
+};
 
-export const test_isObject_array = () => [isObject([1]), false];
+export const test_toNumber_nonnumeric_string = () => {
+  return [toNumber("a"), 0];
+};
 
-export const test_isObject_date = () => [isObject(new Date()), false];
+export const test_toNumber_empty_string = () => {
+  return [toNumber(""), 0];
+};
+
+export const test_toNumber_zero = () => {
+  return [toNumber(0), 0];
+};
+
+export const test_toNumber_integer = () => {
+  return [toNumber(1), 1];
+};
+
+export const test_toNumber_float = () => {
+  return [toNumber(0.1), 0.1];
+};
+
+export const test_toNumber_gibberish = () => {
+  return [toNumber("*"), 0];
+};

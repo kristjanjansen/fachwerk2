@@ -268,15 +268,13 @@ export const test_parseCoords_string_1_1 = () => {
   return [parseCoords("1 1"), [[1, 1, 0]]];
 };
 
-// SKIP
-// export const test_parseCoords_string_1_1_a_spaced = () => {
-//   return [parseCoords("1  1        a"), [[1, 1, 0]]];
-// };
+export const test_parseCoords_string_1_1_a_spaced = () => {
+  return [parseCoords("1  1        a"), [[1, 1, 0]]];
+};
 
-// SKIP
-// export const test_parseCoords_string_1_1_a_1_spaced = () => {
-//   return [parseCoords("1  1        a 1"), [[1, 1, 0]]];
-// };
+export const test_parseCoords_string_1_1_a_1_spaced = () => {
+  return [parseCoords("1  1        a 1"), [[1, 1, 0]]];
+};
 
 export const test_parseCoords_string_1_and_1 = () => {
   return [
@@ -473,19 +471,18 @@ export const test_parseCoords_object_number_1_1_1_1_in_array = () => {
   ];
 };
 
-// SKIP
-// export const test_parseCoords_object_everything_in_array = () => {
-//   return [
-//     parseCoords([
-//       { x: 1, y: "1", z: false },
-//       { x: 1, y: 1, z: null, a: 1 }
-//     ]),
-//     [
-//       [1, 1, 0],
-//       [1, 1, 0]
-//     ]
-//   ];
-// };
+export const test_parseCoords_object_everything_in_array = () => {
+  return [
+    parseCoords([
+      { x: 1, y: "1", z: false },
+      { x: 1, y: 1, z: null, a: 1 }
+    ]),
+    [
+      [1, 1, 0],
+      [1, 1, 0]
+    ]
+  ];
+};
 
 export const test_parseCoords_array_number_1_1_1_in_array_array = () => {
   return [parseCoords([[1, 1, 1]]), [[1, 1, 1]]];

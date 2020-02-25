@@ -1,5 +1,5 @@
 import { ref, watch } from "../deps/vue.js";
-import * as katex from "../deps/katex.js";
+import { katex } from "../deps/katex.js";
 
 export const FMath = {
   help: `

@@ -11,8 +11,6 @@ export * from "./FDocumentCompiler.js";
 export * from "./FDocumentEditor.js";
 export * from "./FDocumentViewer.js";
 export * from "./FFetch.js";
-export * from "./FLineCanvas.js";
-export * from "./FLineSvg.js";
 export * from "./FMath.js";
 export * from "./FScene.js";
 export * from "./FSceneCanvas.js";

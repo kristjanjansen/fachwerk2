@@ -34,12 +34,7 @@ export const transform3dProps = {
 // };
 
 export const transform2d = props => {
-  let positionOrXYZ = props.position;
-
-  if (props.x || props.y || props.z) {
-    positionOrXYZ = [props.x || 0, props.y || 0, props.z || 0];
-  }
-  const position = parseCoords(positionOrXYZ)[0];
+  const position = parseCoords(props.position)[0];
   const rotation = parseCoords(props.rotation)[0];
   const scale = parseCoords(props.scale, normalizeScale)[0];
 

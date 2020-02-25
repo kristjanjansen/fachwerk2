@@ -56,5 +56,5 @@ export const test_toNumber_float = () => {
 };
 
 export const test_toNumber_gibberish = () => {
-  return [toNumber("*"), 0];
+  return [toNumber("*"), 1];
 };

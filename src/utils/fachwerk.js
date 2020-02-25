@@ -28,6 +28,7 @@ export const fachwerk = () => {
 
   app.config.errorHandler = onError;
   app.config.warnHandler = onWarning;
+  app.config.productionTip = false;
 
   app.mount("#app");
 };

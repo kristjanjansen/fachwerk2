@@ -10,7 +10,6 @@ export * from "./FDocument.js";
 export * from "./FDocumentCompiler.js";
 export * from "./FDocumentEditor.js";
 export * from "./FDocumentViewer.js";
-export * from "./FFetch.js";
 export * from "./FMath.js";
 export * from "./FScene.js";
 export * from "./FSceneCanvas.js";

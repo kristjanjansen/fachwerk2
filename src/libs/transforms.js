@@ -46,7 +46,7 @@ export const transform2d = props => {
   return { position, rotation, scale };
 };
 
-export const useTransform2d = props => {
+export const useSvgTransform = props => {
   return computed(() => {
     const { position, rotation, scale } = transform2d(props);
     const positionStr = `translate(${position[0]} ${position[1]})`;

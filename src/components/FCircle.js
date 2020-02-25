@@ -15,7 +15,7 @@ export const FCircle = {
     const type = inject("sceneType");
     return () =>
       types[type.value]
-        ? h(types[type.value], { ...props, ...context }, context.slots)
+        ? h(types[type.value], { ...props }, context.slots)
         : null;
   }
 };

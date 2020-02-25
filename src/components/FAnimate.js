@@ -4,13 +4,10 @@ import anime from "../deps/anime.js";
 import { set } from "../../fachwerk.js";
 
 export const FAnimate = {
-  help: `
-Animates a value
-  `,
   props: {
     set: { default: "" }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const progress = ref(0);
     anime({
       targets: progress,
@@ -20,10 +17,12 @@ Animates a value
       direction: "alternate",
       loop: true
     });
-    if (props.set) {
-      watch(progress, progress => set(props.set, progress));
-    }
-    return { progress };
-  },
-  template: `<slot :value="progress" />`
+    watch(progress, progress => {
+      emit("value", progress);
+      if (props.set) {
+        set(props.set, progress);
+      }
+    });
+    return () => null;
+  }
 };

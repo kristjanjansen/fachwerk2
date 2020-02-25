@@ -1,21 +1,9 @@
 <f-scene>
-  <f-box r=>
+  <f-box r="100" :position="[get('a'),100]" />
 </f-scene>
-
-Hello
-booo
-
----
-
-Haaa
-
--
-
-Bamm
-!
 
 <f-scene>
-<f-box :position="[get('a',100]" r="100" />
+  <f-box r="100" :rotation="get('a')" />
 </f-scene>
 
-<f-slider set="a" />
+<f-animate set="a" />

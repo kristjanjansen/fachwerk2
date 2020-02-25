@@ -11,10 +11,7 @@ import {
 import { padArrayRight } from "./array.js";
 
 export const normalizeDefault = arr => {
-  if (arr == null) {
-    return [0, 0, 0];
-  }
-  return padArrayRight(arr, 3, 0).map(value => toNumber(value));
+  return padArrayRight(arr || [], 3, 0).map(value => toNumber(value));
 };
 
 export const normalizeScale = arr => {
@@ -24,17 +21,7 @@ export const normalizeScale = arr => {
   if (arr.length == 1) {
     return [arr[0], arr[0], arr[0]];
   }
-  return normalizeDefault(arr);
-};
-
-export const normalizeRotation3 = arr => {
-  if (arr === null) {
-    return [[1, 1, 1]];
-  }
-  if (arr.length == 1) {
-    return [0, 0, arr[0]];
-  }
-  return normalizeDefault(arr);
+  return padArrayRight(arr || [], 3, 1).map(value => toNumber(value));
 };
 
 export const coordsTextToArray = (text, normalizer) => {

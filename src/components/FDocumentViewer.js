@@ -30,13 +30,13 @@ export const FDocumentViewer = {
     };
   },
   template: `
-  <div style="border: 1px solid green;">{{ state }}
+  <div style="border: 1px solid green;">
     <button @click="onPrevSlide">←</button>
     <button @click="onNextSlide">→</button>
     <button @click="onToggleSlideMode">Mode</button>
     <div v-for="(page,i) in parsedDocument" style="margin: 3px; border: 1px solid red;">
       <div v-for="content in page.content" v-if="isSlideVisible(i)" style="margin: 3px; border: 1px solid blue;">
-        {{i}}<f-document-compiler :content="content" />
+        <f-document-compiler :content="content" />
       </div>
     </div>
   </div>

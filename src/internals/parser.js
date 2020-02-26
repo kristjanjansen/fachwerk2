@@ -8,11 +8,6 @@ const parseMeta = row => {
     .replace(/\|/g, "")
     .split(": ")
     .map(s => s.trim());
-  // Handle case for key: key: value
-  // const key = meta[0];
-  // meta.shift();
-  // const values = meta.join(": ");
-  // return { [key]: values };
   return meta;
 };
 

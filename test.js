@@ -1,9 +1,11 @@
-import * as utils from "./src/utils/index.js";
-import * as internals from "./src/internals/index.js";
+import * as fachwerk from "./fachwerk.js";
 
-const tests = Object.entries({
-  ...utils,
-  ...internals
-}).filter(([key]) => key.startsWith("test_"));
+const tests = Object.entries({ ...fachwerk }).filter(([key]) =>
+  key.startsWith("test_")
+);
 
-utils.test(tests);
+const exitCode = fachwerk.test(tests);
+
+if (window.Deno !== undefined) {
+  Deno.exit(exitCode);
+}

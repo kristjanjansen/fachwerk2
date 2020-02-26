@@ -6,6 +6,8 @@ import {
   LineBasicMaterial
 } from "../deps/three.js";
 
+import { toNumber } from "../utils/index.js";
+
 export const stylingProps = {
   stroke: { default: "black", type: [String] },
   strokeWidth: { default: 3, type: [String, Number] },
@@ -18,7 +20,7 @@ export const useSvgStyling = props => {
   return computed(() => {
     const fill = props.fill;
     const stroke = props.stroke;
-    const strokeWidth = parseFloat(props.strokeWidth) * svgUnit.value;
+    const strokeWidth = toNumber(props.strokeWidth, 1) * svgUnit.value;
     return { fill, stroke, strokeWidth };
   });
 };

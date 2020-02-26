@@ -1,6 +1,6 @@
-import { shorten } from "./string.js";
+import { shorten } from "./index.js";
 
-// https://github.com/denoland/deno/blob/master/std/testing/asserts.ts
+// From https://github.com/denoland/deno/blob/master/std/testing/asserts.ts
 
 const isKeyedCollection = x => [Symbol.iterator, "size"].every(k => k in x);
 
@@ -55,13 +55,6 @@ export const equal = (c, d) => {
   })(c, d);
 };
 
-const exit = code => {
-  if (window.Deno === undefined) {
-    return;
-  }
-  Deno.exit(code);
-};
-
 export const test = tests => {
   const reset = "\x1b[0m";
   const red = "\x1b[31m";
@@ -107,12 +100,12 @@ ${reset}`);
 
 `);
 
-    exit(failed > 0 ? 1 : 0);
+    return failed > 0 ? 1 : 0;
   } else {
     console.log(`
   No tests found
 
 `);
-    exit(0);
+    return 0;
   }
 };

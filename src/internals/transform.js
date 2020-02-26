@@ -1,6 +1,6 @@
 import { computed } from "../deps/vue.js";
-import { parseCoords, normalizeScale } from "../utils/coordinates.js";
-import { deg2rad } from "../utils/trig.js";
+
+import { parseCoords, normalizeScale, deg2rad } from "../utils/index.js";
 
 export const transformTwoProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },

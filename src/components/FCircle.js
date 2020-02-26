@@ -9,7 +9,7 @@ export const FCircle = {
     const types = {
       svg: FCircleSvg,
       canvas: FCircleCanvas,
-      svg3: FCircleThree,
+      three: FCircleThree,
       webgl: FCircleThree
     };
     const type = inject("sceneType");

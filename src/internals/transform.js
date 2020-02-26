@@ -1,4 +1,4 @@
-import { computed } from "../deps/vue.js";
+import { computed, watch } from "../deps/vue.js";
 
 import { parseCoords, normalizeScale, deg2rad } from "../utils/index.js";
 

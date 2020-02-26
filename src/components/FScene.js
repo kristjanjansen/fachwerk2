@@ -21,7 +21,7 @@ export const FScene = {
     const types = {
       svg: FSceneSvg,
       canvas: FSceneCanvas,
-      svg3: FSceneThreeSvg,
+      three: FSceneThreeSvg,
       webgl: FSceneThreeWebgl
     };
     const type = computed(() => props.type);

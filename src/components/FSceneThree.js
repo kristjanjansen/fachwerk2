@@ -1,11 +1,9 @@
 import { provide, ref, onMounted, onBeforeUpdate } from "../deps/vue.js";
 
-import { deg2rad } from "../../fachwerk.js";
 import {
   Scene,
   PerspectiveCamera,
   Color,
-  AmbientLight,
   DirectionalLight,
   WebGLRenderer
 } from "../deps/three.js";

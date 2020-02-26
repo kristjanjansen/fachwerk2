@@ -16,21 +16,21 @@ export const stylingProps = {
 };
 
 export const useSvgStyling = props => {
-  const svgUnit = inject("svgUnit");
+  const scene = inject("scene");
   return computed(() => {
     const fill = props.fill;
     const stroke = props.stroke;
-    const strokeWidth = toNumber(props.strokeWidth, 1) * svgUnit.value;
+    const strokeWidth = toNumber(props.strokeWidth, 1) * scene.value.unit;
     return { fill, stroke, strokeWidth };
   });
 };
 
 // Canvas
 
-export const stylingCanvas = (props, ctx) => {
-  ctx.fillStyle = props.fill;
-  ctx.strokeStyle = props.stroke;
-  ctx.lineWidth = props.strokeWidth;
+export const stylingCanvas = (props, scene) => {
+  scene.fillStyle = props.fill;
+  scene.strokeStyle = props.stroke;
+  scene.lineWidth = props.strokeWidth;
 };
 
 // Three

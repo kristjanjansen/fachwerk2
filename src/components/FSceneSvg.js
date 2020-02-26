@@ -1,4 +1,4 @@
-import { ref, onMounted, provide, computed } from "../deps/vue.js";
+import { ref, provide, computed } from "../deps/vue.js";
 
 export const FSceneSvg = {
   setup() {
@@ -8,13 +8,6 @@ export const FSceneSvg = {
     const viewBox = computed(() => `0 0 200 200`);
 
     provide("svgUnit", svgUnit);
-
-    // onMounted(() => {
-    //   const observer = new ResizeObserver(entries => {
-    //     width.value = entries[0].contentRect.width;
-    //   });
-    //   observer.observe(svg.value);
-    // });
 
     return { svg, width, viewBox };
   },

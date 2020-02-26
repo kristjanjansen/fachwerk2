@@ -1,10 +1,14 @@
-import { stylingProps, useStyling2d } from "../libs/styling.js";
-import { transform2dProps, useSvgTransform } from "../libs/transform.js";
+import {
+  stylingProps,
+  useSvgStyling,
+  transformTwoProps,
+  useSvgTransform
+} from "../internals/index.js";
 
 export const FBoxSvg = {
-  props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },
+  props: { r: { default: 1 }, ...transformTwoProps, ...stylingProps },
   setup(props) {
-    const styling = useStyling2d(props);
+    const styling = useSvgStyling(props);
     const transform = useSvgTransform(props);
     return { styling, transform };
   },

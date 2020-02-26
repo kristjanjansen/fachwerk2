@@ -6,7 +6,7 @@ import {
   isNumber,
   isBoolean,
   isNull
-} from "./types.js";
+} from "../utils/index.js";
 
 import { padArrayRight } from "./array.js";
 

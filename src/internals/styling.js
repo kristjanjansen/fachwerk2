@@ -13,7 +13,7 @@ export const stylingProps = {
   opacity: { default: 1, type: [String, Number] }
 };
 
-export const useStyling2d = props => {
+export const useSvgStyling = props => {
   const svgUnit = inject("svgUnit");
   return computed(() => {
     const fill = props.fill;
@@ -23,11 +23,15 @@ export const useStyling2d = props => {
   });
 };
 
-export const styling2dCanvas = (props, ctx) => {
+// Canvas
+
+export const stylingCanvas = (props, ctx) => {
   ctx.fillStyle = props.fill;
   ctx.strokeStyle = props.stroke;
   ctx.lineWidth = props.strokeWidth;
 };
+
+// Three
 
 export const useThreeFill = props =>
   computed(

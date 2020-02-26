@@ -12,7 +12,7 @@ export const FCircle = {
       three: FCircleThree,
       webgl: FCircleThree
     };
-    const type = inject("sceneType");
+    const type = inject("type");
     return () =>
       types[type.value]
         ? h(types[type.value], { ...props }, context.slots)

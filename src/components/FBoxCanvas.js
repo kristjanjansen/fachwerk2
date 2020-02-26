@@ -15,18 +15,18 @@ export const FBoxCanvas = {
     ...transformTwoProps
   },
   setup(props) {
-    const ctx = inject("ctx");
+    const scene = inject("scene");
     watch(() => {
-      if (ctx.value) {
-        transformCanvas(props, ctx.value);
-        stylingCanvas(props, ctx.value);
+      if (scene.value) {
+        transformCanvas(props, scene.value);
+        stylingCanvas(props, scene.value);
         if (props.fill !== "none") {
-          ctx.value.fillRect(props.r / -2, props.r / -2, props.r, props.r);
+          scene.value.fillRect(props.r / -2, props.r / -2, props.r, props.r);
         }
         if (props.stroke !== "none") {
-          ctx.value.strokeRect(props.r / -2, props.r / -2, props.r, props.r);
+          scene.value.strokeRect(props.r / -2, props.r / -2, props.r, props.r);
         }
-        transformCanvasReset(ctx.value);
+        transformCanvasReset(scene.value);
       }
     });
     return () => null;

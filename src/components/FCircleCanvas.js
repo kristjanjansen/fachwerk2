@@ -15,20 +15,20 @@ export const FCircleCanvas = {
     r: { default: 1 }
   },
   setup(props) {
-    const ctx = inject("ctx");
+    const scene = inject("scene");
     watch(() => {
-      if (ctx.value) {
-        transformCanvas(props, ctx.value);
-        stylingCanvas(props, ctx.value);
-        ctx.value.beginPath();
-        ctx.value.arc(0, 0, props.r, 0, 2 * Math.PI);
+      if (scene.value) {
+        transformCanvas(props, scene.value);
+        stylingCanvas(props, scene.value);
+        scene.value.beginPath();
+        scene.value.arc(0, 0, props.r, 0, 2 * Math.PI);
         if (props.fill !== "none") {
-          ctx.value.fill();
+          scene.value.fill();
         }
         if (props.stroke !== "none") {
-          ctx.value.stroke();
+          scene.value.stroke();
         }
-        transformCanvasReset(ctx.value);
+        transformCanvasReset(scene.value);
       }
     });
     return () => null;

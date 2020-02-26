@@ -25,9 +25,6 @@ export const FSceneThree = {
     const scene = new Scene();
     scene.background = new Color("white");
 
-    // const ambientLight = new AmbientLight("white", 0.1);
-    // scene.add(ambientLight);
-
     const directionalLight = new DirectionalLight("white", 1);
     directionalLight.position.set(0, 0, 10);
     scene.add(directionalLight);

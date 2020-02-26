@@ -25,7 +25,7 @@ export const FScene = {
       webgl: FSceneThreeWebgl
     };
     const type = computed(() => props.type);
-    provide("sceneType", type);
+    provide("type", type);
     return () => h(types[type.value], { ...props }, context.slots);
   }
 };

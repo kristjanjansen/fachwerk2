@@ -10,7 +10,7 @@ import { toNumber } from "../utils/index.js";
 
 export const stylingProps = {
   stroke: { default: "black", type: [String] },
-  strokeWidth: { default: 3, type: [String, Number] },
+  strokeWidth: { default: 2, type: [String, Number] },
   fill: { default: "none", type: [String, Number] },
   opacity: { default: 1, type: [String, Number] }
 };

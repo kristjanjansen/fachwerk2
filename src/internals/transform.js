@@ -10,7 +10,7 @@ import { deg2rad, fit } from "../utils/index.js";
 
 export const transformTwoProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },
-  rotation: { default: 0, type: [String, Number] },
+  rotation: { default: 0, type: [String, Number, Array, Object] },
   scale: { default: [1, 1], type: [String, Number, Array, Object] }
 };
 

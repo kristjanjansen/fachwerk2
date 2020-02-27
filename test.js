@@ -1,8 +1,12 @@
-import * as fachwerk from "./fachwerk.js";
+import * as components from "./src/components.js";
+import * as utils from "./src/utils.js";
+import * as internals from "./src/internals.js";
 
-const tests = Object.entries({ ...fachwerk }).filter(([key]) =>
-  key.startsWith("test_")
-);
+const tests = Object.entries({
+  ...components,
+  ...utils,
+  ...internals
+}).filter(([key]) => key.startsWith("test_"));
 
 const exitCode = fachwerk.test(tests);
 

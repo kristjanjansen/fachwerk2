@@ -27,10 +27,8 @@ export const FDocumentViewer = {
         ...viewerGridStyle(slide)
       }"
     >
-      <f-document-compiler
-        v-for="content in slide.content"
-        :content="content"
-      />
+    <div v-for="content in slide.content">
+      <f-document-compiler :content="content" />
     </div>
   </div>
   `

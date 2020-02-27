@@ -1,43 +1,36 @@
-import { computed, watch } from "../deps/vue.js";
-import { parseDocument } from "../internals/index.js";
-import {
-  setSlideCount,
-  onToggleSlideMode,
-  onPrevSlide,
-  onNextSlide,
-  isSlideVisible,
-  state
-} from "../internals/index.js";
+import { computed } from "../deps/vue.js";
+import { parseDocument, viewerGridStyle } from "../internals/index.js";
 
 export const FDocumentViewer = {
   props: {
     document: {
       default: "",
       type: String
+    },
+    index: {
+      default: null,
+      type: String
     }
   },
   setup(props) {
     const parsedDocument = computed(() => parseDocument(props.document));
-    watch(parsedDocument, document => setSlideCount(document.length));
 
-    return {
-      parsedDocument,
-      onToggleSlideMode,
-      onPrevSlide,
-      onNextSlide,
-      isSlideVisible,
-      state
-    };
+    return { parsedDocument, viewerGridStyle };
   },
   template: `
   <div>
-    <button @click="onPrevSlide">←</button>
-    <button @click="onNextSlide">→</button>
-    <button @click="onToggleSlideMode">Slide mode</button>
-    <div v-for="(page,i) in parsedDocument" style="padding: var(--base2);">
-      <div v-for="content in page.content" v-if="isSlideVisible(i)">
-        <f-document-compiler :content="content" />
-      </div>
+    <div
+      v-for="(slide,i) in parsedDocument"
+      :style="{
+        padding: 'var(--base2)',
+        display: 'grid',
+        ...viewerGridStyle(slide)
+      }"
+    >
+      <f-document-compiler
+        v-for="content in slide.content"
+        :content="content"
+      />
     </div>
   </div>
   `

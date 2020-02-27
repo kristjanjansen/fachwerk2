@@ -1,28 +1,14 @@
-import { ref } from "../deps/vue.js";
-import { useLocalstore } from "../utils/localstore.js";
-
-const count = ref(1);
-
-const slideMode = useLocalstore(false, "slides");
-const index = useLocalstore(0, "index");
-
-export const state = { count, slideMode, index };
-export const isSlideVisible = i => {
-  if (slideMode.value === true) {
-    return i === index.value;
-  }
-  return true;
+export const viewerGridStyle = slide => {
+  return {
+    gridTemplateColumns: slide.cols
+      ? slide.cols
+      : "repeat(" + slide.colCount + ", 1fr)",
+    gridTemplateRows: slide.rows
+      ? slide.rows
+      : slide.rowCount > 1
+      ? "repeat(" + (slide.rowCount - 1) + ", auto) 1fr"
+      : "1fr",
+    gridTemplateAreas: slide.areas,
+    gridGap: slide.gap ? slide.gap : "var(--base3)"
+  };
 };
-
-export const setSlideCount = newCount => (count.value = newCount);
-export const onPrevSlide = () => {
-  if (slideMode.value === true && index.value > 0) {
-    index.value--;
-  }
-};
-export const onNextSlide = () => {
-  if (slideMode.value === true && index.value < count.value - 1) {
-    index.value++;
-  }
-};
-export const onToggleSlideMode = () => (slideMode.value = !slideMode.value);

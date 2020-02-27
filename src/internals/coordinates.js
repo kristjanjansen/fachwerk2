@@ -23,6 +23,19 @@ export const normalizeScale = arr => {
   return padArrayRight(arr || [], 3, 1).map(value => toNumber(value));
 };
 
+export const normalizeThreeRotation = arr => {
+  if (arr === null) {
+    return [[0, 0, 0]];
+  }
+  if (arr.length == 1) {
+    return [0, 0, arr[0]];
+  }
+  if (arr.length == 2) {
+    return [arr[0], arr[1], 0];
+  }
+  return [arr[0], arr[1], arr[2]];
+};
+
 export const coordsTextToArray = (text, normalizer) => {
   if (text.trim().length === 0) {
     return [normalizer(null)];

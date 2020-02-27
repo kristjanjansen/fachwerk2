@@ -11,4 +11,3 @@ export * from "./string.js";
 export * from "./test.js";
 export * from "./trig.js";
 export * from "./types.js";
-export * from "./coordinates.js";

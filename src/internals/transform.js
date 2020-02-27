@@ -1,6 +1,12 @@
 import { computed, watch } from "../deps/vue.js";
 
-import { parseCoords, normalizeScale, deg2rad } from "../utils/index.js";
+import {
+  parseCoords,
+  normalizeScale,
+  normalizeThreeRotation
+} from "../internals/index.js";
+
+import { deg2rad } from "../utils/index.js";
 
 export const transformTwoProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },
@@ -14,9 +20,17 @@ export const transformThreeProps = {
   scale: { default: [1, 1, 1], type: [String, Number, Array, Object] }
 };
 
-const getTransform = props => {
+const getTwoTransform = props => {
   const position = parseCoords(props.position)[0];
   const rotation = parseCoords(props.rotation)[0];
+  const scale = parseCoords(props.scale, normalizeScale)[0];
+
+  return { position, rotation, scale };
+};
+
+const getThreeTransform = props => {
+  const position = parseCoords(props.position)[0];
+  const rotation = parseCoords(props.rotation, normalizeThreeRotation)[0];
   const scale = parseCoords(props.scale, normalizeScale)[0];
 
   return { position, rotation, scale };
@@ -26,7 +40,7 @@ const getTransform = props => {
 
 export const useSvgTransform = props => {
   return computed(() => {
-    const { position, rotation, scale } = getTransform(props);
+    const { position, rotation, scale } = getTwoTransform(props);
     const positionStr = `translate(${position[0]} ${position[1]})`;
     const rotationStr = `rotate(${rotation[0]})`;
     const scaleStr = `scale(${scale[0]} ${scale[1]})`;
@@ -53,7 +67,7 @@ export const test_useSvgTransform_custom_props = () => {
 // Canvas
 
 export const transformCanvas = (props, ctx) => {
-  const { position, rotation, scale } = getTransform(props);
+  const { position, rotation, scale } = getTwoTransform(props);
   ctx.translate(position[0], position[1]);
   ctx.rotate(deg2rad(rotation[0]));
   ctx.scale(scale[0], scale[1]);
@@ -69,7 +83,7 @@ export const useThreeTransform = (props, object) => {
   watch(
     () => props.position,
     () => {
-      const { position } = getTransform(props);
+      const { position } = getThreeTransform(props);
       object.position.x = position[0];
       object.position.y = position[1];
       object.position.z = position[2];
@@ -79,7 +93,7 @@ export const useThreeTransform = (props, object) => {
   watch(
     () => props.rotation,
     () => {
-      const { rotation } = getTransform(props);
+      const { rotation } = getThreeTransform(props);
       object.rotation.x = deg2rad(rotation[0]);
       object.rotation.y = deg2rad(rotation[1]);
       object.rotation.z = deg2rad(rotation[2]);
@@ -89,7 +103,7 @@ export const useThreeTransform = (props, object) => {
   watch(
     () => props.scale,
     () => {
-      const { scale } = getTransform(props);
+      const { scale } = getThreeTransform(props);
       object.scale.x = scale[0];
       object.scale.y = scale[1];
       object.scale.z = scale[2];

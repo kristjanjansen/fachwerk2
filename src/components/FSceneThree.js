@@ -1,11 +1,9 @@
 import { provide, ref, onMounted, onBeforeUpdate } from "../deps/vue.js";
 
-import { deg2rad } from "../../fachwerk.js";
 import {
   Scene,
   PerspectiveCamera,
   Color,
-  AmbientLight,
   DirectionalLight,
   WebGLRenderer
 } from "../deps/three.js";
@@ -24,9 +22,6 @@ export const FSceneThree = {
 
     const scene = new Scene();
     scene.background = new Color("white");
-
-    // const ambientLight = new AmbientLight("white", 0.1);
-    // scene.add(ambientLight);
 
     const directionalLight = new DirectionalLight("white", 1);
     directionalLight.position.set(0, 0, 10);

@@ -6,6 +6,8 @@ import {
   LineBasicMaterial
 } from "../deps/three.js";
 
+import { toNumber } from "../utils/index.js";
+
 export const stylingProps = {
   stroke: { default: "black", type: [String] },
   strokeWidth: { default: 3, type: [String, Number] },
@@ -13,21 +15,25 @@ export const stylingProps = {
   opacity: { default: 1, type: [String, Number] }
 };
 
-export const useStyling2d = props => {
-  const svgUnit = inject("svgUnit");
+export const useSvgStyling = props => {
+  const scene = inject("scene");
   return computed(() => {
     const fill = props.fill;
     const stroke = props.stroke;
-    const strokeWidth = parseFloat(props.strokeWidth) * svgUnit.value;
+    const strokeWidth = toNumber(props.strokeWidth, 1) * scene.value.unit;
     return { fill, stroke, strokeWidth };
   });
 };
 
-export const styling2dCanvas = (props, ctx) => {
-  ctx.fillStyle = props.fill;
-  ctx.strokeStyle = props.stroke;
-  ctx.lineWidth = props.strokeWidth;
+// Canvas
+
+export const stylingCanvas = (props, scene) => {
+  scene.fillStyle = props.fill;
+  scene.strokeStyle = props.stroke;
+  scene.lineWidth = props.strokeWidth;
 };
+
+// Three
 
 export const useThreeFill = props =>
   computed(

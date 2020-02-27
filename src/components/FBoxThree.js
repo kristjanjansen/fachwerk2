@@ -1,18 +1,23 @@
 import { inject } from "../deps/vue.js";
+
 import {
   Group,
   PlaneGeometry,
-  BoxGeometry,
   Mesh,
   EdgesGeometry,
   LineSegments
 } from "../deps/three.js";
 
-import { stylingProps, useThreeFill, useThreeStroke } from "../libs/styling.js";
-import { transform2dProps, useTransform3d } from "../libs/transform.js";
+import {
+  stylingProps,
+  useThreeFill,
+  useThreeStroke,
+  transformThreeProps,
+  useThreeTransform
+} from "../internals/index.js";
 
 export const FBoxThree = {
-  props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },
+  props: { r: { default: 1 }, ...transformThreeProps, ...stylingProps },
   setup(props) {
     const scene = inject("scene");
 
@@ -35,7 +40,7 @@ export const FBoxThree = {
 
     scene.add(group);
 
-    useTransform3d(props, group);
+    useThreeTransform(props, group);
 
     return () => null;
   }

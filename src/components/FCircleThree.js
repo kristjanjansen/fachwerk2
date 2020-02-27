@@ -7,11 +7,16 @@ import {
   LineSegments
 } from "../deps/three.js";
 
-import { stylingProps, useThreeFill, useThreeStroke } from "../libs/styling.js";
-import { transform2dProps, useTransform3d } from "../libs/transform.js";
+import {
+  stylingProps,
+  useThreeFill,
+  useThreeStroke,
+  transformThreeProps,
+  useThreeTransform
+} from "../internals/index.js";
 
 export const FCircleThree = {
-  props: { r: { default: 1 }, ...transform2dProps, ...stylingProps },
+  props: { r: { default: 1 }, ...stylingProps, ...transformThreeProps },
   setup(props) {
     const scene = inject("scene");
 
@@ -34,7 +39,7 @@ export const FCircleThree = {
 
     scene.add(group);
 
-    useTransform3d(props, group);
+    useThreeTransform(props, group);
 
     return () => null;
   }

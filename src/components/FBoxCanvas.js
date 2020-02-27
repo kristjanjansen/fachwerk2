@@ -1,31 +1,32 @@
 import { inject, watch } from "../deps/vue.js";
 
-import { stylingProps, styling2dCanvas } from "../libs/styling.js";
 import {
-  transform2dProps,
-  transform2dCanvas,
-  reset2dCanvas
-} from "../libs/transform.js";
+  stylingProps,
+  stylingCanvas,
+  transformTwoProps,
+  transformCanvas,
+  transformCanvasReset
+} from "../internals/index.js";
 
 export const FBoxCanvas = {
   props: {
     r: { default: 1 },
     ...stylingProps,
-    ...transform2dProps
+    ...transformTwoProps
   },
   setup(props) {
-    const ctx = inject("ctx");
+    const scene = inject("scene");
     watch(() => {
-      if (ctx.value) {
-        transform2dCanvas(props, ctx.value);
-        styling2dCanvas(props, ctx.value);
+      if (scene.value) {
+        transformCanvas(props, scene.value);
+        stylingCanvas(props, scene.value);
         if (props.fill !== "none") {
-          ctx.value.fillRect(props.r / -2, props.r / -2, props.r, props.r);
+          scene.value.fillRect(props.r / -2, props.r / -2, props.r, props.r);
         }
         if (props.stroke !== "none") {
-          ctx.value.strokeRect(props.r / -2, props.r / -2, props.r, props.r);
+          scene.value.strokeRect(props.r / -2, props.r / -2, props.r, props.r);
         }
-        reset2dCanvas(ctx.value);
+        transformCanvasReset(scene.value);
       }
     });
     return () => null;

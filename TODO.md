@@ -1,2 +1,0 @@
-- 3d transforms
-- unify slider / animate props

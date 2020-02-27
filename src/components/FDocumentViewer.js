@@ -1,5 +1,5 @@
 import { computed, watch } from "../deps/vue.js";
-import { parseDocument } from "../libs/parser.js";
+import { parseDocument } from "../internals/index.js";
 import {
   setSlideCount,
   onToggleSlideMode,
@@ -7,7 +7,7 @@ import {
   onNextSlide,
   isSlideVisible,
   state
-} from "../libs/viewer.js";
+} from "../internals/index.js";
 
 export const FDocumentViewer = {
   props: {

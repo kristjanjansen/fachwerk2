@@ -9,10 +9,10 @@ export const FCircle = {
     const types = {
       svg: FCircleSvg,
       canvas: FCircleCanvas,
-      svg3: FCircleThree,
+      three: FCircleThree,
       webgl: FCircleThree
     };
-    const type = inject("sceneType");
+    const type = inject("type");
     return () =>
       types[type.value]
         ? h(types[type.value], { ...props }, context.slots)

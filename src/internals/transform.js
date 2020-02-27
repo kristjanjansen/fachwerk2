@@ -1,13 +1,14 @@
-import { computed } from "../deps/vue.js";
-import { parseCoords, normalizeScale } from "../utils/coordinates.js";
+import { computed, watch } from "../deps/vue.js";
 
-export const transform2dProps = {
+import { parseCoords, normalizeScale, deg2rad } from "../utils/index.js";
+
+export const transformTwoProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },
   rotation: { default: 0, type: [String, Number] },
   scale: { default: [1, 1], type: [String, Number, Array, Object] }
 };
 
-export const transform3dProps = {
+export const transformThreeProps = {
   position: { default: [0, 0, 0], type: [String, Number, Array, Object] },
   rotation: { default: [0, 0, 0], type: [String, Number, Array, Object] },
   scale: { default: [1, 1, 1], type: [String, Number, Array, Object] }
@@ -36,7 +37,7 @@ export const useSvgTransform = props => {
 
 export const test_useSvgTransform_default_props = () => {
   return [
-    useSvgTransform(transform2dProps).value,
+    useSvgTransform(transformTwoProps).value,
     "translate(0 0) rotate(0) scale(1 1)"
   ];
 };
@@ -51,14 +52,14 @@ export const test_useSvgTransform_custom_props = () => {
 
 // Canvas
 
-export const useCanvasTransform = (props, ctx) => {
+export const transformCanvas = (props, ctx) => {
   const { position, rotation, scale } = getTransform(props);
   ctx.translate(position[0], position[1]);
   ctx.rotate(deg2rad(rotation[0]));
   ctx.scale(scale[0], scale[1]);
 };
 
-export const resetCanvas = ctx => {
+export const transformCanvasReset = ctx => {
   ctx.resetTransform();
 };
 

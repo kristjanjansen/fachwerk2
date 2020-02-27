@@ -5,10 +5,9 @@ import {
   isArray,
   isNumber,
   isBoolean,
-  isNull
-} from "./types.js";
-
-import { padArrayRight } from "./array.js";
+  isNull,
+  padArrayRight
+} from "../utils/index.js";
 
 export const normalizeDefault = arr => {
   return padArrayRight(arr || [], 3, 0).map(value => toNumber(value));
@@ -130,6 +129,9 @@ export const coordsObjectToArray = (obj, normalizer = normalizeDefault) => {
 };
 
 export const parseCoords = (c, normalizer = normalizeDefault) => {
+  if (isNull(c)) {
+    return coordsTextToArray("", normalizer);
+  }
   if (isString(c)) {
     return coordsTextToArray(c, normalizer);
   }
@@ -146,6 +148,10 @@ export const parseCoords = (c, normalizer = normalizeDefault) => {
 };
 
 // Empty tests
+
+export const test_parseCoords_null = () => {
+  return [parseCoords(null), [[0, 0, 0]]];
+};
 
 export const test_parseCoords_empty_string = () => {
   return [parseCoords(""), [[0, 0, 0]]];

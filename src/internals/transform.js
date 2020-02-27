@@ -6,7 +6,7 @@ import {
   normalizeThreeRotation
 } from "../internals/index.js";
 
-import { deg2rad } from "../utils/index.js";
+import { deg2rad, fit } from "../utils/index.js";
 
 export const transformTwoProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },
@@ -84,8 +84,8 @@ export const useThreeTransform = (props, object) => {
     () => props.position,
     () => {
       const { position } = getThreeTransform(props);
-      object.position.x = position[0];
-      object.position.y = position[1];
+      object.position.x = fit(position[0], 0, 200, -100, 100);
+      object.position.y = fit(position[1], 0, 200, 100, -100);
       object.position.z = position[2];
     }
   );
@@ -94,9 +94,9 @@ export const useThreeTransform = (props, object) => {
     () => props.rotation,
     () => {
       const { rotation } = getThreeTransform(props);
-      object.rotation.x = deg2rad(rotation[0]);
-      object.rotation.y = deg2rad(rotation[1]);
-      object.rotation.z = deg2rad(rotation[2]);
+      object.rotation.x = deg2rad(360 - rotation[0]);
+      object.rotation.y = deg2rad(360 - rotation[1]);
+      object.rotation.z = deg2rad(360 - rotation[2]);
     }
   );
 

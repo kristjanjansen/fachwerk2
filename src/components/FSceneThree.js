@@ -57,7 +57,6 @@ export const FSceneThree = {
   `,
   css: /*css*/ `
     .f-scene-three > * {
-      border: 1px solid red;
       display: block;
     }
   `

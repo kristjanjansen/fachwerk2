@@ -12,12 +12,12 @@ export const FSceneCanvas = {
       scene.value = canvas.getContext("2d");
     });
     onBeforeUpdate(() => {
-      scene.value.clearRect(0, 0, 200, 200); // 400
+      scene.value.clearRect(0, 0, 200, 200);
     });
     return { node };
   },
   template: `
-  <canvas style="border: 1px solid red;" ref="node">
+  <canvas ref="node">
     <slot />
   </canvas>
   `

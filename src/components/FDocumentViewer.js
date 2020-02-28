@@ -22,7 +22,7 @@ export const FDocumentViewer = {
     <div
       v-for="(slide,i) in parsedDocument"
       :style="{
-        padding: 'var(--base2)',
+        padding: 'var(--base4)',
         display: 'grid',
         ...viewerGridStyle(slide)
       }"

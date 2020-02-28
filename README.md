@@ -45,7 +45,7 @@ The simplest way to create a dynamic variable is to use `<f-slider>` component w
 <f-slider set="a" />
 ```
 
-To use the live value, you will need to use `get()` function that prints out the value.
+To get the live value, use the `get()` function to print out the value.
 
 ```handlebars
 {{ get("a") }}
@@ -63,7 +63,21 @@ It is more useful to use `get()` function inside components, for example:
 
 <!-- set() -->
 
-<!-- ## Math -->
+### Math
+
+`<f-math>` allows to write math equations in classic [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) format. It uses a [KaTeX](https://github.com/Khan/KaTeX) library under the hood.
+
+```html
+<f-math>b = a^2</f-math>
+```
+
+The true power of the framework appears when math functions are combined with live variables:
+
+```html
+<f-slider set="a" />
+
+<f-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</f-math>
+```
 
 ## Development
 
@@ -102,25 +116,25 @@ In the production version [./src/components/FCompiler.js](./src/components/FComp
 
 ### Code organization
 
-#### [./src/components](./src/components)
+[./src/components](./src/components)
 
 Public VueJS components, all loaded when the framework is initialized and accessible in Markdown documents.
 
-#### [./src/utils](./src/utils)
+[./src/utils](./src/utils)
 
 Public utility functions, all accessible in Markdown documents.
 
-#### [./src/internal](./src/utils)
+[./src/internal](./src/utils)
 
 Internal functions used by components.
 
-#### [./src/deps](./src/deps)
+[./src/deps](./src/deps)
 
 External dependencies redirected to ESM imports from https://unpkg.com
 
 ## Testing
 
-Fachwerk relies on a number of unit tests that make sure that internal functions and public utilities work right.
+Fachwerk relies on unit tests that make sure that internal functions and public utilities work right.
 
 ### Writing tests
 
@@ -153,13 +167,13 @@ For Windows support, see [these instructions](https://deno.land/std/manual.md#do
 
 ### Running tests automatically
 
-Commandline tests run on each commit to Github repository, there is a Github action in [/.github/actions/test.yml](./.github/actions/test.yml).
+Command line tests run on each commit to Github repository, there is a Github action in [/.github/actions/test.yml](./.github/actions/test.yml).
 
 ## FAQ
 
 ### Why not package.json? Why not NPM?
 
-Fachwerk fully embraces the future of Javascript modules and is very much inspired by toolless movement, such as [Deno](https://deno.land/std/manual.md) and [Pika](https://www.pika.dev/) minimalistic Javascript package management.
+Fachwerk fully embraces the future of Javascript modules and is very much inspired by toolless movement and products such as [Deno](https://deno.land/std/manual.md) and [Pika](https://www.pika.dev/) minimalistic Javascript package management.
 
 ### Why not Typescript?
 

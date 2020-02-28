@@ -11,13 +11,15 @@ The graphics is handled by the generic `<f-scene>` component that supports follo
 | `<f-scene mode="three">`  | vector   | 3d         | ThreeJS rendered as SVG   |
 | `<f-scene mode="webgl">`  | bitmap   | 3d         | ThreeJS rendered as WebGL |
 
-Internally, `<f-scene>` is just a proxy component, passing the rendering duties to scene rendering components for each rendering mode, such as `<f-scene-svg>`, `<f-scene-canvas>`, `<f-scene-three>` etc.
+Internally, `<f-scene>` is just a wrapper component, passing the rendering duties to scene rendering components for each rendering mode, such as `<f-scene-svg>`, `<f-scene-canvas>`, `<f-scene-three>` etc.
 
 Each rendering component sets up the context for particular rendering technology such as `<svg>` tag, canvas `getContext()`, ThreeJS `scene` object etc.
 
 ### Graphics primitives
 
-Fachwerk offers a set of components for graphics primitives such as `<f-circle>`, `<f-square>` etc. Similar to the scene component above, each primitive is a proxy component, passing the rendering to the underlying render-specific component.
+Fachwerk offers a set of components for graphics primitives such as `<f-circle>`, `<f-square>` etc. Similar to the scene component above, each primitive is a _polymorphic_ component, a wrapper passing the rendering to the underlying render-specific component.
+
+Graphics primitives components are aware which scene type is their parent and they pick the correct rendering component accordingly.
 
 When writing the following code,
 
@@ -27,7 +29,7 @@ When writing the following code,
 </f-scene>
 ```
 
-it is actually rendered as:
+it will be rendered as:
 
 ```html
 <f-scene-svg>
@@ -85,7 +87,7 @@ The true power of the framework appears when math functions are combined with li
 
 The heart of Fachwerk lies on a very simple idea: **live-compile a Markdown file as a VueJS template**.
 
-In the code it can be expressed as:
+In VueJS 3.x code it can be expressed as:
 
 ```js
 import {
@@ -112,7 +114,7 @@ const FCompiler = {
 createApp(FCompiler).mount("#app");
 ```
 
-In the production version [./src/components/FCompiler.js](./src/components/FCompiler.js) is a little more complicated, including error handling and utility functions injection but the basic idea remains the same.
+In the production version [./src/components/FCompiler.js](./src/components/FCompiler.js) is a little more complicated, including error handling and utility functions, but the basic idea remains the same.
 
 ### Code organization
 
@@ -131,6 +133,31 @@ Internal functions used by components.
 [./src/deps](./src/deps)
 
 External dependencies redirected to ESM imports from https://unpkg.com
+
+### CSS and styling
+
+Global CSS resides in `/fachwerk.css` file and relies heavily on CSS variables.
+
+Component CSS is stored as an `css` attribute on each component:
+
+```js
+const ExampleComponent = {
+  template: `<div class="ExampleComponent">Hello</div>`,
+  css: {
+    .ExampleComponent {
+      color: var(--red);
+    }
+  }
+}
+```
+
+In `utils/css.js` there is a function `componentCss()` that gets the `css` attribute values from all components, merges them into a single CSS string and injects it to HTML `<style>` tag:
+
+```js
+import { components } from "https://fachwerk.github.io/fachwerk/fachwerk.js";
+
+componentCss(components);
+```
 
 ## Testing
 

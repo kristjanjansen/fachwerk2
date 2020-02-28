@@ -2,10 +2,30 @@ import { computed, h, compile, onErrorCaptured } from "../deps/vue.js";
 import marked from "../deps/marked.js";
 import { utils, onCompilerError } from "../../fachwerk.js";
 
+const renderer = new marked.Renderer();
+
+renderer.code = (code, info, escaped) => {
+  const escapeReplacements = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  };
+  const getEscapeReplacement = ch => escapeReplacements[ch];
+  const escapedCode = code.replace(/[&<>"']/g, getEscapeReplacement);
+  if (info === "fw") {
+    return `<pre>${escapedCode}</pre>
+
+${code}`;
+  }
+  return `<pre>${escapedCode}</pre>`;
+};
+
 const compileContent = content => {
   let c = () => null;
   try {
-    c = compile(marked(content, { breaks: true }), {
+    c = compile(marked(content, { renderer, breaks: true }), {
       onError: onCompilerError
     });
   } catch (error) {

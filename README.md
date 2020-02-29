@@ -11,7 +11,7 @@ The graphics is handled by the generic `<f-scene>` component that supports follo
 | `<f-scene mode="svg">`    | vector   | 2d         | SVG                       |
 | `<f-scene mode="canvas">` | bitmap   | 2d         | HTML `<canvas>`           |
 | `<f-scene mode="three">`  | vector   | 3d         | ThreeJS rendered as SVG   |
-| `<f-scene mode="webgl">`  | bitmap   | 3d         | ThreeJS rendered as WebGL |
+| `<f-scene mode="webgl">`  | bitmap   | 3d         | ThreeJS rendered as WebGL |  |
 
 Internally, `<f-scene>` is just a wrapper component, passing the rendering duties to scene rendering components for each rendering mode, such as `<f-scene-svg>`, `<f-scene-canvas>`, `<f-scene-three>` etc.
 
@@ -25,7 +25,7 @@ Graphics primitives components are aware which scene type is their parent and th
 
 When writing the following code,
 
-```live
+```fw
 <f-scene mode="svg">
   <f-square />
 </f-scene>
@@ -33,7 +33,7 @@ When writing the following code,
 
 it will be rendered as:
 
-```live
+```fw
 <f-scene-svg>
   <f-square-svg />
 </f-scene-svg>
@@ -45,19 +45,19 @@ Fachwerk supports live variables, they can be easily set and used to create dyna
 
 The simplest way to create a dynamic variable is to use `<f-slider>` component with `set` prop:
 
-```live
+```fw
 <f-slider set="a" />
 ```
 
-To get the live value, use the `get()` function to print out the value.
+To get the live value, use the `get(name, default)` function to print out the value.
 
-```live
-<output>{{ get("a") }}</output>
+```fw
+<output>{{ get("a", 0) }}</output>
 ```
 
 It is more useful to use `get()` function inside components, for example:
 
-```live
+```fw
 <f-scene>
   <f-square
     r="100"
@@ -73,13 +73,13 @@ In addition to the live variables, backed by the global state there are also glo
 
 To send an event, use `send(channel, value)` function:
 
-```live
+```fw
 <button v-on:click="send('example', 1)">test</button>
 ```
 
 To receive an event, use `receive(channel, callback)` function
 
-```live
+```fw
 {{ receive('example', log) }}
 ```
 
@@ -91,13 +91,13 @@ To receive an event, use `receive(channel, callback)` function
 
 `<f-math>` allows to write math equations in classic [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) format. It uses a [KaTeX](https://github.com/Khan/KaTeX) library under the hood.
 
-```live
+```fw
 <f-math>b = a^2</f-math>
 ```
 
 The true power of the framework appears when math functions are combined with live variables:
 
-```live
+```fw
 <f-slider set="a" />
 
 <f-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</f-math>

@@ -1,6 +1,6 @@
 import { ref, watch, onMounted } from "../deps/vue.js";
 
-export const FDocumentEditor = {
+export const FEditor = {
   props: { content: { default: "", type: String } },
   setup(props, { emit }) {
     const editor = ref(null);
@@ -22,6 +22,7 @@ export const FDocumentEditor = {
           const end = this.selectionEnd;
           this.value = val.substring(0, start) + "  " + val.substring(end);
           this.selectionStart = this.selectionEnd = start + 2;
+          emit("input:content", currentContent);
           return false;
         }
       };
@@ -33,16 +34,15 @@ export const FDocumentEditor = {
     ref="editor"
     v-model="currentContent"
     style="
-      border: none;
       color: var(--lightergray);
       background: var(--paleblue);
       font-family: var(--font-mono);
       font-size: var(--font-mono-size);
       line-height: var(--font-mono-lineheight);
+      border: none;
       outline: none;
       resize: none;
       width: 100%;
-      height: 80vh;
       padding: var(--base2);
     "
   />

@@ -4,16 +4,14 @@ import { utils, onCompilerError } from "../../fachwerk.js";
 
 const renderer = new marked.Renderer();
 
-renderer.code = (code, info, escaped) => {
-  const escapeReplacements = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  };
-  const getEscapeReplacement = ch => escapeReplacements[ch];
-  const escapedCode = code.replace(/[&<>"']/g, getEscapeReplacement);
+renderer.code = (code, info) => {
+  const escapedCode = code
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+
   if (info === "fw") {
     return `<pre>${escapedCode}</pre>
 

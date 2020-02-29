@@ -14,7 +14,7 @@ export const fachwerk = () => {
       return { document };
     },
     template: `
-      <f-document :document="document" />
+      <f-document-viewer :document="document" />
     `
   };
 

@@ -5,7 +5,7 @@ import {
   useSvgTransform
 } from "../internals/index.js";
 
-export const FBoxSvg = {
+export const FSquareSvg = {
   props: { r: { default: 1 }, ...transformTwoProps, ...stylingProps },
   setup(props) {
     const styling = useSvgStyling(props);

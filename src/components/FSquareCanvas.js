@@ -8,7 +8,7 @@ import {
   transformCanvasReset
 } from "../internals/index.js";
 
-export const FBoxCanvas = {
+export const FSquareCanvas = {
   props: {
     r: { default: 1 },
     ...stylingProps,

@@ -23,7 +23,7 @@ Graphics primitives components are aware which scene type is their parent and th
 
 When writing the following code,
 
-```html
+```live
 <f-scene mode="svg">
   <f-square />
 </f-scene>
@@ -31,7 +31,7 @@ When writing the following code,
 
 it will be rendered as:
 
-```html
+```live
 <f-scene-svg>
   <f-square-svg />
 </f-scene-svg>
@@ -43,22 +43,42 @@ Fachwerk supports live variables, they can be easily set and used to create dyna
 
 The simplest way to create a dynamic variable is to use `<f-slider>` component with `set` prop:
 
-```html
+```live
 <f-slider set="a" />
 ```
 
 To get the live value, use the `get()` function to print out the value.
 
-```handlebars
-{{ get("a") }}
+```live
+<output>{{ get("a") }}</output>
 ```
 
 It is more useful to use `get()` function inside components, for example:
 
-```html
+```live
 <f-scene>
-  <f-square :rotation="get('a')" />
+  <f-square
+    r="100"
+    position="100 100"
+    :rotation="get('a')"
+  />
 </f-scene>
+```
+
+### Events
+
+In addition to the live variables, backed by the global state there are also global events.
+
+To send an event, use `send(channel, value)` function:
+
+```live
+<button v-on:click="send('example', 1)">test</button>
+```
+
+To receive an event, use `receive(channel, callback)` function
+
+```live
+{{ receive('example', log) }}
 ```
 
 <!-- f-animate -->
@@ -69,13 +89,13 @@ It is more useful to use `get()` function inside components, for example:
 
 `<f-math>` allows to write math equations in classic [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) format. It uses a [KaTeX](https://github.com/Khan/KaTeX) library under the hood.
 
-```html
+```live
 <f-math>b = a^2</f-math>
 ```
 
 The true power of the framework appears when math functions are combined with live variables:
 
-```html
+```live
 <f-slider set="a" />
 
 <f-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</f-math>

@@ -7,17 +7,17 @@ export const FSceneSvg = {
     const scene = computed(() => ({
       unit: width.value ? 200 / width.value : 1
     }));
-    const viewBox = computed(() => `0 0 200 200`);
+    const viewSquare = computed(() => `0 0 200 200`);
 
     provide("scene", scene);
 
-    return { node, width, viewBox };
+    return { node, width, viewSquare };
   },
   template: `<div ref="node">
     <svg
       :width="width"
       :height="width"
-      :view-box.camel="viewBox"
+      :view-box.camel="viewSquare"
     >
       <slot />
     </svg>

@@ -16,7 +16,7 @@ import {
   useThreeTransform
 } from "../internals/index.js";
 
-export const FBoxThree = {
+export const FSquareThree = {
   props: { r: { default: 1 }, ...transformThreeProps, ...stylingProps },
   setup(props) {
     const scene = inject("scene");

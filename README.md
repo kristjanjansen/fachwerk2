@@ -1,31 +1,63 @@
 # Fachwerk
 
+## Getting started
+
+To get started you will need a single HTML file and a Markdown file:
+
+**index.html**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fachwerk</title>
+    <link
+      rel="stylesheet"
+      href="https://fachwerk.github.io/fachwerk/fachwerk.css"
+    />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module">
+      import { fachwerk } from "https://fachwerk.github.io/fachwerk/fachwerk";
+      fachwerk();
+    </script>
+  </body>
+</html>
+```
+
+**index.md**
+
+```md
+# Hello world!
+```
+
 ## Components
 
-### Graphics
+All Fachwerk components are prefixed with `f-` and are loaded automatically when the framework starts.
+
+### Graphics scene
 
 The graphics is handled by the generic `<f-scene>` component that supports following rendering modes:
 
-| mode                      | graphics  | implementation            |
+| mode                      | graphics  | technology                |
 | ------------------------- | --------- | ------------------------- |
 | `<f-scene mode="svg">`    | 2D vector | SVG                       |
 | `<f-scene mode="canvas">` | 2D bitmap | HTML `<canvas>`           |
 | `<f-scene mode="three">`  | 3D vector | ThreeJS rendered as SVG   |
 | `<f-scene mode="webgl">`  | 3D bitmap | ThreeJS rendered as WebGL |  |
 
-Internally, `<f-scene>` is just a wrapper component, passing the rendering duties to scene rendering components for each rendering mode, such as `<f-scene-svg>`, `<f-scene-canvas>`, `<f-scene-three>` etc.
+Internally, `<f-scene>` is just a _polymorphic_ wrapper component, passing the rendering duties to technology-specific component, such as `<f-scene-svg>`, `<f-scene-canvas>`, `<f-scene-three>` etc.
 
-Each rendering component sets up the context for particular rendering technology such as `<svg>` tag, canvas `getContext()`, ThreeJS `scene` object etc.
+### Graphics elements
 
-### Graphics primitives
+Fachwerk offers a set of graphics elements/primitives such as `<f-circle>`, `<f-square>` etc. Similar to their parent `<f-scene>` component, each graphics component is a _polymorphic_ component, being aware of their parent type to pick the correct rendering subcomponent:
 
-Fachwerk offers a set of components for graphics primitives such as `<f-circle>`, `<f-square>` etc. Similar to the scene component above, each primitive is a _polymorphic_ component, a wrapper passing the rendering to the underlying render-specific component.
+When writing the following code:
 
-Graphics primitives components are aware which scene type is their parent and they pick the correct rendering component accordingly.
-
-When writing the following code,
-
-```vue
+```html
 <f-scene mode="svg">
   <f-square />
 </f-scene>
@@ -33,7 +65,7 @@ When writing the following code,
 
 it will be rendered as:
 
-```vue
+```html
 <f-scene-svg>
   <f-square-svg />
 </f-scene-svg>
@@ -43,16 +75,18 @@ it will be rendered as:
 
 Fachwerk supports live variables, they can be easily set and used to create dynamic experiences.
 
+#### f-slider
+
 The simplest way to create a dynamic variable is to use `<f-slider>` component with `set` prop:
 
 ```vue
 <f-slider set="a" />
 ```
 
-To get the live value, use the `get(name, default)` function to print out the value.
+To get the live value, use the `get()` function to print out the value.
 
 ```vue
-<output>{{ get("a", 0) }}</output>
+<output>{{ get("a") }}</output>
 ```
 
 It is more useful to use `get()` function inside components, for example:
@@ -67,25 +101,43 @@ It is more useful to use `get()` function inside components, for example:
 </f-scene>
 ```
 
+Most components that generate data accept `set=""` as a prop, but there also a `set()` function for cases you want to do something custom.
+
+#### f-animate
+
+Another way of adjusting live variables is to _animate_, _interpolate_ or _tween_ from one value to another during a certain duration.
+
+```vue
+<f-animate set="b" />
+
+<output>b is currently {{ get("b") }}</output>
+
+<f-scene>
+  <f-square
+    r="100"
+    position="100 100"
+    :rotation="get('b')"
+  />
+</f-scene>
+```
+
 ### Events
 
-In addition to the live variables, backed by the global state there are also global events.
+In addition to the live variables, Fachwerk also provides way to send and receive global events.
 
-To send an event, use `send(channel, value)` function:
-
-```vue
-<button v-on:click="send('example', 1)">test</button>
-```
-
-To receive an event, use `receive(channel, callback)` function
+To send an event, use `send()` function:
 
 ```vue
-{{ receive("example", log) }}
+<button v-on:click="send('click!')">Click me</button>
 ```
 
-<!-- f-animate -->
+To receive an event, use `receive()` function:
 
-<!-- set() -->
+```vue
+{{ receive("click!", () => set("clicked", true)) }}
+
+<output>{{ get('clicked') ? 'Clicked!' : 'Waiting for a click'}}</output>
+```
 
 ### Math
 
@@ -95,7 +147,7 @@ To receive an event, use `receive(channel, callback)` function
 <f-math>b = a^2</f-math>
 ```
 
-The true power of the framework appears when math functions are combined with live variables:
+The true power of the framework emerges when math functions are combined with live variables:
 
 ```vue
 <f-slider set="a" />
@@ -103,11 +155,15 @@ The true power of the framework appears when math functions are combined with li
 <f-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</f-math>
 ```
 
-## Development
+## Framework architecture
 
-### Architecture
+### Markdown compiler
 
-The heart of Fachwerk lies on a very simple idea: **live-compile a Markdown file as a VueJS template**.
+`<f-compiler>`
+
+The heart of Fachwerk lies on a very simple idea:
+
+**Take a Markdown file, add some VueJS components and live compile them into Vue template**.
 
 In VueJS 3.x code it can be expressed as:
 
@@ -136,25 +192,25 @@ const FCompiler = {
 createApp(FCompiler).mount("#app");
 ```
 
-In the production version [./src/components/FCompiler.js](./src/components/FCompiler.js) is a little more complicated, including error handling and utility functions, but the basic idea remains the same.
+In the production version [./src/components/FCompiler.js](./src/components/FCompiler.js) is a little more sophisticated, including error handling and injecting utility functions, but the basic idea remains the same.
 
-### Code organization
+### Content display
 
-[./src/components](./src/components)
+`<f-content>` is working on top of `<f-compiler>`. It accepts `content` prop for Markdown content, parses it via `parseContent()` into pages separated by `---` divider.
 
-Public VueJS components, all loaded when the framework is initialized and accessible in Markdown documents.
+Pages can be optionally divided into grid regions, separated by `-` dividers.
 
-[./src/utils](./src/utils)
+Then each region and page is looped over and rendered by `<f-compiler>`.
 
-Public utility functions, all accessible in Markdown documents.
+### Code editing
 
-[./src/internal](./src/utils)
+`<f-editor>` is a simple code editor, a styled `<textarea>` with proper <kbd>tab</kbd> key handling. It is designed for quick livecode snippets editing, not for serious coding work.
 
-Internal functions used by components.
+There is a separate initiative to intergrate Fachwerk with Monaco code editor from VSCode.
 
-[./src/deps](./src/deps)
+### Content editor and preview
 
-External dependencies redirected to ESM imports from https://unpkg.com
+`<f-content-editor>` is a simple two-pane coding environment combining `<f-editor>` code editing and `<f-content>` content viewer.
 
 ### CSS and styling
 
@@ -181,9 +237,29 @@ import { components } from "https://fachwerk.github.io/fachwerk/fachwerk.js";
 componentCss(components);
 ```
 
+There are also utility functions for getting and setting CSS variables, `getCssVariable()` and `setCssVariable()` respectively.
+
+### Code organization
+
+[./src/components](./src/components)
+
+Public VueJS components, all loaded when the framework is initialized and accessible in Markdown documents.
+
+[./src/utils](./src/utils)
+
+Public utility functions, accessible in Markdown documents.
+
+[./src/internal](./src/utils)
+
+Internal functions used by components.
+
+[./src/deps](./src/deps)
+
+External dependencies redirected to ESM imports from https://unpkg.com
+
 ## Testing
 
-Fachwerk relies on unit tests that make sure that internal functions and public utilities work right.
+Fachwerk relies on a suite of unit tests that verify that utility and internal functions work right.
 
 ### Writing tests
 
@@ -199,33 +275,37 @@ export const test_add = {
 
 ### Running tests
 
-Test functions are picked up by test runner `/test.js`, where return values are compared. If they equal, the test passes. If they are not equal, the test fails.
+Test functions are picked up by test runner `/test.js` that compare the values returned. If they equal, the test passes. If they are not equal, the test fails.
 
 Tests can be run either from the browser or command line.
 
-For browser testing, open [/test.html](/test.html) file in local server and open Developer Tools.
+**For browser testing**, open [/test.html](/test.html) file in local server and open Developer Tools.
 
-For command line testing, you will need to install [Deno](https://deno.land/std/manual.md) and run the following commands on MacOS:
+**For command line testing** you will need to install [Deno](https://deno.land/std/manual.md) and run the following commands on MacOS:
 
 ```js
 brew install deno
 deno test.js
 ```
 
-For Windows support, see [these instructions](https://deno.land/std/manual.md#download-and-install).
+For Windows support, see [these Deno installation instructions](https://deno.land/std/manual.md#download-and-install).
 
 ### Running tests automatically
 
-Command line tests run on each commit to Github repository, there is a Github action in [/.github/actions/test.yml](./.github/actions/test.yml).
+Commandline tests run on each commit to Github repository, there is a Github action in [/.github/actions/test.yml](./.github/actions/test.yml).
 
 ## FAQ
 
-### Why not package.json? Why not NPM?
+### Why not package.json? Why not npm?
 
 Fachwerk fully embraces the future of Javascript modules and is very much inspired by toolless movement and products such as [Deno](https://deno.land/std/manual.md) and [Pika](https://www.pika.dev/) minimalistic Javascript package management.
+
+### What about versioning the releases?
+
+During the initial development, the development happens in the latest `master` branch. In the future, a simple versioning system could be introduced.
 
 ### Why not Typescript?
 
 It is a viable option and could provide excellent developer experience for the framework consumers. Fachwerk still prioritizes minimal tooling and directly accessible source code over the Typescript benefits.
 
-Note that this could be reconsidered in the future, giving Deno is already part of the project's toolchain.
+Note that this could be reconsidered in the future, giving Deno is already part of the project toolchain.

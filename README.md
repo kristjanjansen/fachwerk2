@@ -309,3 +309,21 @@ During the initial development, the development happens in the latest `master` b
 It is a viable option and could provide excellent developer experience for the framework consumers. Fachwerk still prioritizes minimal tooling and directly accessible source code over the Typescript benefits.
 
 Note that this could be reconsidered in the future, giving Deno is already part of the project toolchain.
+
+## Backstory
+
+Current initiative is actually a second take on the same idea: creating lightweight dynamic documents using latest Javascript features, VueJS and Markdown.
+
+Although first version served the need of the project it was created for -- to deliver next-gen educational materials -- the actual implementation was somewhat lacking:
+
+- It was too early for full-on ESM (ECMAStript modules), many of the project dependencies did not yet offer ESM module builds so custom Rollup-based build system was introduced for transpiling CommonJS modules to ESM (similar what Snowpack does).
+
+- One of the messiest implementations were ThreeJS-related code, starting from missing ESM support, especially in more experimental code such as `THREE.SVGRenderer` that had to be ported to ES6 manually. Also, the ThreeJS code was parly based on outdated [vue-threejs](https://github.com/fritx/vue-threejs) implementation that was hard to reason about.
+
+- Some key ideas such as a simple global state using `set` and `get` helpers only appeared later in the project, leaving many of the ealier, poorer attempts for state handling via `v-slot` still in to codebase and in the documentation.
+
+- Unefficient code here and there as performance was not a prioritized goal: CSS live injection approach was unefficient, math component needed a explicit update triggering and ThreeJS components were always animating even when the input data was static.
+
+- Very modest test coverage and missing intergration with CI (Continuous Integration) systems.
+
+- Documentation, content creation, content marketing and contributions / community management was mostly an afterthought.

@@ -1,3 +1,5 @@
+# Fachwerk
+
 ## Components
 
 ### Graphics
@@ -23,7 +25,7 @@ Graphics primitives components are aware which scene type is their parent and th
 
 When writing the following code,
 
-```html
+```live
 <f-scene mode="svg">
   <f-square />
 </f-scene>
@@ -31,7 +33,7 @@ When writing the following code,
 
 it will be rendered as:
 
-```html
+```live
 <f-scene-svg>
   <f-square-svg />
 </f-scene-svg>
@@ -43,21 +45,25 @@ Fachwerk supports live variables, they can be easily set and used to create dyna
 
 The simplest way to create a dynamic variable is to use `<f-slider>` component with `set` prop:
 
-```html
+```live
 <f-slider set="a" />
 ```
 
 To get the live value, use the `get()` function to print out the value.
 
-```handlebars
-{{ get("a") }}
+```live
+<output>{{ get("a") }}</output>
 ```
 
 It is more useful to use `get()` function inside components, for example:
 
-```html
+```live
 <f-scene>
-  <f-square :rotation="get('a')" />
+  <f-square
+    r="100"
+    position="100 100"
+    :rotation="get('a')"
+  />
 </f-scene>
 ```
 
@@ -91,7 +97,7 @@ To receive an event, use `receive(channel, callback)` function
 
 The true power of the framework appears when math functions are combined with live variables:
 
-```html
+```live
 <f-slider set="a" />
 
 <f-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</f-math>

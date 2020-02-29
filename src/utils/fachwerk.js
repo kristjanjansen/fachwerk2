@@ -7,10 +7,15 @@ import {
   onWarning
 } from "../../fachwerk.js";
 
-export const fachwerk = () => {
+export const fachwerk = (options = {}) => {
+  const currentOptions = {
+    file: "./index.md",
+    ...options
+  };
+
   const App = {
     setup() {
-      const { document } = useFetch("index.md");
+      const { document } = useFetch(currentOptions.file);
       return { document };
     },
     template: `

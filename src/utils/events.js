@@ -1,3 +1,5 @@
+// From https://gist.github.com/hkwon/766a7344c9f29675bd9eb49281a7936a
+
 function Events() {
   const subscriptions = {};
 
@@ -5,16 +7,6 @@ function Events() {
     const id = Symbol("id");
     if (!subscriptions[eventType]) subscriptions[eventType] = {};
     subscriptions[eventType][id] = callback;
-    return {
-      unsubscribe: function unsubscribe() {
-        delete subscriptions[eventType][id];
-        if (
-          Object.getOwnPropertySymbols(subscriptions[eventType]).length === 0
-        ) {
-          delete subscriptions[eventType];
-        }
-      }
-    };
   };
 
   this.emit = function publishEventWithArgs(eventType, arg) {
@@ -26,8 +18,10 @@ function Events() {
   };
 }
 
-export const events = new Events();
+const events = new Events();
 
-export const send = (key, payload = null) => events.emit(key, payload);
+export const send = (key, payload = null) => {
+  return events.emit(key, payload);
+};
 
 export const receive = (key, callback) => events.on(key, callback);

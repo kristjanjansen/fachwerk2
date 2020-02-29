@@ -61,6 +61,22 @@ It is more useful to use `get()` function inside components, for example:
 </f-scene>
 ```
 
+### Events
+
+In addition to the live variables, backed by the global state there are also global events.
+
+To send an event, use `send(channel, value)` function:
+
+```live
+<button v-on:click="send('example', 1)">test</button>
+```
+
+To receive an event, use `receive(channel, callback)` function
+
+```live
+{{ receive('example', log) }}
+```
+
 <!-- f-animate -->
 
 <!-- set() -->
@@ -69,7 +85,7 @@ It is more useful to use `get()` function inside components, for example:
 
 `<f-math>` allows to write math equations in classic [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) format. It uses a [KaTeX](https://github.com/Khan/KaTeX) library under the hood.
 
-```html
+```live
 <f-math>b = a^2</f-math>
 ```
 

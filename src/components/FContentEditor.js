@@ -16,12 +16,13 @@ export const FContentEditor = {
     return { currentContent };
   },
   template: `
-  <div style="display: grid; grid-template-columns: 1fr 1fr;">
+  <div
+    style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 100vh;">
     <f-editor
       :content="currentContent"
       @input:content="content => currentContent = content"
     />
-    <f-content :content="currentContent" />
+    <f-content  style="overflow: auto" :content="currentContent" />
   </div>
   `
 };

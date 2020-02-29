@@ -18,10 +18,12 @@ export const FDocumentViewer = {
     return { parsedDocument, viewerGridStyle };
   },
   template: `
-  <div>
+  <div style="display: flex; justify-content: center;">
+    <div>
     <div
       v-for="(slide,i) in parsedDocument"
       :style="{
+        maxWidth: '900px',
         padding: 'var(--base4)',
         display: 'grid',
         ...viewerGridStyle(slide)
@@ -29,6 +31,7 @@ export const FDocumentViewer = {
     >
     <div v-for="content in slide.content">
       <f-document-compiler :content="content" />
+    </div>
     </div>
   </div>
   `

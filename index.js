@@ -1,2 +1,2 @@
 import { fachwerk } from "./fachwerk.js";
-fachwerk();
+fachwerk({ file: "./README.md" });

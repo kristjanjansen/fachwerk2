@@ -15,7 +15,7 @@
   --yellow: #fec938; /* gold */
   --lightyellow: #ffe18e; /* gold */
   --lighteryellow: #feeec1;
-  --lightblue: #d8e6f3; /* ghostwhite */
+  --lightblue: hsl(209, 53%, 95%); /* ghostwhite */
   --blue: #1982c4; /* steelblue */
   --paleblue: #263238;
   --green: #59cd90; /*Alt: #1C7C54;*/
@@ -337,7 +337,7 @@ pre {
   line-height: calc(var(--base) * 2.5);
   background: var(--lightblue);
   color: var(--blue);
-  padding: var(--base2);
+  padding: calc(var(--base) * 1.5);
   margin: 0 0 var(--base2) 0;
   word-break: break-word;
   white-space: pre-wrap;
@@ -369,7 +369,7 @@ output {
   line-height: calc(var(--base) * 2.5);
   white-space: pre-wrap;
   overflow: auto;
-  padding: var(--base2);
+  padding: calc(var(--base) * 1.5);
   color: var(--white);
   background: var(--black);
   margin: 0 0 var(--base2) 0;

@@ -12,12 +12,12 @@ renderer.code = (code, info) => {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-  if (info === "fw") {
-    return `<pre>${escapedCode}</pre>
+  if (info === "live") {
+    return `<pre v-pre>${escapedCode}</pre>
 
 ${code}`;
   }
-  return `<pre>${escapedCode}</pre>`;
+  return `<pre v-pre>${escapedCode}</pre>`;
 };
 
 const compileContent = content => {

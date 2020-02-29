@@ -1,1 +1,3 @@
-export const log = content => console.log(content);
+export function log() {
+  console.log(...arguments);
+}

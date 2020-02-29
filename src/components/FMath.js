@@ -15,7 +15,7 @@ export const FMath = {
     );
     return { math };
   },
-  template: `<div v-html="math" />`,
+  template: `<div style="margin-bottom: var(--base)" v-html="math" />`,
   css: /*css */ `
   @import url('https://unpkg.com/katex@0.11.1/dist/katex.min.css');
   `

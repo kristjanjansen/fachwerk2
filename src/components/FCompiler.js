@@ -12,7 +12,7 @@ renderer.code = (code, info) => {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-  if (info === "live") {
+  if (info === "vue") {
     return `<pre v-pre>${escapedCode}</pre>
 
 ${code}`;
@@ -32,7 +32,7 @@ const compileContent = content => {
   return c;
 };
 
-export const FDocumentCompiler = {
+export const FCompiler = {
   props: {
     content: {
       default: ""

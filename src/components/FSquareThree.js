@@ -20,7 +20,6 @@ export const FSquareThree = {
   props: { r: { default: 1 }, ...transformThreeProps, ...stylingProps },
   setup(props) {
     const scene = inject("scene");
-    const sceneContext = inject("sceneContext");
 
     var group = new Group();
 
@@ -41,7 +40,7 @@ export const FSquareThree = {
 
     scene.add(group);
 
-    useThreeTransform(props, group, sceneContext);
+    useThreeTransform(props, group);
 
     return () => null;
   }

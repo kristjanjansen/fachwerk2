@@ -23,6 +23,7 @@ export const FSceneThree = {
   setup(props) {
     const el = ref(null);
     const { width, height } = useSize(props);
+    provide("sceneContext", { width, height });
 
     const scene = new Scene();
     scene.background = new Color("white");
@@ -37,7 +38,7 @@ export const FSceneThree = {
       0.1,
       1000
     );
-    camera.position.z = 80;
+    camera.position.z = 165;
 
     const renderer =
       props.renderer == "webgl" ? new WebGLRenderer() : new SVGRenderer();
@@ -47,7 +48,6 @@ export const FSceneThree = {
     );
 
     provide("scene", scene);
-    provide("sceneContext", { width, height });
 
     onMounted(() => {
       el.value.append(renderer.domElement);

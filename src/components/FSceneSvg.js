@@ -1,23 +1,26 @@
 import { ref, provide, computed } from "../deps/vue.js";
 
+import { sizeProps, useSize } from "../internals/size.js";
+
 export const FSceneSvg = {
-  setup() {
-    const node = ref(null);
-    const width = ref(200);
+  props: { ...sizeProps },
+  setup(props) {
+    const el = ref(null);
+    const { width, height, viewBox } = useSize(props);
+
     const scene = computed(() => ({
-      unit: width.value ? 200 / width.value : 1
+      unit: 1
     }));
-    const viewSquare = computed(() => `0 0 200 200`);
 
     provide("scene", scene);
 
-    return { node, width, viewSquare };
+    return { el, width, height, viewBox };
   },
-  template: `<div ref="node">
+  template: `<div ref="el">
     <svg
       :width="width"
       :height="width"
-      :view-box.camel="viewSquare"
+      :view-box.camel="viewBox"
     >
       <slot />
     </svg>

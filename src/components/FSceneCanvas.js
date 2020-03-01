@@ -1,23 +1,29 @@
 import { provide, ref, onMounted, onBeforeUpdate } from "../deps/vue.js";
 
+import { sizeProps, useSize } from "../internals/size.js";
+
 export const FSceneCanvas = {
-  setup() {
-    const node = ref(null);
+  props: { ...sizeProps },
+  setup(props) {
+    const el = ref(null);
     const scene = ref(null);
     provide("scene", scene);
+
+    const { width, height } = useSize(props);
+
     onMounted(() => {
-      const canvas = node.value;
-      canvas.width = 200;
-      canvas.height = 200;
+      const canvas = el.value;
+      canvas.width = width.value;
+      canvas.height = height.value;
       scene.value = canvas.getContext("2d");
     });
     onBeforeUpdate(() => {
-      scene.value.clearRect(0, 0, 200, 200);
+      scene.value.clearRect(0, 0, width.value, height.value);
     });
-    return { node };
+    return { el };
   },
   template: `
-  <canvas ref="node">
+  <canvas ref="el" style="border: 1px solid red;">
     <slot />
   </canvas>
   `

@@ -4,6 +4,8 @@ import { FSceneSvg } from "./FSceneSvg.js";
 import { FSceneCanvas } from "./FSceneCanvas.js";
 import { FSceneThree } from "./FSceneThree.js";
 
+import { sizeProps } from "../internals/size.js";
+
 export const FSceneThreeSvg = (props, context) =>
   h(FSceneThree, { ...props, renderer: "svg" }, context.slots);
 
@@ -25,7 +27,8 @@ export const FScene = {
       webgl: FSceneThreeWebgl
     };
     const type = computed(() => props.type);
-    provide("type", type);
+    provide("sceneContext", { type });
+
     return () => h(types[type.value], { ...props }, context.slots);
   }
 };

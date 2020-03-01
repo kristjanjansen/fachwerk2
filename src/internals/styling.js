@@ -16,11 +16,12 @@ export const stylingProps = {
 };
 
 export const useSvgStyling = props => {
-  const scene = inject("scene");
+  const sceneContext = inject("sceneContext");
   return computed(() => {
     const fill = props.fill;
     const stroke = props.stroke;
-    const strokeWidth = toNumber(props.strokeWidth, 1) * scene.value.unit;
+    const strokeWidth =
+      toNumber(props.strokeWidth, 1) * sceneContext.unit.value;
     return { fill, stroke, strokeWidth };
   });
 };

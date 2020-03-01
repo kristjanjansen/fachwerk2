@@ -15,18 +15,28 @@ export const FSquareCanvas = {
     ...transformTwoProps
   },
   setup(props) {
-    const scene = inject("scene");
+    const sceneContext = inject("sceneContext");
     watch(() => {
-      if (scene.value) {
-        transformCanvas(props, scene.value);
-        stylingCanvas(props, scene.value);
+      if (sceneContext.ctx.value) {
+        transformCanvas(props, sceneContext.ctx.value);
+        stylingCanvas(props, sceneContext.ctx.value);
         if (props.fill !== "none") {
-          scene.value.fillRect(-props.r, -props.r, props.r * 2, props.r * 2);
+          sceneContext.ctx.value.fillRect(
+            -props.r,
+            -props.r,
+            props.r * 2,
+            props.r * 2
+          );
         }
         if (props.stroke !== "none") {
-          scene.value.strokeRect(-props.r, -props.r, props.r * 2, props.r * 2);
+          sceneContext.ctx.value.strokeRect(
+            -props.r,
+            -props.r,
+            props.r * 2,
+            props.r * 2
+          );
         }
-        transformCanvasReset(scene.value);
+        transformCanvasReset(sceneContext.ctx.value);
       }
     });
     return () => null;

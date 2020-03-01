@@ -1,4 +1,4 @@
-import { ref, provide, computed } from "../deps/vue.js";
+import { ref, inject, computed } from "../deps/vue.js";
 
 import { sizeProps, useSize } from "../internals/size.js";
 
@@ -7,12 +7,10 @@ export const FSceneSvg = {
   setup(props) {
     const el = ref(null);
     const { width, height, viewBox } = useSize(props);
+    const unit = computed(() => 1);
 
-    const scene = computed(() => ({
-      unit: 1
-    }));
-
-    provide("scene", scene);
+    const sceneContext = inject("sceneContext");
+    sceneContext.unit = unit;
 
     return { el, width, height, viewBox };
   },

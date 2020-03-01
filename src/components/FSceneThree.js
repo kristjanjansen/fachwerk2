@@ -1,4 +1,4 @@
-import { provide, ref, onMounted, onBeforeUpdate } from "../deps/vue.js";
+import { inject, ref, onMounted, onBeforeUpdate } from "../deps/vue.js";
 
 import {
   Scene,
@@ -23,7 +23,6 @@ export const FSceneThree = {
   setup(props) {
     const el = ref(null);
     const { width, height } = useSize(props);
-    provide("sceneContext", { width, height });
 
     const scene = new Scene();
     scene.background = new Color("white");
@@ -47,7 +46,11 @@ export const FSceneThree = {
       window.devicePixelRatio ? window.devicePixelRatio : 1
     );
 
-    provide("scene", scene);
+    const sceneContext = inject("sceneContext");
+
+    sceneContext.width = width;
+    sceneContext.height = height;
+    sceneContext.scene = scene;
 
     onMounted(() => {
       el.value.append(renderer.domElement);

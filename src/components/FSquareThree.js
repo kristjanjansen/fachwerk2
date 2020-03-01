@@ -19,7 +19,7 @@ import {
 export const FSquareThree = {
   props: { r: { default: 1 }, ...transformThreeProps, ...stylingProps },
   setup(props) {
-    const scene = inject("scene");
+    const sceneContext = inject("sceneContext");
 
     var group = new Group();
 
@@ -38,7 +38,7 @@ export const FSquareThree = {
       group.add(strokeObject);
     }
 
-    scene.add(group);
+    sceneContext.scene.add(group);
 
     useThreeTransform(props, group);
 

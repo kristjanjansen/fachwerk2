@@ -18,7 +18,7 @@ import {
 export const FCircleThree = {
   props: { r: { default: 1 }, ...stylingProps, ...transformThreeProps },
   setup(props) {
-    const scene = inject("scene");
+    const sceneContext = inject("sceneContext");
 
     var group = new Group();
 
@@ -37,7 +37,7 @@ export const FCircleThree = {
       group.add(strokeObject);
     }
 
-    scene.add(group);
+    sceneContext.scene.add(group);
 
     useThreeTransform(props, group);
 

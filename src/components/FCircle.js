@@ -5,17 +5,17 @@ import { FCircleCanvas } from "./FCircleCanvas.js";
 import { FCircleThree } from "./FCircleThree.js";
 
 export const FCircle = {
-  setup(props, context) {
+  setup(props, { slots }) {
     const types = {
       svg: FCircleSvg,
       canvas: FCircleCanvas,
       three: FCircleThree,
       webgl: FCircleThree
     };
-    const type = inject("type");
+    const sceneContext = inject("sceneContext");
     return () =>
-      types[type.value]
-        ? h(types[type.value], { ...props }, context.slots)
+      types[sceneContext.type.value]
+        ? h(types[sceneContext.type.value], { ...props }, slots)
         : null;
   }
 };

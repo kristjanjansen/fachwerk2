@@ -37,7 +37,7 @@ export const FSceneThree = {
       0.1,
       1000
     );
-    camera.position.z = 165;
+    camera.position.z = width.value / 2.5;
 
     const renderer =
       props.renderer == "webgl" ? new WebGLRenderer() : new SVGRenderer();

@@ -17,6 +17,7 @@ export const stylingProps = {
 
 export const useSvgStyling = props => {
   const sceneContext = inject("sceneContext");
+  console.log(sceneContext);
   return computed(() => {
     const fill = props.fill;
     const stroke = props.stroke;

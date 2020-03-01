@@ -15,7 +15,7 @@ export const FContent = {
   },
   template: `
   <div style="display: flex; justify-content: center;">
-    <div style="max-width: 900px; width: 100%;">
+    <div style="max-width: 800px; width: 100%;">
       <div
         v-for="(slide,i) in parsedContent"
         :style="{

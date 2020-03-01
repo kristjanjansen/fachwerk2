@@ -1,4 +1,4 @@
-import { computed, watch } from "../deps/vue.js";
+import { computed, watch, inject } from "../deps/vue.js";
 
 import {
   parseCoords,
@@ -79,13 +79,28 @@ export const transformCanvasReset = ctx => {
 
 // Three
 
-export const useThreeTransform = (props, object) => {
+export const useThreeTransform = (props, object, sceneContext) => {
+  //const { width, height } = sceneContext;
   watch(
     () => props.position,
     () => {
       const { position } = getThreeTransform(props);
-      object.position.x = fit(position[0], 0, 200, -100, 100);
-      object.position.y = fit(position[1], 0, 200, 100, -100);
+      object.position.x = position[0];
+      object.position.y = position[1];
+      // object.position.x = fit(
+      //   position[0],
+      //   0,
+      //   width.value,
+      //   width.value / -2,
+      //   width.value / 2
+      // );
+      // object.position.y = fit(
+      //   position[1],
+      //   0,
+      //   height.value,
+      //   height.value / 2,
+      //   height.value / -2
+      // );
       object.position.z = position[2];
     }
   );

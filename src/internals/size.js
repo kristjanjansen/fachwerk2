@@ -1,13 +1,15 @@
 import { computed } from "../deps/vue.js";
 
+import { toNumber } from "../../fachwerk.js";
+
 export const sizeProps = {
   width: { default: 300, type: [String, Number] },
-  height: { default: null, type: [String, Number] }
+  height: { default: 300, type: [String, Number] }
 };
 
 export const useSize = props => {
-  const width = computed(() => props.width);
-  const height = computed(() => props.height || props.width);
+  const width = computed(() => toNumber(props.width));
+  const height = computed(() => toNumber(props.height));
   const viewBox = computed(() => `0 0 ${props.width} ${props.height}`);
   return { width, height, viewBox };
 };

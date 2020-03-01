@@ -20,10 +20,11 @@ export const FSquareThree = {
   props: { r: { default: 1 }, ...transformThreeProps, ...stylingProps },
   setup(props) {
     const scene = inject("scene");
+    const sceneContext = inject("sceneContext");
 
     var group = new Group();
 
-    const geometry = new PlaneGeometry(props.r, props.r, props.r);
+    const geometry = new PlaneGeometry(props.r * 2, props.r * 2);
 
     if (props.fill !== "none") {
       const fill = useThreeFill(props);
@@ -40,7 +41,7 @@ export const FSquareThree = {
 
     scene.add(group);
 
-    useThreeTransform(props, group);
+    useThreeTransform(props, group, sceneContext);
 
     return () => null;
   }

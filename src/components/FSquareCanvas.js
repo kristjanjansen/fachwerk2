@@ -21,10 +21,10 @@ export const FSquareCanvas = {
         transformCanvas(props, scene.value);
         stylingCanvas(props, scene.value);
         if (props.fill !== "none") {
-          scene.value.fillRect(props.r / -2, props.r / -2, props.r, props.r);
+          scene.value.fillRect(-props.r, -props.r, props.r * 2, props.r * 2);
         }
         if (props.stroke !== "none") {
-          scene.value.strokeRect(props.r / -2, props.r / -2, props.r, props.r);
+          scene.value.strokeRect(-props.r, -props.r, props.r * 2, props.r * 2);
         }
         transformCanvasReset(scene.value);
       }

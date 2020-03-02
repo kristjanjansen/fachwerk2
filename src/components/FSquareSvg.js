@@ -14,10 +14,10 @@ export const FSquareSvg = {
   },
   template: `
     <rect 
-      :x="r / -2"
-      :y="r / -2"
-      :width="r"
-      :height="r"
+      :x="-r"
+      :y="-r"
+      :width="r * 2"
+      :height="r * 2"
       :fill="styling.fill"
       :stroke="styling.stroke"
       :stroke-width="styling.strokeWidth"

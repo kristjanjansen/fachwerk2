@@ -38,36 +38,109 @@ To get started you will need a single HTML file and a Markdown file:
 
 All Fachwerk components are prefixed with `f-` and are loaded automatically when the framework starts.
 
-### Graphics scene
+### Graphics
 
-The graphics is handled by the generic `<f-scene>` component that supports following rendering modes:
+The graphics components are wrapped into generic `<f-scene>` component. It is a wrapper component, passing the actual context building and rendering to the subcomponents:
 
-| mode                      | graphics  | technology                |
-| ------------------------- | --------- | ------------------------- |
-| `<f-scene mode="svg">`    | 2D vector | SVG                       |
-| `<f-scene mode="canvas">` | 2D bitmap | HTML `<canvas>`           |
-| `<f-scene mode="three">`  | 3D vector | ThreeJS rendered as SVG   |
-| `<f-scene mode="webgl">`  | 3D bitmap | ThreeJS rendered as WebGL |  |
+#### 2D vector graphics
 
-Internally, `<f-scene>` is just a _polymorphic_ wrapper component, passing the rendering duties to technology-specific component, such as `<f-scene-svg>`, `<f-scene-canvas>`, `<f-scene-three>` etc.
+`<f-scene type="svg">` → `<f-scene-svg>`
 
-### Graphics elements
+A 2D vector graphics scene, implemented as SVG markup,
 
-Fachwerk offers a set of graphics elements/primitives such as `<f-circle>`, `<f-square>` etc. Similar to their parent `<f-scene>` component, each graphics component is a _polymorphic_ component, being aware of their parent type to pick the correct rendering subcomponent:
+The component provides a following reactive context to the child components:
+
+```js
+const renderContext = inject("renderContext");
+/*
+renderContext = { 
+  type.value: 'svg',
+  width.value: 400,
+  height.value: 400,
+  unit.value: 1
+}
+*/
+```
+
+#### 2D bitmap graphics
+
+`<f-scene type="canvas">` → `<f-scene-canvas>`
+
+It is a bitmap graphics scene, implemented as 2D `<canvas>`.
+
+The component provides a following reactive context to the child components:
+
+```js
+const renderContext = inject("renderContext");
+/*
+renderContext = { 
+  type.value: 'canvas',
+  width.value: 400,
+  height.value: 400,
+  ctx.value: canvas.getContext('2d')
+}
+*/
+```
+
+#### 3D vector graphics
+
+`<f-scene type="three">` → `<f-scene-three renderer="svg">`
+
+It is a vector graphics scene rendered by ThreeJS and SVGRenderer plugin.
+
+The component provides a following reactive context to the child components:
+
+```js
+const renderContext = inject("renderContext");
+/*
+renderContext = { 
+  type.value: 'three',
+  width.value: 400,
+  height.value: 400,
+  scene.value: new THREE.Scene()
+}
+*/
+```
+
+#### 3D vector graphics
+
+`<f-scene type="webgl">` → `<f-scene-three renderer="webl">`
+
+It is a vector graphics scene rendered by ThreeJS default WebGL renderer.
+
+The component provides a following reactive context to the child components:
+
+```js
+const renderContext = inject("renderContext");
+/*
+renderContext = { 
+  type.value: 'webgl',
+  width.value: 400,
+  height.value: 400,
+  scene.value: new THREE.Scene()
+}
+*/
+```
+
+### Graphics primitives
+
+Fachwerk offers a set of graphics primitives to draw circles, rectangles etc.
+
+Each graphics primitive component is aware of their parent's `<f-scene>` type (using `renderContext.type`) to pick the correct rendering component.
 
 When writing the following code:
 
-```html
+```vue
 <f-scene mode="svg">
-  <f-square />
+  <f-square r="100" />
 </f-scene>
 ```
 
-it will be rendered as:
+it will internally be rendered as:
 
-```html
+```
 <f-scene-svg>
-  <f-square-svg />
+  <f-square-svg r="100" />
 </f-scene-svg>
 ```
 
@@ -95,27 +168,25 @@ It is more useful to use `get()` function inside components, for example:
 <f-scene>
   <f-square
     r="100"
-    position="100 100"
     :rotation="get('a')"
   />
 </f-scene>
 ```
 
-Most components that generate data accept `set=""` as a prop, but there also a `set()` function for cases you want to do something custom.
+Most components that generate data accept `set=""` as a prop, but there is also a `set()` function for cases you want to do something custom.
 
 #### f-animate
 
-Another way of adjusting live variables is to _animate_, _interpolate_ or _tween_ from one value to another during a certain duration.
+Another way of adjusting live variables is to _animate_ one value to another in certain duration.
 
 ```vue
 <f-animate set="b" />
 
-<output>b is currently {{ get("b") }}</output>
+<output>b is {{ get("b") }}</output>
 
 <f-scene>
   <f-square
     r="100"
-    position="100 100"
     :rotation="get('b')"
   />
 </f-scene>
@@ -320,10 +391,10 @@ Although first version served the need of the project it was created for -- to d
 
 - One of the messiest implementations were ThreeJS-related code, starting from missing ESM support, especially in more experimental code such as `THREE.SVGRenderer` that had to be ported to ES6 manually. Also, the ThreeJS code was parly based on outdated [vue-threejs](https://github.com/fritx/vue-threejs) implementation that was hard to reason about.
 
-- Some key ideas such as a simple global state using `set` and `get` helpers only appeared later in the project, leaving many of the ealier, poorer attempts for state handling via `v-slot` still in to codebase and in the documentation.
+- Some key ideas such as a simple global state using `set` and `get` helInefficientppeared later in the projthe ect, leaving many of the ealier, poorer attempts for state handling via `v-slot` still in to codebase and in the documentation.
 
-- Unefficient code here and there as performance was not a prioritized goal: CSS live injection approach was unefficient, math component needed a explicit update triggering and ThreeJS components were always animating even when the input data was static.
+- Inefficient code here and there as the performance was not a prioritized goal: CSS live injection approach was unefficient, math cointegrationed a explicit update triggering and ThreeJS components were always animating even when the input, data was static.
 
-- Very modest test coverage and missing intergration with CI (Continuous Integration) systems.
+- Very modest test coverage and missing integration with CI (Continuous Integration) systems.
 
 - Documentation, content creation, content marketing and contributions / community management was mostly an afterthought.

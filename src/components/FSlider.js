@@ -16,7 +16,7 @@ export const FSlider = {
     type="range"
     :value="value"
     @input="onInput"
-    max="200"
+    max="360"
     step="0.01"
   />`
 };

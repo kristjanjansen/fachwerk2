@@ -17,10 +17,13 @@ export const fachwerk = (options = {}) => {
   const App = {
     setup() {
       const { content } = useFetch(currentOptions.file);
-      return { content };
+      const component = currentOptions.editor
+        ? "f-content-editor"
+        : "f-content";
+      return { component, content };
     },
     template: `
-      <f-content-editor :content="content" />
+      <component :is="component" :content="content" />
     `
   };
 

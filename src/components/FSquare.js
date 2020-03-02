@@ -5,14 +5,14 @@ import { FSquareCanvas } from "./FSquareCanvas.js";
 import { FSquareThree } from "./FSquareThree.js";
 
 export const FSquare = {
-  setup(props, context) {
+  setup(props, { slots }) {
     const types = {
       svg: FSquareSvg,
       canvas: FSquareCanvas,
       three: FSquareThree,
       webgl: FSquareThree
     };
-    const type = inject("type");
-    return () => h(types[type.value], { ...props }, context.slots);
+    const sceneContext = inject("sceneContext");
+    return () => h(types[sceneContext.type.value], { ...props }, slots);
   }
 };

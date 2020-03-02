@@ -1,4 +1,4 @@
-import { computed, h, compile, onErrorCaptured } from "../deps/vue.js";
+import { computed, h, compile, onErrorCaptured, inject } from "../deps/vue.js";
 import marked from "../deps/marked.js";
 import { utils, onCompilerError } from "../../fachwerk.js";
 
@@ -40,9 +40,10 @@ export const FCompiler = {
   },
   setup(props) {
     onErrorCaptured(onCompilerError);
+    const customUtils = inject("customUtils");
     const compiledContent = computed(() => ({
       setup() {
-        return { ...utils };
+        return { ...utils, ...customUtils };
       },
       render: compileContent(props.content)
     }));

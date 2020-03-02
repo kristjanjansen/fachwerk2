@@ -1,4 +1,4 @@
-import { createApp } from "../deps/vue.js";
+import { createApp, provide } from "../deps/vue.js";
 
 import {
   useFetch,
@@ -9,15 +9,17 @@ import {
 } from "../../fachwerk.js";
 
 export const fachwerk = (options = {}) => {
-  const currentOptions = {
+  const customOptions = {
     file: "./index.md",
     components: {},
+    utils: {},
     ...options
   };
 
   const App = {
     setup() {
-      const { content } = useFetch(currentOptions.file);
+      provide("customUtils", customOptions.utils);
+      const { content } = useFetch(customOptions.file);
       return { content };
     },
     template: `
@@ -29,7 +31,7 @@ export const fachwerk = (options = {}) => {
 
   Object.entries({
     ...components,
-    ...currentOptions.components
+    ...customOptions.components
   }).forEach(([name, component]) => app.component(name, component));
 
   componentCss(components);

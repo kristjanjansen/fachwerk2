@@ -6,7 +6,6 @@ export * from "./FSquareThree.js";
 export * from "./FCircle.js";
 export * from "./FCircleCanvas.js";
 export * from "./FCircleSvg.js";
-export * from "./FContentEditor.js";
 export * from "./FCompiler.js";
 export * from "./FEditor.js";
 export * from "./FContent.js";

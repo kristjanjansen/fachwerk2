@@ -11,27 +11,26 @@ import {
 export const fachwerk = (options = {}) => {
   const currentOptions = {
     file: "./index.md",
+    components: {},
     ...options
   };
 
   const App = {
     setup() {
       const { content } = useFetch(currentOptions.file);
-      const component = currentOptions.editor
-        ? "f-content-editor"
-        : "f-content";
-      return { component, content };
+      return { content };
     },
     template: `
-      <component :is="component" :content="content" />
+      <f-content :content="content" />
     `
   };
 
   const app = createApp(App);
 
-  for (const name in components) {
-    app.component(name, components[name]);
-  }
+  Object.entries({
+    ...components,
+    ...currentOptions.components
+  }).forEach(([name, component]) => app.component(name, component));
 
   componentCss(components);
 

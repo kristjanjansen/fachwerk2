@@ -13,6 +13,7 @@ export const fachwerk = (options = {}) => {
     file: "./index.md",
     components: {},
     utils: {},
+    template: "",
     ...options
   };
 
@@ -22,7 +23,9 @@ export const fachwerk = (options = {}) => {
       const { content } = useFetch(customOptions.file);
       return { content };
     },
-    template: `
+    template:
+      customOptions.template ||
+      `
       <f-content :content="content" />
     `
   };

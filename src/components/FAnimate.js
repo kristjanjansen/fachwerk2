@@ -8,22 +8,24 @@ export const FAnimate = {
   props: {
     ...dynamicProps,
     duration: { default: 5000, type: [String, Number] },
-    easing: { default: "linear", type: String }
+    easing: { default: "linear", type: String },
+    direction: { default: "alternate", type: String }
   },
   setup(props, { emit }) {
     const progress = ref(0);
     anime({
       targets: progress,
-      value: props.value,
+      value: [props.from, props.to],
       duration: props.duration,
       easing: props.easing,
-      direction: "alternate",
+      direction: props.direction,
       loop: true
     });
     watch(progress, progress => {
-      emit("value", progress);
+      const currentProgress = props.integer ? Math.floor(progress) : progress;
+      emit("value", currentProgress);
       if (props.set) {
-        set(props.set, progress);
+        set(props.set, currentProgress);
       }
     });
     return () => null;

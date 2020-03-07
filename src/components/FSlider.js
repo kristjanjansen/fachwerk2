@@ -2,7 +2,7 @@ import { set as storeSet, toNumber } from "../../fachwerk.js";
 import { dynamicProps } from "../internals/dynamic.js";
 
 export const FSlider = {
-  props: { ...dynamicProps },
+  props: { ...dynamicProps, value: { default: 0, type: [String, Number] } },
   setup(props, { emit }) {
     const onInput = e => {
       const currentValue = toNumber(e.target.value);
@@ -19,6 +19,6 @@ export const FSlider = {
     @input="onInput"
     :min="from"
     :max="to"
-    :step="float ? 0.01 : step ? step : 1"
+    :step="integer ? 1 : step ? step : 0.01"
   />`
 };

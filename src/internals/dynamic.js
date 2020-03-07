@@ -1,18 +1,17 @@
 export const dynamicProps = {
-  value: { default: 0, type: [String, Number] },
   from: {
     default: 0,
     type: [String, Number]
   },
   to: {
-    default: 10,
+    default: 360,
     type: [String, Number]
   },
   step: {
     default: 1,
     type: [String, Number]
   },
-  float: {
+  integer: {
     default: false,
     type: [Boolean, String]
   },

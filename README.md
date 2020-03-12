@@ -398,3 +398,9 @@ Although first version served the need of the project it was created for -- to d
 - Very modest test coverage and missing integration with CI (Continuous Integration) systems.
 
 - Documentation, content creation, content marketing and contributions / community management was mostly an afterthought.
+
+---
+
+```
+~/.local/bin/deno run --allow-write bundle.js
+```

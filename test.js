@@ -1,6 +1,6 @@
-import * as components from "./src/components.js";
-import * as utils from "./src/utils.js";
-import * as internals from "./src/internals.js";
+import * as components from "./src/components/index.js";
+import * as utils from "./src/utils/index.js";
+import * as internals from "./src/internals/index.js";
 
 const tests = Object.entries({
   ...components,
@@ -8,7 +8,7 @@ const tests = Object.entries({
   ...internals
 }).filter(([key]) => key.startsWith("test_"));
 
-const exitCode = fachwerk.test(tests);
+const exitCode = utils.test(tests);
 
 if (window.Deno !== undefined) {
   Deno.exit(exitCode);

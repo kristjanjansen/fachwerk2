@@ -1,2 +1,2 @@
-import { fachwerk } from "./fachwerk.js";
+import { fachwerk } from "./fachwerk.bundle.js";
 fachwerk({ file: "./README.md" });

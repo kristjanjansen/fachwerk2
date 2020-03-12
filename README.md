@@ -328,6 +328,20 @@ Internal functions used by components.
 
 External dependencies redirected to ESM imports from https://unpkg.com
 
+## Bundling
+
+By default external dependencies are fetched from https://unpkg.com on each page load. This frees us to have a complicated build step but makes certain use cases harder, such as writing content offline or developing the framwork offline.
+
+For this reason we ship also a bundled version of the framework that includes both external dependencies and framework code itself. It is located at `./fachwerk.bundle.js`. 
+
+To generate a bundle we use a following Deno command:
+
+```
+deno run bundle.js > fachwerk.bundle.js
+```
+
+The script generates 
+
 ## Testing
 
 Fachwerk relies on a suite of unit tests that verify that utility and internal functions work right.
@@ -401,6 +415,3 @@ Although first version served the need of the project it was created for -- to d
 
 ---
 
-```
-~/.local/bin/deno run --allow-write bundle.js
-```

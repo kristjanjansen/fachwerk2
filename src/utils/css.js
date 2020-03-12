@@ -15,7 +15,7 @@ export const componentCss = components => {
     .filter(([_, { css }]) => css)
     .map(([key, { css }]) => css)
     .join(" ")
-    .replace("\n", " ")
+    .replace("\r?\n", " ")
     .replace(/\s+/g, " ");
   injectCss(css);
 };

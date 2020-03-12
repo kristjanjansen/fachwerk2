@@ -1,4 +1,4 @@
-import { createApp } from "../deps/vue.js";
+import { createApp, provide } from "../deps/vue.js";
 
 import {
   useFetch,
@@ -9,29 +9,33 @@ import {
 } from "../../fachwerk.js";
 
 export const fachwerk = (options = {}) => {
-  const currentOptions = {
+  const customOptions = {
     file: "./index.md",
+    components: {},
+    utils: {},
+    template: "",
     ...options
   };
 
   const App = {
     setup() {
-      const { content } = useFetch(currentOptions.file);
-      const component = currentOptions.editor
-        ? "f-content-editor"
-        : "f-content";
-      return { component, content };
+      provide("customUtils", customOptions.utils);
+      const { content } = useFetch(customOptions.file);
+      return { content };
     },
-    template: `
-      <component :is="component" :content="content" />
+    template:
+      customOptions.template ||
+      `
+      <f-content :content="content" />
     `
   };
 
   const app = createApp(App);
 
-  for (const name in components) {
-    app.component(name, components[name]);
-  }
+  Object.entries({
+    ...components,
+    ...customOptions.components
+  }).forEach(([name, component]) => app.component(name, component));
 
   componentCss(components);
 

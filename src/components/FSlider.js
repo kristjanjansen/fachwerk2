@@ -1,13 +1,14 @@
-import { set as storeSet } from "../../fachwerk.js";
+import { set as storeSet, toNumber } from "../../fachwerk.js";
+import { dynamicProps } from "../internals/dynamic.js";
 
 export const FSlider = {
-  props: { value: { default: 0 }, set: { default: "" } },
-  setup({ set }, { emit }) {
+  props: { ...dynamicProps, value: { default: 0, type: [String, Number] } },
+  setup(props, { emit }) {
     const onInput = e => {
-      const value = parseFloat(e.target.value);
-      emit("value", value);
-      if (set) {
-        storeSet(set, value);
+      const currentValue = toNumber(e.target.value);
+      emit("value", currentValue);
+      if (props.set) {
+        storeSet(props.set, currentValue);
       }
     };
     return { onInput };
@@ -16,7 +17,8 @@ export const FSlider = {
     type="range"
     :value="value"
     @input="onInput"
-    max="360"
-    step="0.01"
+    :min="from"
+    :max="to"
+    :step="integer ? 1 : step ? step : 0.01"
   />`
 };

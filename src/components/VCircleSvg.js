@@ -5,7 +5,7 @@ import {
   useSvgTransform
 } from "../internals/index.js";
 
-export const FCircleSvg = {
+export const VCircleSvg = {
   props: { r: { default: 1 }, ...transformTwoProps, ...stylingProps },
   setup(props) {
     const styling = useSvgStyling(props);

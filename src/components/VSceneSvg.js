@@ -2,7 +2,7 @@ import { ref, inject, computed } from "../deps/vue.js";
 
 import { sizeProps, useSize } from "../internals/size.js";
 
-export const FSceneSvg = {
+export const VSceneSvg = {
   props: { ...sizeProps },
   setup(props) {
     const el = ref(null);

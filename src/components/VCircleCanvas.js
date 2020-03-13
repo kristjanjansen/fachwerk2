@@ -8,7 +8,7 @@ import {
   transformCanvasReset
 } from "../internals/index.js";
 
-export const FCircleCanvas = {
+export const VCircleCanvas = {
   props: {
     ...transformTwoProps,
     ...stylingProps,

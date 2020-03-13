@@ -1,10 +1,10 @@
 import { ref, watch } from "../deps/vue.js";
 import anime from "../deps/anime.js";
 
-import { set } from "../../fachwerk.js";
+import { set } from "../../visualia.js";
 import { dynamicProps } from "../internals/dynamic.js";
 
-export const FAnimate = {
+export const VAnimate = {
   props: {
     ...dynamicProps,
     duration: { default: 5000, type: [String, Number] },

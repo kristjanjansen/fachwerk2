@@ -12,7 +12,7 @@ import { SVGRenderer } from "../deps/svgrenderer.js";
 
 import { sizeProps, useSize } from "../internals/size.js";
 
-export const FSceneThree = {
+export const VSceneThree = {
   props: {
     ...sizeProps,
     renderer: {

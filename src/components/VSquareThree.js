@@ -16,7 +16,7 @@ import {
   useThreeTransform
 } from "../internals/index.js";
 
-export const FSquareThree = {
+export const VSquareThree = {
   props: { r: { default: 1 }, ...transformThreeProps, ...stylingProps },
   setup(props) {
     const sceneContext = inject("sceneContext");

@@ -6,9 +6,9 @@ import {
   componentCss,
   onError,
   onWarning
-} from "../../fachwerk.js";
+} from "../../visualia.js";
 
-export const fachwerk = (options = {}) => {
+export const visualia = (options = {}) => {
   const customOptions = {
     file: "./index.md",
     components: {},
@@ -26,7 +26,7 @@ export const fachwerk = (options = {}) => {
     template:
       customOptions.template ||
       `
-      <f-content :content="content" />
+      <v-content :content="content" />
     `
   };
 

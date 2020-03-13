@@ -1,16 +1,16 @@
 import { h, inject } from "../deps/vue.js";
 
-import { FCircleSvg } from "./FCircleSvg.js";
-import { FCircleCanvas } from "./FCircleCanvas.js";
-import { FCircleThree } from "./FCircleThree.js";
+import { VCircleSvg } from "./VCircleSvg.js";
+import { VCircleCanvas } from "./VCircleCanvas.js";
+import { VCircleThree } from "./VCircleThree.js";
 
-export const FCircle = {
+export const VCircle = {
   setup(props, { slots }) {
     const types = {
-      svg: FCircleSvg,
-      canvas: FCircleCanvas,
-      three: FCircleThree,
-      webgl: FCircleThree
+      svg: VCircleSvg,
+      canvas: VCircleCanvas,
+      three: VCircleThree,
+      webgl: VCircleThree
     };
     const sceneContext = inject("sceneContext");
     return () =>

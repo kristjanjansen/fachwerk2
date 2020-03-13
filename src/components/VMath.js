@@ -1,7 +1,7 @@
 import { ref, watch } from "../deps/vue.js";
 import { katex } from "../deps/katex.js";
 
-export const FMath = {
+export const VMath = {
   setup(_, { slots }) {
     const math = ref("");
     watch(

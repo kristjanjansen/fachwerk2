@@ -1,4 +1,4 @@
-# Fachwerk
+# Visualia
 
 ## Getting started
 
@@ -12,17 +12,17 @@ To get started you will need a single HTML file and a Markdown file:
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fachwerk</title>
+    <title>Visualia</title>
     <link
       rel="stylesheet"
-      href="https://fachwerk.github.io/fachwerk/fachwerk.css"
+      href="https://visualia.github.io/visualia/visualia.css"
     />
   </head>
   <body>
     <div id="app"></div>
     <script type="module">
-      import { fachwerk } from "https://fachwerk.github.io/fachwerk/fachwerk";
-      fachwerk();
+      import { visualia } from "https://visualia.github.io/visualia/visualia";
+      visualia();
     </script>
   </body>
 </html>
@@ -36,15 +36,15 @@ To get started you will need a single HTML file and a Markdown file:
 
 ## Components
 
-All Fachwerk components are prefixed with `f-` and are loaded automatically when the framework starts.
+All Visualia components are prefixed with `f-` and are loaded automatically when the framework starts.
 
 ### Graphics
 
-The graphics components are wrapped into generic `<f-scene>` component. It is a wrapper component, passing the actual context building and rendering to the subcomponents:
+The graphics components are wrapped into generic `<v-scene>` component. It is a wrapper component, passing the actual context building and rendering to the subcomponents:
 
 #### 2D vector graphics
 
-`<f-scene type="svg">` → `<f-scene-svg>`
+`<v-scene type="svg">` → `<v-scene-svg>`
 
 A 2D vector graphics scene, implemented as SVG markup,
 
@@ -64,7 +64,7 @@ renderContext = {
 
 #### 2D bitmap graphics
 
-`<f-scene type="canvas">` → `<f-scene-canvas>`
+`<v-scene type="canvas">` → `<v-scene-canvas>`
 
 It is a bitmap graphics scene, implemented as 2D `<canvas>`.
 
@@ -84,7 +84,7 @@ renderContext = {
 
 #### 3D vector graphics
 
-`<f-scene type="three">` → `<f-scene-three renderer="svg">`
+`<v-scene type="three">` → `<v-scene-three renderer="svg">`
 
 It is a vector graphics scene rendered by ThreeJS and SVGRenderer plugin.
 
@@ -104,7 +104,7 @@ renderContext = {
 
 #### 3D vector graphics
 
-`<f-scene type="webgl">` → `<f-scene-three renderer="webl">`
+`<v-scene type="webgl">` → `<v-scene-three renderer="webl">`
 
 It is a vector graphics scene rendered by ThreeJS default WebGL renderer.
 
@@ -124,36 +124,36 @@ renderContext = {
 
 ### Graphics primitives
 
-Fachwerk offers a set of graphics primitives to draw circles, rectangles etc.
+Visualia offers a set of graphics primitives to draw circles, rectangles etc.
 
-Each graphics primitive component is aware of their parent's `<f-scene>` type (using `renderContext.type`) to pick the correct rendering component.
+Each graphics primitive component is aware of their parent's `<v-scene>` type (using `renderContext.type`) to pick the correct rendering component.
 
 When writing the following code:
 
 ```vue
-<f-scene mode="svg">
-  <f-square r="100" />
-</f-scene>
+<v-scene mode="svg">
+  <v-square r="100" />
+</v-scene>
 ```
 
 it will internally be rendered as:
 
 ```
-<f-scene-svg>
-  <f-square-svg r="100" />
-</f-scene-svg>
+<v-scene-svg>
+  <v-square-svg r="100" />
+</v-scene-svg>
 ```
 
 ### Live variables
 
-Fachwerk supports live variables, they can be easily set and used to create dynamic experiences.
+Visualia supports live variables, they can be easily set and used to create dynamic experiences.
 
 #### f-slider
 
-The simplest way to create a dynamic variable is to use `<f-slider>` component with `set` prop:
+The simplest way to create a dynamic variable is to use `<v-slider>` component with `set` prop:
 
 ```vue
-<f-slider set="a" />
+<v-slider set="a" />
 ```
 
 To get the live value, use the `get()` function to print out the value.
@@ -165,36 +165,36 @@ To get the live value, use the `get()` function to print out the value.
 It is more useful to use `get()` function inside components, for example:
 
 ```vue
-<f-scene>
-  <f-square
+<v-scene>
+  <v-square
     r="100"
     :rotation="get('a')"
   />
-</f-scene>
+</v-scene>
 ```
 
 Most components that generate data accept `set=""` as a prop, but there is also a `set()` function for cases you want to do something custom.
 
-#### f-animate
+#### v-animate
 
 Another way of adjusting live variables is to _animate_ one value to another in certain duration.
 
 ```vue
-<f-animate set="b" />
+<v-animate set="b" />
 
 <output>b is {{ get("b") }}</output>
 
-<f-scene>
-  <f-square
+<v-scene>
+  <v-square
     r="100"
     :rotation="get('b')"
   />
-</f-scene>
+</v-scene>
 ```
 
 ### Events
 
-In addition to the live variables, Fachwerk also provides way to send and receive global events.
+In addition to the live variables, Visualia also provides way to send and receive global events.
 
 To send an event, use `send()` function:
 
@@ -212,27 +212,27 @@ To receive an event, use `receive()` function:
 
 ### Math
 
-`<f-math>` allows to write math equations in classic [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) format. It uses a [KaTeX](https://github.com/Khan/KaTeX) library under the hood.
+`<v-math>` allows to write math equations in classic [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) format. It uses a [KaTeX](https://github.com/Khan/KaTeX) library under the hood.
 
 ```vue
-<f-math>b = a^2</f-math>
+<v-math>b = a^2</v-math>
 ```
 
 The true power of the framework emerges when math functions are combined with live variables:
 
 ```vue
-<f-slider set="a" />
+<v-slider set="a" />
 
-<f-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</f-math>
+<v-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</v-math>
 ```
 
 ## Framework architecture
 
 ### Markdown compiler
 
-`<f-compiler>`
+`<v-compiler>`
 
-The heart of Fachwerk lies on a very simple idea:
+The heart of Visualia lies on a very simple idea:
 
 **Take a Markdown file, add some VueJS components and live compile them into Vue template**.
 
@@ -246,54 +246,54 @@ import {
 
 import marked from "https://unpkg.com/marked@0.8.0/lib/marked.esm.js";
 
-const markdown = `
+const content = `
 # Hello
 
 <sample-component />
 `;
 
-const FCompiler = {
+const App = {
   components: { SampleComponent: { template: "world" } },
   setup() {
-    const template = marked(markdown);
+    const template = marked(content);
     return () => compile(template)();
   }
 };
 
-createApp(FCompiler).mount("#app");
+createApp(App).mount("#app");
 ```
 
-In the production version [./src/components/FCompiler.js](./src/components/FCompiler.js) is a little more sophisticated, including error handling and injecting utility functions, but the basic idea remains the same.
+The actual [production version compiler](./src/components/VCompiler.js) is a little more sophisticated, including error handling and injecting utility functions, but the basic idea is the same.
 
 ### Content display
 
-`<f-content>` is working on top of `<f-compiler>`. It accepts `content` prop for Markdown content, parses it via `parseContent()` into pages separated by `---` divider.
+`<v-content>` is working on top of `<v-compiler>`. It accepts `content` prop for Markdown content, parses it via `parseContent()` into pages separated by `---` divider.
 
 Pages can be optionally divided into grid regions, separated by `-` dividers.
 
-Then each region and page is looped over and rendered by `<f-compiler>`.
+Then each region and page is looped over and rendered by `<v-compiler>`.
 
 ### Code editing
 
-`<f-editor>` is a simple code editor, a styled `<textarea>` with proper <kbd>tab</kbd> key handling. It is designed for quick livecode snippets editing, not for serious coding work.
+`<v-editor>` is a simple code editor, a styled `<textarea>` with proper <kbd>tab</kbd> key handling. It is designed for quick livecode snippets editing, not for serious coding work.
 
-There is a separate initiative to intergrate Fachwerk with Monaco code editor from VSCode.
+There is a separate initiative to intergrate Visualia with Monaco code editor from VSCode.
 
 ### Content editor and preview
 
-`<f-content-editor>` is a simple two-pane coding environment combining `<f-editor>` code editing and `<f-content>` content viewer.
+`<v-content-editor>` is a simple two-pane coding environment combining `<v-editor>` code editing and `<v-content>` content viewer.
 
 ### CSS and styling
 
-Global CSS resides in `/fachwerk.css` file and relies heavily on CSS variables.
+Global CSS resides in `/visualia.css` file and relies heavily on CSS variables.
 
 Component CSS is stored as an `css` attribute on each component:
 
 ```js
-const ExampleComponent = {
-  template: `<div class="ExampleComponent">Hello</div>`,
+const VExample = {
+  template: `<div class="VExample">Hello</div>`,
   css: {
-    .ExampleComponent {
+    .VExample {
       color: var(--red);
     }
   }
@@ -303,7 +303,7 @@ const ExampleComponent = {
 In `utils/css.js` there is a function `componentCss()` that gets the `css` attribute values from all components, merges them into a single CSS string and injects it to HTML `<style>` tag:
 
 ```js
-import { components } from "https://fachwerk.github.io/fachwerk/fachwerk.js";
+import { components } from "https://visualia.github.io/visualia/visualia.js";
 
 componentCss(components);
 ```
@@ -332,19 +332,19 @@ External dependencies redirected to ESM imports from https://unpkg.com
 
 By default external dependencies are fetched from https://unpkg.com on each page load. This frees us to have a complicated build step but makes certain use cases harder, such as writing content offline or developing the framwork offline.
 
-For this reason we ship also a bundled version of the framework that includes both external dependencies and framework code itself. It is located at `./fachwerk.bundle.js`. 
+For this reason we ship also a bundled version of the framework that includes both external dependencies and framework code itself. It is located at `./visualia.bundle.js`.
 
 To generate a bundle we use a following Deno command:
 
 ```
-deno run bundle.js > fachwerk.bundle.js
+deno run bundle.js > visualia.bundle.js
 ```
 
-The script generates 
+The script generates
 
 ## Testing
 
-Fachwerk relies on a suite of unit tests that verify that utility and internal functions work right.
+Visualia relies on a suite of unit tests that verify that utility and internal functions work right.
 
 ### Writing tests
 
@@ -383,7 +383,7 @@ Commandline tests run on each commit to Github repository, there is a Github act
 
 ### Why not package.json? Why not npm?
 
-Fachwerk fully embraces the future of Javascript modules and is very much inspired by toolless movement and products such as [Deno](https://deno.land/std/manual.md) and [Pika](https://www.pika.dev/) minimalistic Javascript package management.
+Visualia fully embraces the future of Javascript modules and is very much inspired by toolless movement and products such as [Deno](https://deno.land/std/manual.md) and [Pika](https://www.pika.dev/) minimalistic Javascript package management.
 
 ### What about versioning the releases?
 
@@ -391,7 +391,7 @@ During the initial development, the development happens in the latest `master` b
 
 ### Why not Typescript?
 
-It is a viable option and could provide excellent developer experience for the framework consumers. Fachwerk still prioritizes minimal tooling and directly accessible source code over the Typescript benefits.
+It is a viable option and could provide excellent developer experience for the framework consumers. Visualia still prioritizes minimal tooling and directly accessible source code over the Typescript benefits.
 
 Note that this could be reconsidered in the future, giving Deno is already part of the project toolchain.
 
@@ -414,4 +414,3 @@ Although first version served the need of the project it was created for -- to d
 - Documentation, content creation, content marketing and contributions / community management was mostly an afterthought.
 
 ---
-

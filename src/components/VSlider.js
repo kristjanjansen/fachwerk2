@@ -1,7 +1,7 @@
-import { set as storeSet, toNumber } from "../../fachwerk.js";
+import { set as storeSet, toNumber } from "../../visualia.js";
 import { dynamicProps } from "../internals/dynamic.js";
 
-export const FSlider = {
+export const VSlider = {
   props: { ...dynamicProps, value: { default: 0, type: [String, Number] } },
   setup(props, { emit }) {
     const onInput = e => {

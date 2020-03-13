@@ -1,6 +1,6 @@
 import { computed } from "../deps/vue.js";
 
-import { toNumber } from "../../fachwerk.js";
+import { toNumber } from "../../visualia.js";
 
 export const sizeProps = {
   width: { default: 300, type: [String, Number] },

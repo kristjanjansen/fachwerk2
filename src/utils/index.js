@@ -2,7 +2,7 @@ export * from "./array.js";
 export * from "./css.js";
 export * from "./error.js";
 export * from "./events.js";
-export * from "./fachwerk.js";
+export * from "./visualia.js";
 export * from "./fetch.js";
 export * from "./log.js";
 export * from "./math.js";

@@ -1,6 +1,6 @@
 import { computed, h, compile, onErrorCaptured, inject } from "../deps/vue.js";
 import marked from "../deps/marked.js";
-import { utils, onCompilerError } from "../../fachwerk.js";
+import { utils, onCompilerError } from "../../visualia.js";
 
 const renderer = new marked.Renderer();
 
@@ -32,7 +32,7 @@ const compileContent = content => {
   return c;
 };
 
-export const FCompiler = {
+export const VCompiler = {
   props: {
     content: {
       default: ""

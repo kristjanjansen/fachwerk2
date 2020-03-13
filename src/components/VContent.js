@@ -1,7 +1,7 @@
 import { computed } from "../deps/vue.js";
 import { parseContent, slideGridStyle } from "../internals/content.js";
 
-export const FContent = {
+export const VContent = {
   props: {
     content: {
       default: "",
@@ -25,7 +25,7 @@ export const FContent = {
         }"
       >
         <div v-for="cell in slide.content">
-          <f-compiler :content="cell" />
+          <v-compiler :content="cell" />
         </div>
       </div>
     </div>

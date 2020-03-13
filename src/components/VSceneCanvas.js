@@ -2,7 +2,7 @@ import { inject, ref, onMounted, onBeforeUpdate } from "../deps/vue.js";
 
 import { sizeProps, useSize } from "../internals/size.js";
 
-export const FSceneCanvas = {
+export const VSceneCanvas = {
   props: { ...sizeProps },
   setup(props) {
     const el = ref(null);

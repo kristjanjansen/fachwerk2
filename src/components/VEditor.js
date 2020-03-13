@@ -1,6 +1,6 @@
 import { ref, watch, onMounted } from "../deps/vue.js";
 
-export const FEditor = {
+export const VEditor = {
   props: { content: { default: "", type: String } },
   setup(props, { emit }) {
     const editor = ref(null);

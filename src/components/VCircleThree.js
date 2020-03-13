@@ -15,7 +15,7 @@ import {
   useThreeTransform
 } from "../internals/index.js";
 
-export const FCircleThree = {
+export const VCircleThree = {
   props: { r: { default: 1 }, ...stylingProps, ...transformThreeProps },
   setup(props) {
     const sceneContext = inject("sceneContext");

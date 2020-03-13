@@ -1,3 +1,6 @@
-const [_, bundle] = await Deno.bundle("./fachwerk.js");
-
-console.log(bundle.replace(/  +/g, " "));
+if (Deno.args[0]) {
+  const [_, bundle] = await Deno.bundle(Deno.args[0]);
+  console.log(bundle.replace(/  +/g, " "));
+} else {
+  console.log("Usage: deno bundle.js fachwerk.js > fachwerk.bundle.js");
+}

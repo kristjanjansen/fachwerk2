@@ -12,7 +12,7 @@ renderer.code = (code, info) => {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 
-  if (info === "vue") {
+  if (info === "v") {
     return `<pre v-pre>${escapedCode}</pre>
 
 ${code}`;

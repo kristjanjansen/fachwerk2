@@ -1,5 +1,11 @@
 # Visualia
 
+## About
+
+Visualia is a web framework for creating interactive documents. It uses Markdown text format and VueJS components for authoring.
+
+Visualia supports a wide range of use cases -- from learning materials, interactive slides, visual notebooks to generative art and data visualizations.
+
 ## Getting started
 
 To get started you will need a single HTML file and a Markdown file:
@@ -36,101 +42,26 @@ To get started you will need a single HTML file and a Markdown file:
 
 ## Components
 
-All Visualia components are prefixed with `f-` and are loaded automatically when the framework starts.
+All Visualia components are prefixed with `v-` and are loaded automatically when the framework starts.
 
-### Graphics
+### Graphics scene
 
-The graphics components are wrapped into generic `<v-scene>` component. It is a wrapper component, passing the actual context building and rendering to the subcomponents:
+Visualia offers a set of graphics primitives to draw circles, rectangles etc. You can choose between using different rendering technologies -- whenever you need a 2d and 3d rendering or vector or bitmap output.
 
-#### 2D vector graphics
+To choose the rendering technology you first set a graphics scene element, `<v-scene>` and set an attribute `type` to pick a suitable rendering type:
 
-`<v-scene type="svg">` → `<v-scene-svg>`
+| Mode                      | Type      |
+| ------------------------- | --------- |
+| `<f-scene type="svg">`    | 2D vector |
+| `<f-scene type="canvas">` | 2D bitmap |
+| `<f-scene type="three">`  | 3D vector |
+| `<f-scene type="webgl">`  | 3D bitmap |
 
-A 2D vector graphics scene, implemented as SVG markup,
-
-The component provides a following reactive context to the child components:
-
-```js
-const renderContext = inject("renderContext");
-/*
-renderContext = { 
-  type.value: 'svg',
-  width.value: 400,
-  height.value: 400,
-  unit.value: 1
-}
-*/
-```
-
-#### 2D bitmap graphics
-
-`<v-scene type="canvas">` → `<v-scene-canvas>`
-
-It is a bitmap graphics scene, implemented as 2D `<canvas>`.
-
-The component provides a following reactive context to the child components:
-
-```js
-const renderContext = inject("renderContext");
-/*
-renderContext = { 
-  type.value: 'canvas',
-  width.value: 400,
-  height.value: 400,
-  ctx.value: canvas.getContext('2d')
-}
-*/
-```
-
-#### 3D vector graphics
-
-`<v-scene type="three">` → `<v-scene-three renderer="svg">`
-
-It is a vector graphics scene rendered by ThreeJS and SVGRenderer plugin.
-
-The component provides a following reactive context to the child components:
-
-```js
-const renderContext = inject("renderContext");
-/*
-renderContext = { 
-  type.value: 'three',
-  width.value: 400,
-  height.value: 400,
-  scene.value: new THREE.Scene()
-}
-*/
-```
-
-#### 3D vector graphics
-
-`<v-scene type="webgl">` → `<v-scene-three renderer="webl">`
-
-It is a vector graphics scene rendered by ThreeJS default WebGL renderer.
-
-The component provides a following reactive context to the child components:
-
-```js
-const renderContext = inject("renderContext");
-/*
-renderContext = { 
-  type.value: 'webgl',
-  width.value: 400,
-  height.value: 400,
-  scene.value: new THREE.Scene()
-}
-*/
-```
-
-### Graphics primitives
-
-Visualia offers a set of graphics primitives to draw circles, rectangles etc.
-
-Each graphics primitive component is aware of their parent's `<v-scene>` type (using `renderContext.type`) to pick the correct rendering component.
+Each graphics component is aware of the current`<v-scene>` type and passes the actual rendering to technology-specific subcomponent.
 
 When writing the following code:
 
-```vue
+```
 <v-scene mode="svg">
   <v-square r="100" />
 </v-scene>
@@ -144,6 +75,16 @@ it will internally be rendered as:
 </v-scene-svg>
 ```
 
+#### f-square
+
+Displays a 2D square.
+
+```v
+<v-scene>
+  <v-square r="100" />
+</v-scene>
+```
+
 ### Live variables
 
 Visualia supports live variables, they can be easily set and used to create dynamic experiences.
@@ -152,19 +93,19 @@ Visualia supports live variables, they can be easily set and used to create dyna
 
 The simplest way to create a dynamic variable is to use `<v-slider>` component with `set` prop:
 
-```vue
+```v
 <v-slider set="a" />
 ```
 
 To get the live value, use the `get()` function to print out the value.
 
-```vue
+```v
 <output>{{ get("a") }}</output>
 ```
 
 It is more useful to use `get()` function inside components, for example:
 
-```vue
+```v
 <v-scene>
   <v-square
     r="100"
@@ -179,7 +120,7 @@ Most components that generate data accept `set=""` as a prop, but there is also 
 
 Another way of adjusting live variables is to _animate_ one value to another in certain duration.
 
-```vue
+```v
 <v-animate set="b" />
 
 <output>b is {{ get("b") }}</output>
@@ -198,13 +139,13 @@ In addition to the live variables, Visualia also provides way to send and receiv
 
 To send an event, use `send()` function:
 
-```vue
+```v
 <button v-on:click="send('click!')">Click me</button>
 ```
 
 To receive an event, use `receive()` function:
 
-```vue
+```v
 {{ receive("click!", () => set("clicked", true)) }}
 
 <output>{{ get('clicked') ? 'Clicked!' : 'Waiting for a click'}}</output>
@@ -214,13 +155,13 @@ To receive an event, use `receive()` function:
 
 `<v-math>` allows to write math equations in classic [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics) format. It uses a [KaTeX](https://github.com/Khan/KaTeX) library under the hood.
 
-```vue
+```v
 <v-math>b = a^2</v-math>
 ```
 
 The true power of the framework emerges when math functions are combined with live variables:
 
-```vue
+```v
 <v-slider set="a" />
 
 <v-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</v-math>

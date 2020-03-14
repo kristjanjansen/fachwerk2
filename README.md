@@ -57,6 +57,8 @@ To choose the rendering technology you first set a graphics scene element, `<v-s
 | `<f-scene type="three">`  | 3D vector |
 | `<f-scene type="webgl">`  | 3D bitmap |
 
+<br>
+
 Each graphics component is aware of the current`<v-scene>` type and passes the actual rendering to technology-specific subcomponent.
 
 When writing the following code:
@@ -81,7 +83,17 @@ Displays a 2D square.
 
 ```v
 <v-scene>
-  <v-square r="100" />
+  <v-square position="150 150" r="100" />
+</v-scene>
+```
+
+#### f-circle
+
+Displays a 2D circle.
+
+```v
+<v-scene>
+  <v-circle position="150 150" r="100" />
 </v-scene>
 ```
 
@@ -100,7 +112,7 @@ The simplest way to create a dynamic variable is to use `<v-slider>` component w
 To get the live value, use the `get()` function to print out the value.
 
 ```v
-<output>{{ get("a") }}</output>
+<output>a is: {{ get("a") }}</output>
 ```
 
 It is more useful to use `get()` function inside components, for example:
@@ -108,6 +120,7 @@ It is more useful to use `get()` function inside components, for example:
 ```v
 <v-scene>
   <v-square
+    position="150 150"
     r="100"
     :rotation="get('a')"
   />
@@ -127,6 +140,7 @@ Another way of adjusting live variables is to _animate_ one value to another in 
 
 <v-scene>
   <v-square
+    position="150 150"
     r="100"
     :rotation="get('b')"
   />

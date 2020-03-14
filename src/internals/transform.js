@@ -6,7 +6,7 @@ import {
   normalizeThreeRotation
 } from "../internals.js";
 
-import { deg2rad, fit } from "../utils.js/index.js";
+import { deg2rad, fit } from "../utils.js";
 
 export const transformTwoProps = {
   position: { default: [0, 0], type: [String, Number, Array, Object] },

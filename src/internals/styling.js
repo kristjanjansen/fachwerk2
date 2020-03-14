@@ -6,7 +6,7 @@ import {
   LineBasicMaterial
 } from "../deps/three.js";
 
-import { toNumber } from "../utils/index.js";
+import { toNumber } from "../utils.js";
 
 export const stylingProps = {
   stroke: { default: "black", type: [String] },

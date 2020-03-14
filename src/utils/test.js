@@ -1,4 +1,4 @@
-import { shorten } from "./index.js";
+import { shorten } from "../utils.js";
 
 // From https://github.com/denoland/deno/blob/master/std/testing/asserts.ts
 

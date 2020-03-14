@@ -7,9 +7,9 @@ import { dynamicProps } from "../internals/dynamic.js";
 export const VAnimate = {
   props: {
     ...dynamicProps,
-    duration: { default: 5000, type: [String, Number] },
+    duration: { default: 10000, type: [String, Number] },
     easing: { default: "linear", type: String },
-    direction: { default: "alternate", type: String }
+    alternate: { default: false, type: Boolean }
   },
   setup(props, { emit }) {
     const progress = ref(0);
@@ -18,7 +18,7 @@ export const VAnimate = {
       value: [props.from, props.to],
       duration: props.duration,
       easing: props.easing,
-      direction: props.direction,
+      direction: props.alternate ? "alternate" : null,
       loop: true
     });
     watch(progress, progress => {

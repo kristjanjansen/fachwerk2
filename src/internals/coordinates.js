@@ -7,7 +7,7 @@ import {
   isBoolean,
   isNull,
   padArrayRight
-} from "../utils/index.js";
+} from "../utils.js";
 
 export const normalizeDefault = arr => {
   return padArrayRight(arr || [], 3, 0).map(value => toNumber(value));

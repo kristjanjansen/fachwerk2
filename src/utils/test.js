@@ -63,7 +63,7 @@ export const test = tests => {
   const greenbg = "\x1b[42m";
   const dim = "\x1b[2m";
 
-  console.log(`\n  ${dim}Running Fachwerk tests${reset}\n`);
+  console.log(`\n  ${dim}Running Visualia tests${reset}\n`);
 
   const filteredKey = typeof process !== "undefined" ? process.argv[2] : null;
 

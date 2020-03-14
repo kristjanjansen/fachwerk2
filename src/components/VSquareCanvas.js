@@ -6,7 +6,7 @@ import {
   transformTwoProps,
   transformCanvas,
   transformCanvasReset
-} from "../internals/index.js";
+} from "../internals.js";
 
 export const VSquareCanvas = {
   props: {

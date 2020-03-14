@@ -14,7 +14,7 @@ import {
   useThreeStroke,
   transformThreeProps,
   useThreeTransform
-} from "../internals/index.js";
+} from "../internals.js";
 
 export const VSquareThree = {
   props: { r: { default: 1 }, ...transformThreeProps, ...stylingProps },

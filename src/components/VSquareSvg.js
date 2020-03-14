@@ -3,7 +3,7 @@ import {
   useSvgStyling,
   transformTwoProps,
   useSvgTransform
-} from "../internals/index.js";
+} from "../internals.js";
 
 export const VSquareSvg = {
   props: { r: { default: 1 }, ...transformTwoProps, ...stylingProps },

@@ -13,7 +13,7 @@ import {
   useThreeStroke,
   transformThreeProps,
   useThreeTransform
-} from "../internals/index.js";
+} from "../internals.js";
 
 export const VCircleThree = {
   props: { r: { default: 1 }, ...stylingProps, ...transformThreeProps },

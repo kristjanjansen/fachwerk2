@@ -1,6 +1,6 @@
-import * as components from "./src/components/index.js";
-import * as utils from "./src/utils/index.js";
-import * as internals from "./src/internals/index.js";
+import * as components from "./src/components.js";
+import * as utils from "./src/utils.js";
+import * as internals from "./src/internals.js";
 
 const tests = Object.entries({
   ...components,

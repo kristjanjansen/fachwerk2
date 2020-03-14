@@ -27,7 +27,7 @@ export const VSceneCanvas = {
     return { el };
   },
   template: `
-  <canvas ref="el" style="border: 1px solid red;">
+  <canvas ref="el">
     <slot />
   </canvas>
   `

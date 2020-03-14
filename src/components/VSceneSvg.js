@@ -19,7 +19,6 @@ export const VSceneSvg = {
       :width="width"
       :height="width"
       :view-box.camel="viewBox"
-      style="border: 1px solid red;"
     >
       <slot />
     </svg>

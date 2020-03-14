@@ -2,7 +2,7 @@
 
 ## About
 
-Visualia is a web framework for creating interactive documents. It uses Markdown text format and VueJS components for authoring.
+Visualia is a web framework for creating interactive documents. It uses Markdown text format and [VueJS 3.x](https://github.com/vuejs/vue-next) components for authoring.
 
 Visualia supports a wide range of use cases -- from learning materials, interactive slides, visual notebooks to generative art and data visualizations.
 
@@ -44,18 +44,18 @@ To get started you will need a single HTML file and a Markdown file:
 
 All Visualia components are prefixed with `v-` and are loaded automatically when the framework starts.
 
-### Graphics scene
+### Graphics
 
-Visualia offers a set of graphics primitives to draw circles, rectangles etc. You can choose between using different rendering technologies -- whenever you need a 2d and 3d rendering or vector or bitmap output.
+Visualia offers a set of graphics _primitives_ to draw circles, rectangles etc. You can choose between using different rendering technologies -- whenever you need a 2d and 3d rendering or vector or bitmap output.
 
 To choose the rendering technology you first set a graphics scene element, `<v-scene>` and set an attribute `type` to pick a suitable rendering type:
 
 | Mode                      | Type      |
 | ------------------------- | --------- |
-| `<f-scene type="svg">`    | 2D vector |
-| `<f-scene type="canvas">` | 2D bitmap |
-| `<f-scene type="three">`  | 3D vector |
-| `<f-scene type="webgl">`  | 3D bitmap |
+| `<v-scene type="svg">`    | 2D vector |
+| `<v-scene type="canvas">` | 2D bitmap |
+| `<v-scene type="three">`  | 3D vector |
+| `<v-scene type="webgl">`  | 3D bitmap |
 
 <br>
 
@@ -77,9 +77,9 @@ it will internally be rendered as:
 </v-scene-svg>
 ```
 
-#### f-square
+#### Square
 
-Displays a 2D square.
+`<v-square>` Displays a 2D square.
 
 ```v
 <v-scene>
@@ -87,9 +87,9 @@ Displays a 2D square.
 </v-scene>
 ```
 
-#### f-circle
+#### Circle
 
-Displays a 2D circle.
+`<v-circle>` displays a 2D circle.
 
 ```v
 <v-scene>
@@ -101,7 +101,7 @@ Displays a 2D circle.
 
 Visualia supports live variables, they can be easily set and used to create dynamic experiences.
 
-#### f-slider
+#### Slider
 
 The simplest way to create a dynamic variable is to use `<v-slider>` component with `set` prop:
 
@@ -112,7 +112,7 @@ The simplest way to create a dynamic variable is to use `<v-slider>` component w
 To get the live value, use the `get()` function to print out the value.
 
 ```v
-<output>a is: {{ get("a") }}</output>
+<blockquote>a is {{ get("a") }}</blockquote>
 ```
 
 It is more useful to use `get()` function inside components, for example:
@@ -129,14 +129,14 @@ It is more useful to use `get()` function inside components, for example:
 
 Most components that generate data accept `set=""` as a prop, but there is also a `set()` function for cases you want to do something custom.
 
-#### v-animate
+#### Animate
 
-Another way of adjusting live variables is to _animate_ one value to another in certain duration.
+Another way of adjusting live variables is to `<v-animate>` one value to another in certain duration.
 
 ```v
 <v-animate set="b" />
 
-<output>b is {{ get("b") }}</output>
+<blockquote>b is {{ get("b") }}</blockquote>
 
 <v-scene>
   <v-square
@@ -151,18 +151,22 @@ Another way of adjusting live variables is to _animate_ one value to another in 
 
 In addition to the live variables, Visualia also provides way to send and receive global events.
 
+#### Sending an event
+
 To send an event, use `send()` function:
 
 ```v
-<button v-on:click="send('click!')">Click me</button>
+<blockquote><button v-on:click="send('click!')">Click me</button></blockquote>
 ```
+
+#### Receiving an event
 
 To receive an event, use `receive()` function:
 
 ```v
 {{ receive("click!", () => set("clicked", true)) }}
 
-<output>{{ get('clicked') ? 'Clicked!' : 'Waiting for a click'}}</output>
+<blockquote>{{ get('clicked') ? 'Clicked!' : 'Waiting for a click'}}</blockquote>
 ```
 
 ### Math
@@ -181,15 +185,13 @@ The true power of the framework emerges when math functions are combined with li
 <v-math>b = {{ get('a',0) }}^2 = {{ get('a',0) ** 2 }}</v-math>
 ```
 
-## Framework architecture
+## Development
 
 ### Markdown compiler
 
-`<v-compiler>`
-
 The heart of Visualia lies on a very simple idea:
 
-**Take a Markdown file, add some VueJS components and live compile them into Vue template**.
+> Take a Markdown file, add some VueJS components and live compile them into Vue template
 
 In VueJS 3.x code it can be expressed as:
 
@@ -218,7 +220,7 @@ const App = {
 createApp(App).mount("#app");
 ```
 
-[The actual compiler](./src/components/VCompiler.js) is a little more sophisticated, including error handling and injecting utility functions, but the basic idea is the same.
+The actual `<v-compiler>` component [in the codebase](./src/components/VCompiler.js) is a little more sophisticated, including error handling and injecting utility functions, but the basic idea stays the same.
 
 ### Content display
 
@@ -227,16 +229,6 @@ createApp(App).mount("#app");
 Pages can be optionally divided into grid regions, separated by `-` dividers.
 
 Then each region and page is looped over and rendered by `<v-compiler>`.
-
-### Code editing
-
-`<v-editor>` is a simple code editor, a styled `<textarea>` with proper <kbd>tab</kbd> key handling. It is designed for quick livecode snippets editing, not for serious coding work.
-
-There is a separate initiative to intergrate Visualia with Monaco code editor from VSCode.
-
-### Content editor and preview
-
-`<v-content-editor>` is a simple two-pane coding environment combining `<v-editor>` code editing and `<v-content>` content viewer.
 
 ### CSS and styling
 
@@ -285,17 +277,15 @@ External dependencies redirected to ESM imports from https://unpkg.com
 
 ### Bundling
 
-By default external dependencies are fetched from https://unpkg.com on each page load. This frees us to have a complicated build step but makes certain use cases harder, such as writing content offline or developing the framwork offline.
+By default external dependencies are fetched from https://unpkg.com on each page load. This frees us to have a complicated build step but makes certain use cases harder, such as writing content or developing the framework offline.
 
-For this reason we ship also a bundled version of the framework that includes both external dependencies and framework code itself. It is located at `./visualia.bundle.js`.
+For this reason we ship also provide a command to create a bundled version of the framework that includes both external dependencies and framework code itself. It is located at `./visualia.bundle.js`.
 
-To generate a bundle we use a following Deno command:
+To generate a bundle, use the following command:
 
 ```
-deno run bundle.js visualia.js > visualia.bundle.js
+deno bundle.js visualia.js > visualia.bundle.js
 ```
-
-The script generates
 
 ### Testing
 
@@ -319,7 +309,7 @@ Tests can be run either from the browser or command line.
 
 #### Run browser tests
 
-Open [/test.html](/test.html) file in local server and open Developer Tools.
+Open [/test.html](/test.html) file in local server and open Developer Tools panel.
 
 #### Run command line tests
 
@@ -338,34 +328,34 @@ Command line tests run on each commit to Github repository, there is a Github ac
 
 ## FAQ
 
-### Why not package.json? Why not npm?
+#### Why not package.json? Why not npm?
 
-Visualia fully embraces the future of Javascript modules and is very much inspired by toolless movement and products such as [Deno](https://deno.land/std/manual.md) and [Pika](https://www.pika.dev/) minimalistic Javascript package management.
+Visualia fully embraces the future of Javascript modules and is very much inspired by toolless movement and projects such as [Deno](https://deno.land/std/manual.md), [Pika](https://www.pika.dev/) and [reg](https://github.com/mikeal/reg) for next-generation ESM-based Javascript package management.
 
-### What about versioning the releases?
+#### What about versioning the releases?
 
 During the initial development, the development happens in the latest `master` branch. In the future, a simple versioning system could be introduced.
 
-### Why not Typescript?
+#### Why not Typescript?
 
 It is a viable option and could provide excellent developer experience for the framework consumers. Visualia still prioritizes minimal tooling and directly accessible source code over the Typescript benefits.
 
-Note that this could be reconsidered in the future, giving Deno is part of the project toolchain already.
+Note that this could be reconsidered in the future, giving Typescript-based Deno is part of the project toolchain already.
 
-### Tell me the backstory
+#### Tell me the backstory!
 
-Current initiative is actually a second take on the same idea: creating lightweight dynamic documents using latest Javascript features, VueJS and Markdown.
+Visualia is actually a second take on the same idea: creating lightweight dynamic documents using latest Javascript features, VueJS and Markdown.
 
-Although first version served the need of the project it was created for -- to deliver next-gen educational materials -- the actual implementation was somewhat lacking:
+Although the [first version called Fachwerk](https://github.com/designstem/fachwerk) did serve the need of the project it was created for -- to deliver next-gen educational materials -- the actual implementation was somewhat lacking:
 
-- It was too early for full-on ESM (ECMAStript modules), many of the project dependencies did not yet offer ESM module builds so custom Rollup-based build system was introduced for transpiling CommonJS modules to ESM (similar what Snowpack does).
+- It was too early for fully embracing ESM (ECMAScript modules). Many of the project dependencies did not yet offer ESM module builds so custom Rollup-based build system was introduced for transpiling CommonJS modules to ESM (similar what [Snowpack](https://www.snowpack.dev/) does).
 
 - One of the messiest implementations were ThreeJS-related code, starting from missing ESM support, especially in more experimental code such as `THREE.SVGRenderer` that had to be ported to ES6 manually. Also, the ThreeJS code was parly based on outdated [vue-threejs](https://github.com/fritx/vue-threejs) implementation that was hard to reason about.
 
-- Some key ideas such as a simple global state using `set` and `get` helInefficientppeared later in the projthe ect, leaving many of the ealier, poorer attempts for state handling via `v-slot` still in to codebase and in the documentation.
+- Some key ideas such as a simple global state using `set` and `get` only appeared in the project in a later stage. This left several inferior attempts for state handling via `v-slot` still into codebase and into the documentation.
 
-- Inefficient code here and there as the performance was not a prioritized goal: CSS live injection approach was unefficient, math cointegrationed a explicit update triggering and ThreeJS components were always animating even when the input, data was static.
+- The performance was not a prioritized goal: CSS live injection approach was unefficient, math rendering needed a explicit update triggering and ThreeJS components were always animating even when the input data was static.
 
 - Very modest test coverage and missing integration with CI (Continuous Integration) systems.
 
-- Documentation, content creation, content marketing and contributions / community management was mostly an afterthought.
+- Documentation, content creation, content marketing and contributions / community management were mostly an afterthought.

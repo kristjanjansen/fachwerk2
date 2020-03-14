@@ -218,7 +218,7 @@ const App = {
 createApp(App).mount("#app");
 ```
 
-The actual [production version compiler](./src/components/VCompiler.js) is a little more sophisticated, including error handling and injecting utility functions, but the basic idea is the same.
+[The actual compiler](./src/components/VCompiler.js) is a little more sophisticated, including error handling and injecting utility functions, but the basic idea is the same.
 
 ### Content display
 
@@ -283,7 +283,7 @@ Internal functions used by components.
 
 External dependencies redirected to ESM imports from https://unpkg.com
 
-## Bundling
+### Bundling
 
 By default external dependencies are fetched from https://unpkg.com on each page load. This frees us to have a complicated build step but makes certain use cases harder, such as writing content offline or developing the framwork offline.
 
@@ -292,16 +292,16 @@ For this reason we ship also a bundled version of the framework that includes bo
 To generate a bundle we use a following Deno command:
 
 ```
-deno run bundle.js > visualia.bundle.js
+deno run bundle.js visualia.js > visualia.bundle.js
 ```
 
 The script generates
 
-## Testing
+### Testing
 
 Visualia relies on a suite of unit tests that verify that utility and internal functions work right.
 
-### Writing tests
+#### Writing tests
 
 Tests are simple functions starting with `test_` that return `actual` and `expected` results:
 
@@ -313,15 +313,17 @@ export const test_add = {
 }
 ```
 
-### Running tests
-
 Test functions are picked up by test runner `/test.js` that compare the values returned. If they equal, the test passes. If they are not equal, the test fails.
 
 Tests can be run either from the browser or command line.
 
-**For browser testing**, open [/test.html](/test.html) file in local server and open Developer Tools.
+#### Run browser tests
 
-**For command line testing** you will need to install [Deno](https://deno.land/std/manual.md) and run the following commands on MacOS:
+Open [/test.html](/test.html) file in local server and open Developer Tools.
+
+#### Run command line tests
+
+First, you will need to install [Deno](https://deno.land/std/manual.md) and run the following commands on MacOS:
 
 ```js
 brew install deno
@@ -330,9 +332,9 @@ deno test.js
 
 For Windows support, see [these Deno installation instructions](https://deno.land/std/manual.md#download-and-install).
 
-### Running tests automatically
+#### Running tests automatically
 
-Commandline tests run on each commit to Github repository, there is a Github action in [/.github/actions/test.yml](./.github/actions/test.yml).
+Command line tests run on each commit to Github repository, there is a Github action in [/.github/actions/test.yml](./.github/actions/test.yml).
 
 ## FAQ
 
@@ -348,9 +350,9 @@ During the initial development, the development happens in the latest `master` b
 
 It is a viable option and could provide excellent developer experience for the framework consumers. Visualia still prioritizes minimal tooling and directly accessible source code over the Typescript benefits.
 
-Note that this could be reconsidered in the future, giving Deno is already part of the project toolchain.
+Note that this could be reconsidered in the future, giving Deno is part of the project toolchain already.
 
-## Backstory
+### Tell me the backstory
 
 Current initiative is actually a second take on the same idea: creating lightweight dynamic documents using latest Javascript features, VueJS and Markdown.
 
@@ -367,5 +369,3 @@ Although first version served the need of the project it was created for -- to d
 - Very modest test coverage and missing integration with CI (Continuous Integration) systems.
 
 - Documentation, content creation, content marketing and contributions / community management was mostly an afterthought.
-
----

@@ -4,7 +4,7 @@
 
 Visualia is a web framework for creating interactive documents. It uses Markdown text format and [VueJS 3.x](https://github.com/vuejs/vue-next) components for authoring.
 
-Visualia supports a wide range of use cases -- from learning materials, interactive slides, visual notebooks to generative art and data visualizations.
+Visualia supports a wide range of use cases, starting from learning materials, interactive slides and visual notebooks to generative art and data visualizations.
 
 ## Getting started
 
